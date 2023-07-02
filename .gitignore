@@ -1,4 +1,4 @@
 .env
-./mysql-volume
+/mysql-volume
 .BKP
 .drawio
