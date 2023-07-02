@@ -1,0 +1,18 @@
+<h1>Products</h1>
+<table border="1">
+  <thead>
+    <tr>
+      <th>NAME</th>
+      <th>SKU</th>
+      <th>PRICE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{product.name}}</td>
+      <td>{{product.sku}}</td>
+      <td>{{product.price}}</td>
+      <td><img style="height: 75px; width: 60px;" src="{{product.image}}" title="blahblah" /></td>
+    </tr>
+  </tbody>
+</table>
