@@ -2,10 +2,14 @@ package com.sleepypoem.ecommerce.domain.entities;
 
 import com.sleepypoem.ecommerce.domain.entities.abstracts.EntityWithTimeStamps;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "products")
 public class ProductEntity extends EntityWithTimeStamps {
 
