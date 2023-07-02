@@ -3,7 +3,7 @@ version: '3.3'
 services:
   backend-db:
     container_name: backend-database
-    image: mysql/mysql-server:8.0
+    image: mysql/mysql-server:latest
     volumes:
       - ./mysql-volume:/var/lib/mysql
     ports:
@@ -30,16 +30,29 @@ services:
       - "8081:8081"
     networks:
       - springmysql-net
+      - spring-front-back
     environment:
       - MYSQL_HOST=backend-db
       - MYSQL_USERNAME=admin
       - MYSQL_PASSWORD=password
       - MYSQL_DATABASE=ecommerce
       - MYSQL_PORT=3306
-#      - LOCAL_HOST=host.docker.internal
-#    links:
-#      - keycloak
-#    extra_hosts:
-#      - "host.docker.internal:host-gateway"
+    #      - LOCAL_HOST=host.docker.internal
+    #    links:
+    #      - keycloak
+    #    extra_hosts:
+    #      - "host.docker.internal:host-gateway"
+  frontend-app:
+    image: sleepypoem:ecommerce-frontend-0.0.1
+    build:
+      context: ./front-end/angular-ecommerce-front
+    container_name: angular-app
+    depends_on:
+      - backend-app
+    ports:
+      - "3000:80"
+    networks:
+      - spring-front-back
 networks:
   springmysql-net:
+  spring-front-back:
