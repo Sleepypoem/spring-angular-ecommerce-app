@@ -2,8 +2,8 @@ import java.io.*;
 
 public class PomXmlUpdater {
 
-    private static final String PACKAGE_NAME = "PACKAGE_NAME";
-    private static final String PACKAGE_VERSION = "PACKAGE_VERSION";
+    private static final String PACKAGE_NAME = "APP_NAME";
+    private static final String PACKAGE_VERSION = "VERSION";
     private static final String USAGE = "Usage: java PomXmlUpdater <folder-route>";
     private static final String ENV_FILE_NAME = ".env";
     private static final String POM_FILE_NAME = "pom.xml";
@@ -64,15 +64,19 @@ public class PomXmlUpdater {
                     insideParentTag = false;
                 }
 
-                if (line.contains(ARTIFACT_ID_OPENING_TAG) && line.contains(ARTIFACT_ID_CLOSING_TAG) && !artifactIdUpdated && !insideParentTag) {
+                if (line.contains(ARTIFACT_ID_OPENING_TAG) && line.contains(ARTIFACT_ID_CLOSING_TAG)
+                        && !artifactIdUpdated && !insideParentTag) {
                     String packageName = getPackageVariable(PACKAGE_NAME);
-                    line = line.replaceFirst("<artifactId>.*</artifactId>", ARTIFACT_ID_OPENING_TAG + packageName + ARTIFACT_ID_CLOSING_TAG);
+                    line = line.replaceFirst("<artifactId>.*</artifactId>",
+                            ARTIFACT_ID_OPENING_TAG + packageName + ARTIFACT_ID_CLOSING_TAG);
                     artifactIdUpdated = true;
                 }
 
-                if (line.contains(VERSION_OPENING_TAG) && line.contains(VERSION_CLOSING_TAG) && !versionUpdated && !insideParentTag) {
+                if (line.contains(VERSION_OPENING_TAG) && line.contains(VERSION_CLOSING_TAG) && !versionUpdated
+                        && !insideParentTag) {
                     String packageVersion = getPackageVariable(PACKAGE_VERSION);
-                    line = line.replaceFirst("<version>.*</version>", VERSION_OPENING_TAG + packageVersion + VERSION_CLOSING_TAG);
+                    line = line.replaceFirst("<version>.*</version>",
+                            VERSION_OPENING_TAG + packageVersion + VERSION_CLOSING_TAG);
                     versionUpdated = true;
                 }
 
@@ -91,7 +95,8 @@ public class PomXmlUpdater {
 
     private static String getPackageVariable(String variableName) {
         try {
-            String envFilePath = PomXmlUpdater.class.getProtectionDomain().getCodeSource().getLocation().getPath() + ENV_FILE_NAME;
+            String envFilePath = PomXmlUpdater.class.getProtectionDomain().getCodeSource().getLocation().getPath()
+                    + ENV_FILE_NAME;
             File envFile = new File(envFilePath);
 
             if (envFile.exists()) {

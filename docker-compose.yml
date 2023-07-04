@@ -17,12 +17,12 @@ services:
     networks:
       - springmysql-net
   backend-app:
-    image: sleepypoem:ecommerce-backend-${PACKAGE_VERSION}
+    image: sleepypoem:${APP_NAME}-backend-${VERSION}
     build:
       context: ./back-end/ecommerce
       args:
-        - PACKAGE_NAME=${PACKAGE_NAME}
-        - PACKAGE_VERSION=${PACKAGE_VERSION}
+        - APP_NAME=${APP_NAME}
+        - VERSION=${VERSION}
     container_name: spring-app
     depends_on:
       - backend-db
@@ -43,7 +43,7 @@ services:
     #    extra_hosts:
     #      - "host.docker.internal:host-gateway"
   frontend-app:
-    image: sleepypoem:ecommerce-frontend-0.0.1
+    image: sleepypoem:${APP_NAME}-frontend-${VERSION}
     build:
       context: ./front-end/angular-ecommerce-front
     container_name: angular-app
