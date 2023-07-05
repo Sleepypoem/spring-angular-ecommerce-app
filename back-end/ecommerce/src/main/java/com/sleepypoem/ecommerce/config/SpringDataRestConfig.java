@@ -28,10 +28,3 @@ public class SpringDataRestConfig
 
         exposeIds(config);
     }
-
-    private void exposeIds(RepositoryRestConfiguration config) {
-        config.exposeIdsFor(entityManager.getMetamodel().getEntities().stream()
-                .map(Type::getJavaType)
-                .toArray(Class[]::new));
-    }
-}
