@@ -40,6 +40,10 @@ export class ProductListComponent {
     this.getProducts();
   }
 
+  addProductToCart(product: Product) {
+    console.log('adding product ' + product.name + ' to cart');
+  }
+
   getProducts(): void {
     if (this.categoryId != null) {
       this.productService
