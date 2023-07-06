@@ -11,6 +11,7 @@ import { CategoryService } from './services/category.service';
 import { RouterModule, Routes } from '@angular/router';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { CartStatusComponent } from './cart-status/cart-status.component';
 
 const routes: Routes = [
   { path: 'search/:name', component: ProductListComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
     CategorySidebarComponent,
     SearchFormComponent,
     ProductDetailComponent,
+    CartStatusComponent,
   ],
   imports: [
     BrowserModule,
