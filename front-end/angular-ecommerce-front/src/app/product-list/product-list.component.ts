@@ -1,7 +1,9 @@
+import { CartService } from './../services/cart.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from './../product';
 import { ProductService } from './../services/product.service';
 import { Component } from '@angular/core';
+import { CartItem } from '../cartItem';
 
 @Component({
   selector: 'app-product-list',
@@ -11,10 +13,6 @@ import { Component } from '@angular/core';
 export class ProductListComponent {
   products: Product[] = [];
 
-  categoryId: string = '1';
-
-  productName: string = '';
-
   page: number = 1;
   pageSize: number = 5;
   totalRecords: number = 0;
@@ -22,11 +20,9 @@ export class ProductListComponent {
 
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
-  ) {
-    this.categoryId = this.route.snapshot.paramMap.get('id')!;
-    this.productName = this.route.snapshot.paramMap.get('name')!;
-  }
+    private route: ActivatedRoute,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
@@ -41,54 +37,77 @@ export class ProductListComponent {
   }
 
   addProductToCart(product: Product) {
-    console.log('adding product ' + product.name + ' to cart');
+    this.cartService.addToCart(new CartItem(product, 1));
+  }
+
+  getProductsByCategoryPaginated(
+    categoryId: string,
+    page: number,
+    pageSize: number
+  ) {
+    this.productService
+      .getProductsByCategoryPaginated(categoryId, page - 1, pageSize)
+      .subscribe(
+        (data) => (
+          (this.products = data._embedded.products),
+          (this.totalRecords = data.page.totalElements),
+          (this.totalPages = data.page.totalPages),
+          (this.page = data.page.number + 1),
+          (this.pageSize = data.page.size)
+        )
+      );
+  }
+
+  getProductsByNameLikePaginated(
+    productName: string,
+    page: number,
+    pageSize: number
+  ) {
+    this.productService
+      .getProductsByNameLikePaginated(productName, page - 1, pageSize)
+      .subscribe(
+        (data) => (
+          (this.products = data._embedded.products),
+          (this.totalRecords = data.page.totalElements),
+          (this.totalPages = data.page.totalPages),
+          (this.page = data.page.number + 1),
+          (this.pageSize = data.page.size)
+        )
+      );
+  }
+
+  getProductsPaginated(page: number, pageSize: number) {
+    this.productService
+      .getProductsPaginated(page - 1, pageSize)
+      .subscribe(
+        (data) => (
+          (this.products = data._embedded.products),
+          (this.totalRecords = data.page.totalElements),
+          (this.totalPages = data.page.totalPages),
+          (this.page = data.page.number + 1),
+          (this.pageSize = data.page.size)
+        )
+      );
   }
 
   getProducts(): void {
-    if (this.categoryId != null) {
-      this.productService
-        .getProductsByCategoryPaginated(
-          this.categoryId,
-          this.page - 1,
-          this.pageSize
-        )
-        .subscribe(
-          (data) => (
-            (this.products = data._embedded.products),
-            (this.totalRecords = data.page.totalElements),
-            (this.totalPages = data.page.totalPages),
-            (this.page = data.page.number + 1),
-            (this.pageSize = data.page.size)
-          )
-        );
-    } else if (this.productName != null) {
-      this.productService
-        .getProductsByNameLikePaginated(
-          this.productName,
-          this.page - 1,
-          this.pageSize
-        )
-        .subscribe(
-          (data) => (
-            (this.products = data._embedded.products),
-            (this.totalRecords = data.page.totalElements),
-            (this.totalPages = data.page.totalPages),
-            (this.page = data.page.number + 1),
-            (this.pageSize = data.page.size)
-          )
-        );
+    const categoryId = this.route.snapshot.paramMap.get('id');
+    const productName = this.route.snapshot.paramMap.get('name');
+    if (categoryId != null) {
+      this.getProductsByCategoryPaginated(
+        categoryId,
+        this.page - 1,
+        this.pageSize
+      );
+    }
+    if (productName != null) {
+      this.getProductsByNameLikePaginated(
+        productName,
+        this.page - 1,
+        this.pageSize
+      );
     } else {
-      this.productService
-        .getProductsPaginated(this.page - 1, this.pageSize)
-        .subscribe(
-          (data) => (
-            (this.products = data._embedded.products),
-            (this.totalRecords = data.page.totalElements),
-            (this.totalPages = data.page.totalPages),
-            (this.page = data.page.number + 1),
-            (this.pageSize = data.page.size)
-          )
-        );
+      this.getProductsPaginated(this.page - 1, this.pageSize);
     }
   }
 }
