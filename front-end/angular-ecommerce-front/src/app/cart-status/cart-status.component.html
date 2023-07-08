@@ -1,6 +1,10 @@
 <div class="cart-area d-n">
-  <a href="shopping-detail.html">
-									<div class="total">{{totalPrice}} <span> {{totalQuantity}}</span> </div> <i style="font-size: 2.2rem; color: #fff;" class="bi bi-cart4 my-auto"
-										aria-hidden="true"></i>
-								</a>
+  <a routerLink="/cart">
+		<div class="total">{{totalPrice | currency: 'USD'}}
+      <span> {{totalQuantity}}
+      </span>
+    </div>
+    <i style="font-size: 2.2rem; color: #fff;" class="bi bi-cart4 my-auto"aria-hidden="true">
+     </i>
+	</a>
 </div>
