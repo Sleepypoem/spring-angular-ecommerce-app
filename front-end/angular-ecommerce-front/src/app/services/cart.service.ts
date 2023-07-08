@@ -49,6 +49,9 @@ export class CartService {
   }
 
   modifyCartItemQuantity(cartItem: CartItem, newQuantity: number) {
+    if (newQuantity == 0) {
+      return;
+    }
     const index: number = this.cartItems.findIndex(
       (item) => item.product.id === cartItem.product.id
     );
