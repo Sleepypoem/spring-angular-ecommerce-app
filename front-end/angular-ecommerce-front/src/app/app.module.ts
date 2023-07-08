@@ -12,11 +12,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { CartStatusComponent } from './cart-status/cart-status.component';
+import { CartDetailsComponent } from './cart-details/cart-details.component';
 
 const routes: Routes = [
   { path: 'search/:name', component: ProductListComponent },
   { path: 'category/:id', component: ProductListComponent },
   { path: 'products/:id', component: ProductDetailComponent },
+  { path: 'cart', component: CartDetailsComponent },
   { path: 'category', component: ProductListComponent },
   { path: 'products', component: ProductListComponent },
   { path: '', redirectTo: '/products', pathMatch: 'full' },
@@ -31,6 +33,7 @@ const routes: Routes = [
     SearchFormComponent,
     ProductDetailComponent,
     CartStatusComponent,
+    CartDetailsComponent,
   ],
   imports: [
     BrowserModule,
