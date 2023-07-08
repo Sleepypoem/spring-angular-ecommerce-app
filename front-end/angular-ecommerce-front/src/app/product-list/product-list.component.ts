@@ -46,7 +46,7 @@ export class ProductListComponent {
     pageSize: number
   ) {
     this.productService
-      .getProductsByCategoryPaginated(categoryId, page - 1, pageSize)
+      .getProductsByCategoryPaginated(categoryId, page, pageSize)
       .subscribe(
         (data) => (
           (this.products = data._embedded.products),
@@ -64,7 +64,7 @@ export class ProductListComponent {
     pageSize: number
   ) {
     this.productService
-      .getProductsByNameLikePaginated(productName, page - 1, pageSize)
+      .getProductsByNameLikePaginated(productName, page, pageSize)
       .subscribe(
         (data) => (
           (this.products = data._embedded.products),
@@ -78,7 +78,7 @@ export class ProductListComponent {
 
   getProductsPaginated(page: number, pageSize: number) {
     this.productService
-      .getProductsPaginated(page - 1, pageSize)
+      .getProductsPaginated(page, pageSize)
       .subscribe(
         (data) => (
           (this.products = data._embedded.products),
@@ -99,8 +99,7 @@ export class ProductListComponent {
         this.page - 1,
         this.pageSize
       );
-    }
-    if (productName != null) {
+    } else if (productName != null) {
       this.getProductsByNameLikePaginated(
         productName,
         this.page - 1,
