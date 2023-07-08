@@ -11,9 +11,7 @@ export class SearchFormComponent {
 
   ngOnInit(): void {}
 
-  doSearch(value: string) {
-    this.router.navigateByUrl('/search/' + value).then(() => {
-      window.location.reload();
-    });
+  doSearch(name: string) {
+    this.router.navigate(['/search', name]);
   }
 }

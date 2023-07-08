@@ -1,14 +1,14 @@
 <div class="page-wrapper">
   <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
-      <a href="home.html">
+      <a routerLink="/">
           <img src="assets/images/logo/logo.jpg" alt="ecommerce-logo" class="img-responsive">
     </a>
     </div>
     <div class="menu-sidebar-content js-scrollbar1">
       <nav class="navbar-sidebar">
         <ul *ngFor="let category of categories">
-          <li><a href="category/{{category.id}}">{{category.name}}</a></li>
+          <li><a routerLink="category/{{category.id}}">{{category.name}}</a></li>
         </ul>
       </nav>
     </div>
