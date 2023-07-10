@@ -8,25 +8,81 @@
             <h3>Customer</h3>
           </div>
           <div class="row">
-            <div class="col-md-2"><label>First name</label>
-            </div>
+            <div class="col-md-2"><label>First name</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="firstName" type="text" placeholder="First Name">
+                <input [ngClass]="[
+                    'form-control',
+                    firstName?.invalid &&
+                    (firstName?.touched || firstName?.dirty)
+                      ? 'is-invalid'
+                      : 'is-valid'
+                  ]" formControlName="firstName" type="text" placeholder="First Name" />
+                <div *ngIf="
+                    firstName?.invalid &&
+                    (firstName?.dirty || firstName?.touched)
+                  ">
+                  <div *ngIf="firstName?.errors?.['required']"
+                    class="invalid-feedback position-relative text-center">
+                    Please your first name.
+                  </div>
+                  <div *ngIf="firstName?.errors?.['minlength'] || firstName?.errors?.['maxlength']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide a valid first name, it must be at least 3
+                    chars long and 20 chars max
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-md-2"><label>Last name</label>
-            </div>
+            <div class="col-md-2"><label>Last name</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="lastName" type="text" placeholder="Last Name">
+                <input [ngClass]="[
+                    'form-control',
+                    lastName?.invalid &&
+                    (lastName?.touched || lastName?.dirty)
+                      ? 'is-invalid'
+                      : 'is-valid'
+                  ]" formControlName="lastName" type="text" placeholder="Last Name" />
+                <div *ngIf="
+                    lastName?.invalid &&
+                    (lastName?.dirty || lastName?.touched)
+                  ">
+                  <div *ngIf="lastName?.errors?.['required']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide your last name.
+                  </div>
+                  <div *ngIf="lastName?.errors?.['minlength'] || lastName?.errors?.['maxlength']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide a valid last name, it must be at least 3
+                    chars long and 20 chars max
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-md-2"><label>Email</label>
-            </div>
+            <div class="col-md-2"><label>Email</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="email" type="text" placeholder="Email Address">
+                <input [ngClass]="[
+                    'form-control',
+                    email?.invalid &&
+                    (email?.touched || email?.dirty)
+                      ? 'is-invalid'
+                      : 'is-valid'
+                  ]" formControlName="email" type="text" placeholder="Email Address" />
+                <div *ngIf="
+                    email?.invalid &&
+                    (email?.dirty || email?.touched)
+                  ">
+                  <div *ngIf="email?.errors?.['required']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide your email.
+                  </div>
+                  <div *ngIf="email?.errors?.['pattern']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide a valid email address.
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -44,27 +100,26 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select #countrySelector formControlName="country" title="country selector"
-                  (change)="loadCountryStatesByCountryName(countrySelector.value)">
-                  <option value="" disabled selected> Select a country</option>
-                  <option *ngFor="let country of countries" value="{{country.isoCode}}">
-                    {{country.name}}
+                  (change)="
+                    loadCountryStatesByCountryName(countrySelector.value)
+                  ">
+                  <option value="" disabled selected>Select a country</option>
+                  <option *ngFor="let country of countries" value="{{ country.isoCode }}">
+                    {{ country.name }}
                   </option>
                 </select>
               </div>
-
             </div>
-            <div class="col-md-2"><label>Street</label>
-            </div>
+            <div class="col-md-2"><label>Street</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="street" type="text" placeholder="Street">
+                <input formControlName="street" type="text" placeholder="Street" />
               </div>
             </div>
-            <div class="col-md-2"><label>City</label>
-            </div>
+            <div class="col-md-2"><label>City</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="city" type="text" placeholder="City">
+                <input formControlName="city" type="text" placeholder="City" />
               </div>
             </div>
             <div class="col-md-2">
@@ -73,31 +128,28 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select formControlName="state" title="state selector">
-                  <option value="" disabled selected> Select a state</option>
-                  <option *ngFor="let state of states">{{state.name}}</option>
+                  <option value="" disabled selected>Select a state</option>
+                  <option *ngFor="let state of states">{{ state.name }}</option>
                 </select>
               </div>
             </div>
-            <div class="col-md-2"><label>Zip code</label>
-            </div>
+            <div class="col-md-2"><label>Zip code</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="zipCode" type="text" placeholder="Zip code">
+                <input formControlName="zipCode" type="text" placeholder="Zip code" />
               </div>
             </div>
           </div>
-
         </div>
 
         <!-- is billing address same as address? -->
         <div class="item input-space">
           <div class="checkbox-rect">
             <input (change)="copyAddressToBillingAddress($event)" type="checkbox"
-              id="checkbox-rect1" name="check">
+              id="checkbox-rect1" name="check" />
             <label for="checkbox-rect1">Is billing address same as address?</label>
           </div>
         </div>
-
 
         <!-- Billing address area -->
         <div formGroupName="billingAddress" class="form-area">
@@ -111,27 +163,26 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select #countrySelector formControlName="country" title="country selector"
-                  (change)="loadCountryStatesByCountryName(countrySelector.value)">
-                  <option value="" disabled selected> Select a country</option>
-                  <option *ngFor="let country of countries" value="{{country.isoCode}}">
-                    {{country.name}}
+                  (change)="
+                    loadCountryStatesByCountryName(countrySelector.value)
+                  ">
+                  <option value="" disabled selected>Select a country</option>
+                  <option *ngFor="let country of countries" value="{{ country.isoCode }}">
+                    {{ country.name }}
                   </option>
                 </select>
               </div>
-
             </div>
-            <div class="col-md-2"><label>Street</label>
-            </div>
+            <div class="col-md-2"><label>Street</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="street" type="text" placeholder="Street">
+                <input formControlName="street" type="text" placeholder="Street" />
               </div>
             </div>
-            <div class="col-md-2"><label>City</label>
-            </div>
+            <div class="col-md-2"><label>City</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="city" type="text" placeholder="City">
+                <input formControlName="city" type="text" placeholder="City" />
               </div>
             </div>
             <div class="col-md-2">
@@ -140,16 +191,15 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select formControlName="state" title="state selector">
-                  <option value="" disabled selected> Select a state</option>
-                  <option *ngFor="let state of states">{{state.name}}</option>
+                  <option value="" disabled selected>Select a state</option>
+                  <option *ngFor="let state of states">{{ state.name }}</option>
                 </select>
               </div>
             </div>
-            <div class="col-md-2"><label>Zip code</label>
-            </div>
+            <div class="col-md-2"><label>Zip code</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="zipCode" type="text" placeholder="Zip code">
+                <input formControlName="zipCode" type="text" placeholder="Zip code" />
               </div>
             </div>
           </div>
@@ -171,27 +221,23 @@
                   <option>MASTERCARD</option>
                 </select>
               </div>
-
             </div>
-            <div class="col-md-2"><label>Name on card</label>
-            </div>
+            <div class="col-md-2"><label>Name on card</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="cardHolderName" type="text" placeholder="Name on card">
+                <input formControlName="cardHolderName" type="text" placeholder="Name on card" />
               </div>
             </div>
-            <div class="col-md-2"><label>Card number</label>
-            </div>
+            <div class="col-md-2"><label>Card number</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="cardNumber" type="text" placeholder="Card number">
+                <input formControlName="cardNumber" type="text" placeholder="Card number" />
               </div>
             </div>
-            <div class="col-md-2"><label>Card CVC</label>
-            </div>
+            <div class="col-md-2"><label>Card CVC</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="cardSecurityCode" type="text" placeholder="Card CVC">
+                <input formControlName="cardSecurityCode" type="text" placeholder="Card CVC" />
               </div>
             </div>
             <div class="col-md-2">
@@ -225,6 +271,6 @@
         </div>
         <button type="submit" class="btn btn-info">Purchase</button>
       </form>
-
     </div>
   </div>
+</div>
