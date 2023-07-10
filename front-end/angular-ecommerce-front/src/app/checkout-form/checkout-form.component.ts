@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AddressService } from '../services/address.service';
+import { ICountry, IState, ICity } from 'country-state-city';
 
 @Component({
   selector: 'app-checkout-form',
@@ -8,8 +10,16 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class CheckoutFormComponent implements OnInit {
   checkoutForm: FormGroup = {} as FormGroup;
+  countries: ICountry[] = [];
 
-  constructor(private formBuilder: FormBuilder) {}
+  states: IState[] = [];
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private addressService: AddressService
+  ) {
+    this.countries = this.addressService.getCountries();
+  }
 
   ngOnInit() {
     this.checkoutForm = this.formBuilder.group({
@@ -41,6 +51,11 @@ export class CheckoutFormComponent implements OnInit {
         cardType: '',
       }),
     });
+  }
+
+  loadCountryStatesByCountryName(country: any) {
+    console.log(this.checkoutForm.controls['address']);
+    this.states = this.addressService.getStatesByCountry(country);
   }
 
   copyAddressToBillingAddress(event: any) {
