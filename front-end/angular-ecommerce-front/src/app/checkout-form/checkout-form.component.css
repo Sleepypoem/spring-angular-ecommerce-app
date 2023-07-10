@@ -42,6 +42,10 @@
     border:1px solid #ccc
 }
 
+.is-invalid {
+  border: 1px solid red!important;
+}
+
 input[type=number]:hover::-webkit-inner-spin-button {
     width: 20px;
     height: 36px;
@@ -53,6 +57,10 @@ input[type=number]:hover::-webkit-inner-spin-button {
     outline:0;
     padding:0 10px;
     border:1px solid #ccc
+}
+
+.invalid-feedback {
+  display: block!important;
 }
 
 /* CheckBox https://codepen.io/alvarotrigo */
