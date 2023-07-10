@@ -43,10 +43,12 @@
             </div>
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="country" title="country selector">
-                  <option>Country1</option>
-                  <option>Country2</option>
-                  <option>Country3</option>
+                <select #countrySelector formControlName="country" title="country selector"
+                  (change)="loadCountryStatesByCountryName(countrySelector.value)">
+                  <option value="" disabled selected> Select a country</option>
+                  <option *ngFor="let country of countries" value="{{country.isoCode}}">
+                    {{country.name}}
+                  </option>
                 </select>
               </div>
 
@@ -71,9 +73,8 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select formControlName="state" title="state selector">
-                  <option>State1</option>
-                  <option>State2</option>
-                  <option>State3</option>
+                  <option value="" disabled selected> Select a state</option>
+                  <option *ngFor="let state of states">{{state.name}}</option>
                 </select>
               </div>
             </div>
@@ -109,10 +110,12 @@
             </div>
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="country" title="country selector">
-                  <option>Country1</option>
-                  <option>Country2</option>
-                  <option>Country3</option>
+                <select #countrySelector formControlName="country" title="country selector"
+                  (change)="loadCountryStatesByCountryName(countrySelector.value)">
+                  <option value="" disabled selected> Select a country</option>
+                  <option *ngFor="let country of countries" value="{{country.isoCode}}">
+                    {{country.name}}
+                  </option>
                 </select>
               </div>
 
@@ -137,9 +140,8 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select formControlName="state" title="state selector">
-                  <option>State1</option>
-                  <option>State2</option>
-                  <option>State3</option>
+                  <option value="" disabled selected> Select a state</option>
+                  <option *ngFor="let state of states">{{state.name}}</option>
                 </select>
               </div>
             </div>
