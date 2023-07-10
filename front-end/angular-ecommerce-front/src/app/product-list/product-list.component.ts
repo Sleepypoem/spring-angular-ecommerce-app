@@ -18,6 +18,9 @@ export class ProductListComponent {
   totalRecords: number = 0;
   totalPages: number = 0;
 
+  previousCategoryId: string = '';
+  previousProductName: string = '';
+
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
@@ -45,6 +48,10 @@ export class ProductListComponent {
     page: number,
     pageSize: number
   ) {
+    if (this.categoryIdHasChanged(categoryId)) {
+      page = 0;
+    }
+
     this.productService
       .getProductsByCategoryPaginated(categoryId, page, pageSize)
       .subscribe(
@@ -63,6 +70,9 @@ export class ProductListComponent {
     page: number,
     pageSize: number
   ) {
+    if (this.productNameHasChanged(productName)) {
+      page = 0;
+    }
     this.productService
       .getProductsByNameLikePaginated(productName, page, pageSize)
       .subscribe(
@@ -108,5 +118,21 @@ export class ProductListComponent {
     } else {
       this.getProductsPaginated(this.page - 1, this.pageSize);
     }
+  }
+
+  categoryIdHasChanged(categoryId: string): boolean {
+    if (this.previousCategoryId != categoryId) {
+      this.previousCategoryId = categoryId;
+      return true;
+    }
+    return false;
+  }
+
+  productNameHasChanged(productName: string): boolean {
+    if (this.previousProductName != productName) {
+      this.previousProductName = productName;
+      return true;
+    }
+    return false;
   }
 }
