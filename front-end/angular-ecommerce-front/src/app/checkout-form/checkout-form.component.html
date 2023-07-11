@@ -22,7 +22,7 @@
                     firstName?.invalid &&
                     (firstName?.dirty || firstName?.touched)
                   ">
-                  <div *ngIf="firstName?.errors?.['required']"
+                  <div *ngIf="firstName?.errors?.['required'] || firstName?.errors?.['notOnlyBlankSpaces']"
                     class="invalid-feedback position-relative text-center">
                     Please provide your first name.
                   </div>
@@ -44,11 +44,8 @@
                       ? 'is-invalid'
                       : 'is-valid'
                   ]" formControlName="lastName" type="text" placeholder="Last Name" />
-                <div *ngIf="
-                    lastName?.invalid &&
-                    (lastName?.dirty || lastName?.touched)
-                  ">
-                  <div *ngIf="lastName?.errors?.['required']"
+                <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)">
+                  <div *ngIf="lastName?.errors?.['required'] || lastName?.errors?.['notOnlyBlankSpaces']"
                     class="invalid-feedback position-relative text-center">
                     Please provide your last name.
                   </div>
@@ -63,23 +60,16 @@
             <div class="col-md-2"><label>Email</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input [ngClass]="[
-                    'form-control',
-                    email?.invalid &&
-                    (email?.touched || email?.dirty)
-                      ? 'is-invalid'
-                      : 'is-valid'
-                  ]" formControlName="email" type="text" placeholder="Email Address" />
+                <input [ngClass]="['form-control', email?.invalid && (email?.touched || email?.dirty) ? 'is-invalid' : 'is-valid' ]"
+                  formControlName="email" type="text" placeholder="Email Address" />
                 <div *ngIf="
                     email?.invalid &&
                     (email?.dirty || email?.touched)
                   ">
-                  <div *ngIf="email?.errors?.['required']"
-                    class="invalid-feedback position-relative text-center">
+                  <div *ngIf="email?.errors?.['required']" class="invalid-feedback position-relative text-center">
                     Please provide your email.
                   </div>
-                  <div *ngIf="email?.errors?.['pattern']"
-                    class="invalid-feedback position-relative text-center">
+                  <div *ngIf="email?.errors?.['pattern']" class="invalid-feedback position-relative text-center">
                     Please provide a valid email address.
                   </div>
                 </div>
@@ -99,27 +89,53 @@
             </div>
             <div class="col-md-9">
               <div class="input-space">
-                <select #countrySelector formControlName="country" title="country selector"
-                  (change)="
+                <select [ngClass]="['form-control', country?.invalid && (country?.touched || country?.dirty) ? 'is-invalid' : 'is-valid' ]"
+                  #countrySelector formControlName="country" title="country selector" (change)="
                     loadCountryStatesByCountryName(countrySelector.value)
                   ">
-                  <option value="" disabled selected>Select a country</option>
+                  <option value="default" disabled selected>Select a country</option>
                   <option *ngFor="let country of countries" value="{{ country.isoCode }}">
                     {{ country.name }}
                   </option>
                 </select>
+                <div *ngIf="country?.invalid && (country?.dirty || country?.touched)">
+                  <div *ngIf="country?.errors?.['required']" class="invalid-feedback position-relative text-center">
+                    Please select a country.
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-2"><label>Street</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="street" type="text" placeholder="Street" />
+                <input [ngClass]="['form-control', street?.invalid && (street?.touched || street?.dirty) ? 'is-invalid' : 'is-valid' ]"
+                  formControlName="street" type="text" placeholder="Street" />
+                <div *ngIf="street?.invalid && (street?.dirty || street?.touched)">
+                  <div *ngIf="street?.errors?.['required'] || street?.errors?.['notOnlyBlankSpaces']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide your street.
+                  </div>
+                  <div *ngIf="street?.errors?.['minlength'] || street?.errors?.['maxlength']" class="invalid-feedback position-relative text-center">
+                    Please provide a valid street, it must be at least 3
+                    chars long and 50 chars max
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-2"><label>City</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="city" type="text" placeholder="City" />
+                <input [ngClass]="['form-control', city?.invalid && (city?.touched || city?.dirty) ? 'is-invalid' : 'is-valid' ]"
+                  formControlName="city" type="text" placeholder="City" />
+                <div *ngIf="city?.invalid && (city?.dirty || city?.touched)">
+                  <div *ngIf="city?.errors?.['required'] || city?.errors?.['notOnlyBlankSpaces']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide your city name.
+                  </div>
+                  <div *ngIf="city?.errors?.['maxlength']" class="invalid-feedback position-relative text-center">
+                    Please provide a valid city name, max 50 chars long.
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-2">
@@ -127,16 +143,29 @@
             </div>
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="state" title="state selector">
-                  <option value="" disabled selected>Select a state</option>
+                <select [ngClass]="['form-control', state?.invalid && (state?.touched || state?.dirty) ? 'is-invalid' : 'is-valid' ]"
+                  formControlName="state" title="state selector">
+                  <option value="default" disabled selected>Select a state</option>
                   <option *ngFor="let state of states">{{ state.name }}</option>
                 </select>
+                <div *ngIf="state?.invalid && (state?.dirty || state?.touched)">
+                  <div *ngIf="state?.errors?.['required']" class="invalid-feedback position-relative text-center">
+                    Please select a state.
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-2"><label>Zip code</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="zipCode" type="text" placeholder="Zip code" />
+                <input [ngClass]="['form-control', zipCode?.invalid && (zipCode?.touched || zipCode?.dirty) ? 'is-invalid' : 'is-valid' ]"
+                  formControlName="zipCode" type="text" placeholder="Zip code" />
+                <div *ngIf="zipCode?.invalid && (zipCode?.dirty || zipCode?.touched)">
+                  <div *ngIf="zipCode?.errors?.['required'] || zipCode?.errors?.['notOnlyBlankSpaces']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide your zip code.
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -145,8 +174,7 @@
         <!-- is billing address same as address? -->
         <div class="item input-space">
           <div class="checkbox-rect">
-            <input (change)="copyAddressToBillingAddress($event)" type="checkbox"
-              id="checkbox-rect1" name="check" />
+            <input (change)="copyAddressToBillingAddress($event)" type="checkbox" id="checkbox-rect1" name="check" />
             <label for="checkbox-rect1">Is billing address same as address?</label>
           </div>
         </div>
@@ -162,27 +190,56 @@
             </div>
             <div class="col-md-9">
               <div class="input-space">
-                <select #countrySelector formControlName="country" title="country selector"
-                  (change)="
-                    loadCountryStatesByCountryName(countrySelector.value)
-                  ">
-                  <option value="" disabled selected>Select a country</option>
+                <select
+                  [ngClass]="['form-control', billingCountry?.invalid && (billingCountry?.touched || billingCountry?.dirty) ? 'is-invalid' : 'is-valid' ]"
+                  #countrySelector formControlName="country" title="country selector" (change)="
+                              loadCountryStatesByCountryName(countrySelector.value)
+                            ">
+                  <option value="default" disabled selected>Select a country</option>
                   <option *ngFor="let country of countries" value="{{ country.isoCode }}">
                     {{ country.name }}
                   </option>
                 </select>
+                <div *ngIf="billingCountry?.invalid && (billingCountry?.dirty || billingCountry?.touched)">
+                  <div *ngIf="billingCountry?.errors?.['required']" class="invalid-feedback position-relative text-center">
+                    Please select a country.
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-2"><label>Street</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="street" type="text" placeholder="Street" />
+                <input
+                  [ngClass]="['form-control', billingStreet?.invalid && (billingStreet?.touched || billingStreet?.dirty) ? 'is-invalid' : 'is-valid' ]"
+                  formControlName="street" type="text" placeholder="Street" />
+                <div *ngIf="billingStreet?.invalid && (billingStreet?.dirty || billingStreet?.touched)">
+                  <div *ngIf="billingStreet?.errors?.['required'] || billingStreet?.errors?.['notOnlyBlankSpaces']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide your street.
+                  </div>
+                  <div *ngIf="billingStreet?.errors?.['minlength'] || billingStreet?.errors?.['maxlength']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide a valid street, it must be at least 3
+                    chars long and 50 chars max
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-2"><label>City</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="city" type="text" placeholder="City" />
+                <input [ngClass]="['form-control', billingCity?.invalid && (billingCity?.touched || billingCity?.dirty) ? 'is-invalid' : 'is-valid' ]"
+                  formControlName="city" type="text" placeholder="City" />
+                <div *ngIf="billingCity?.invalid && (billingCity?.dirty || billingCity?.touched)">
+                  <div *ngIf="billingCity?.errors?.['required'] || billingCity?.errors?.['notOnlyBlankSpaces']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide your city name.
+                  </div>
+                  <div *ngIf="billingCity?.errors?.['maxlength']" class="invalid-feedback position-relative text-center">
+                    Please provide a valid city name, max 50 chars long.
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-2">
@@ -190,16 +247,31 @@
             </div>
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="state" title="state selector">
-                  <option value="" disabled selected>Select a state</option>
+                <select
+                  [ngClass]="['form-control', billingState?.invalid && (billingState?.touched || billingState?.dirty) ? 'is-invalid' : 'is-valid' ]"
+                  formControlName="state" title="state selector">
+                  <option value="default" disabled selected>Select a state</option>
                   <option *ngFor="let state of states">{{ state.name }}</option>
                 </select>
+                <div *ngIf="billingState?.invalid && (billingState?.dirty || billingState?.touched)">
+                  <div *ngIf="billingState?.errors?.['required']" class="invalid-feedback position-relative text-center">
+                    Please select a state.
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-2"><label>Zip code</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="zipCode" type="text" placeholder="Zip code" />
+                <input
+                  [ngClass]="['form-control', billingZipCode?.invalid && (billingZipCode?.touched || billingZipCode?.dirty) ? 'is-invalid' : 'is-valid' ]"
+                  formControlName="zipCode" type="text" placeholder="Zip code" />
+                <div *ngIf="billingZipCode?.invalid && (billingZipCode?.dirty || billingZipCode?.touched)">
+                  <div *ngIf="billingZipCode?.errors?.['required'] || billingZipCode?.errors?.['notOnlyBlankSpaces']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide your zip code.
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -216,28 +288,77 @@
             </div>
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="cardType" title="card type selector">
-                  <option>VISA</option>
-                  <option>MASTERCARD</option>
+                <select [ngClass]="['form-control', cardType?.invalid && (cardType?.touched || cardType?.dirty) ? 'is-invalid' : 'is-valid' ]"
+                  formControlName="cardType" title="card type selector">
+                  <option default selected value="VISA">VISA</option>
+                  <option value="MASTERCARD">MASTERCARD</option>
                 </select>
+                <div *ngIf="cardType?.invalid && (cardType?.dirty || cardType?.touched)">
+                  <div *ngIf="cardType?.errors?.['required']" class="invalid-feedback position-relative text-center">
+                    Please select your card's type.
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-2"><label>Name on card</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="cardHolderName" type="text" placeholder="Name on card" />
+                <input
+                  [ngClass]="['form-control', cardHolderName?.invalid && (cardHolderName?.touched || cardHolderName?.dirty) ? 'is-invalid' : 'is-valid' ]"
+                  formControlName="cardHolderName" type="text" placeholder="Name on card" />
+
+                <div *ngIf="cardHolderName?.invalid && (cardHolderName?.dirty || cardHolderName?.touched)">
+                  <div *ngIf="cardHolderName?.errors?.['required'] || cardHolderName?.errors?.['notOnlyBlankSpaces']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide the name of the cardholder in your card.
+                  </div>
+                  <div *ngIf="cardHolderName?.errors?.['minlength'] || cardHolderName?.errors?.['maxlength']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide a valid name, it must be at least 3
+                    chars min and 50 chars max.
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-2"><label>Card number</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="cardNumber" type="text" placeholder="Card number" />
+                <input [ngClass]="['form-control', cardNumber?.invalid && (cardNumber?.touched || cardNumber?.dirty) ? 'is-invalid' : 'is-valid' ]"
+                  formControlName="cardNumber" type="text" placeholder="Card number" />
+                <div *ngIf="cardNumber?.invalid && (cardNumber?.dirty || cardNumber?.touched)">
+                  <div *ngIf="cardNumber?.errors?.['required'] || cardNumber?.errors?.['notOnlyBlankSpaces']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide your card number.
+                  </div>
+                  <div *ngIf="cardNumber?.errors?.['minlength'] || cardNumber?.errors?.['maxlength']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide a valid card number, it should be 16 chars long.
+                  </div>
+                  <div *ngIf="cardNumber?.errors?.['pattern']" class="invalid-feedback position-relative text-center">
+                    Only numbers allowed.
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-2"><label>Card CVC</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <input formControlName="cardSecurityCode" type="text" placeholder="Card CVC" />
+                <input
+                  [ngClass]="['form-control', cardSecurityCode?.invalid && (cardSecurityCode?.touched || cardSecurityCode?.dirty) ? 'is-invalid' : 'is-valid' ]"
+                  formControlName="cardSecurityCode" type="text" placeholder="Card CVC" />
+                <div *ngIf="cardSecurityCode?.invalid && (cardSecurityCode?.dirty || cardSecurityCode?.touched)">
+                  <div *ngIf="cardSecurityCode?.errors?.['required'] || cardSecurityCode?.errors?.['notOnlyBlankSpaces']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide your security code.
+                  </div>
+                  <div *ngIf="cardSecurityCode?.errors?.['minlength'] || cardSecurityCode?.errors?.['maxlength']"
+                    class="invalid-feedback position-relative text-center">
+                    Please provide a valid security code, it should be 3 chars long.
+                  </div>
+                  <div *ngIf="cardSecurityCode?.errors?.['pattern']" class="invalid-feedback position-relative text-center">
+                    Only numbers allowed.
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-2">
@@ -253,8 +374,7 @@
             </div>
             <div class="col-md-9">
               <div class="input-space">
-                <input type="number" onkeydown="return false" min="1900" max="2099" step="1"
-                  value="2023" />
+                <input type="number" onkeydown="return false" min="1900" max="2099" step="1" value="2023" />
               </div>
             </div>
           </div>
