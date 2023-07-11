@@ -1,0 +1,128 @@
+
+.form-area{
+    background:#e5e5e5;
+    position:relative;
+    margin-bottom:45px;
+    padding:50px 20px;
+    border:3px solid #ccc
+}
+.form-area h3{
+    position:absolute;
+    top:-26px;
+    /* left:auto; */
+    background:#e5e5e5;
+    padding: 10px 15px;
+    font-weight:500;
+    z-index:23;
+    display:inline-block
+}
+.input-space{
+    margin-bottom:20px
+}
+.input-space label{
+    padding-left:31px;
+    font-size:14px;
+    margin-bottom:50px
+}
+.input-space input[type=text]{
+    width:100%;
+    height:40px;
+    border-radius:30px;
+    outline:0;
+    padding:10px;
+    border:1px solid #ccc
+}
+
+.input-space input[type=number]{
+    width:100%;
+    height:40px;
+    border-radius:30px;
+    outline:0;
+    padding:10px;
+    border:1px solid #ccc
+}
+
+.is-invalid {
+  border: 1px solid red!important;
+}
+
+input[type=number]:hover::-webkit-inner-spin-button {
+    width: 20px;
+    height: 36px;
+}
+.input-space select{
+    width:100%;
+    height:40px;
+    border-radius:30px;
+    outline:0;
+    padding:0 10px;
+    border:1px solid #ccc
+}
+
+.invalid-feedback {
+  display: block!important;
+}
+
+/* CheckBox https://codepen.io/alvarotrigo */
+
+.checkbox-rect input[type="checkbox"] {
+  display: none;
+}
+.checkbox-rect input[type="checkbox"] + label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 20px;
+  font: 14px/20px "Open Sans", Arial, sans-serif;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.checkbox-rect input[type="checkbox"]:hover + label:hover {
+  color: rgb(23, 86, 228);
+}
+.checkbox-rect input[type="checkbox"]:hover + label:before {
+  background: #0071bd;
+  box-shadow: inset 0px 0px 0px 2px #f7f2f2;
+}
+.checkbox-rect input[type="checkbox"] + label:last-child {
+  margin-bottom: 0;
+}
+.checkbox-rect input[type="checkbox"] + label:before {
+  content: "";
+  display: block;
+  width: 1.4em;
+  height: 1.4em;
+  border: 1px solid #343a3f;
+  border-radius: 0.2em;
+  position: absolute;
+  left: 0;
+  top: 0;
+  -webkit-transition: all 0.2s, background 0.2s ease-in-out;
+  transition: all 0.2s, background 0.2s ease-in-out;
+  background: #f3f3f3;
+}
+.checkbox-rect input[type="checkbox"]:checked + label:before {
+  width: 1.3em;
+  height: 1.3em;
+  border-radius: 0.2em;
+  border: 2px solid #fff;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  background: #0071bd;
+  box-shadow: 0 0 0 1px #000;
+}
+
+/* Checkbox */
+
+label.date{
+    padding-top:8px
+}
+option:first{
+    color:#ccc
+}
+select{
+    color:#828482
+}
+
