@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddressService } from '../services/address.service';
 import { ICountry, IState } from 'country-state-city';
 import { CustomValidators } from '../validators/CustomValidators';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-checkout-form',
@@ -15,9 +16,14 @@ export class CheckoutFormComponent implements OnInit {
 
   states: IState[] = [];
 
+  totalPrice: number = 0.0;
+
+  totalQuantity: number = 0;
+
   constructor(
     private formBuilder: FormBuilder,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private cartService: CartService
   ) {
     this.countries = this.addressService.getCountries();
   }
@@ -137,11 +143,20 @@ export class CheckoutFormComponent implements OnInit {
         cardType: ['', [Validators.required]],
       }),
     });
+    this.updateCartReviewDetails();
   }
 
   loadCountryStatesByCountryName(country: any) {
     console.log(this.checkoutForm.controls['address']);
     this.states = this.addressService.getStatesByCountry(country);
+  }
+
+  updateCartReviewDetails() {
+    this.cartService.totalPrice.subscribe((data) => (this.totalPrice = data));
+    this.cartService.totalQuantity.subscribe(
+      (data) => (this.totalQuantity = data)
+    );
+    console.log('updateCartReviewDetails');
   }
 
   copyAddressToBillingAddress(event: any) {

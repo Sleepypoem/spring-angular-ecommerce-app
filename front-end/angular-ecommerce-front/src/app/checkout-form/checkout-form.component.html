@@ -28,8 +28,8 @@
                   </div>
                   <div *ngIf="firstName?.errors?.['minlength'] || firstName?.errors?.['maxlength']"
                     class="invalid-feedback position-relative text-center">
-                    Please provide a valid first name, it must be at least 3
-                    chars long and 20 chars max
+                    Please provide a valid first name, it should be at least 3
+                    chars min and 20 chars max.
                   </div>
                 </div>
               </div>
@@ -51,8 +51,8 @@
                   </div>
                   <div *ngIf="lastName?.errors?.['minlength'] || lastName?.errors?.['maxlength']"
                     class="invalid-feedback position-relative text-center">
-                    Please provide a valid last name, it must be at least 3
-                    chars long and 20 chars max
+                    Please provide a valid last name, it should be at least 3
+                    chars min and 20 chars max.
                   </div>
                 </div>
               </div>
@@ -116,8 +116,8 @@
                     Please provide your street.
                   </div>
                   <div *ngIf="street?.errors?.['minlength'] || street?.errors?.['maxlength']" class="invalid-feedback position-relative text-center">
-                    Please provide a valid street, it must be at least 3
-                    chars long and 50 chars max
+                    Please provide a valid street, it should be at least 3
+                    chars min and 50 chars max.
                   </div>
                 </div>
               </div>
@@ -220,8 +220,8 @@
                   </div>
                   <div *ngIf="billingStreet?.errors?.['minlength'] || billingStreet?.errors?.['maxlength']"
                     class="invalid-feedback position-relative text-center">
-                    Please provide a valid street, it must be at least 3
-                    chars long and 50 chars max
+                    Please provide a valid street, it should be at least 3
+                    chars min and 50 chars max
                   </div>
                 </div>
               </div>
@@ -295,7 +295,7 @@
                 </select>
                 <div *ngIf="cardType?.invalid && (cardType?.dirty || cardType?.touched)">
                   <div *ngIf="cardType?.errors?.['required']" class="invalid-feedback position-relative text-center">
-                    Please select your card's type.
+                    Please select the type of your card.
                   </div>
                 </div>
               </div>
@@ -310,7 +310,7 @@
                 <div *ngIf="cardHolderName?.invalid && (cardHolderName?.dirty || cardHolderName?.touched)">
                   <div *ngIf="cardHolderName?.errors?.['required'] || cardHolderName?.errors?.['notOnlyBlankSpaces']"
                     class="invalid-feedback position-relative text-center">
-                    Please provide the name of the cardholder in your card.
+                    Please provide the cardholder name in your card.
                   </div>
                   <div *ngIf="cardHolderName?.errors?.['minlength'] || cardHolderName?.errors?.['maxlength']"
                     class="invalid-feedback position-relative text-center">
@@ -385,9 +385,9 @@
           <div class="text-center">
             <h3>Review your order</h3>
           </div>
-          <b>Total Quantity: 2</b>
+          <b>Total Quantity: {{totalQuantity}}</b>
           <h4>Shipping: FREE</h4>
-          <B>Total Price: $19.99</B>
+          <B>Total Price: {{totalPrice | currency: 'USD'}}</B>
         </div>
         <button type="submit" class="btn btn-info">Purchase</button>
       </form>
