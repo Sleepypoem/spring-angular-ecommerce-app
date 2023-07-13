@@ -11,9 +11,8 @@ import lombok.Setter;
 @Table(name = "addresses")
 public class AddressEntity extends EntityWithTimeStamps {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 
     private String street;
 
@@ -28,4 +27,8 @@ public class AddressEntity extends EntityWithTimeStamps {
 
 
     private String country;
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private OrderEntity order;
 }
