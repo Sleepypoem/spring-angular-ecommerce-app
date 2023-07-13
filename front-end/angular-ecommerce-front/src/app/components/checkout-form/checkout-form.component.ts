@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AddressService } from '../services/address.service';
 import { ICountry, IState } from 'country-state-city';
-import { CustomValidators } from '../validators/CustomValidators';
-import { CartService } from '../services/cart.service';
+import { AddressService } from 'src/app/services/address.service';
+import { CartService } from 'src/app/services/cart.service';
+import { CustomValidators } from 'src/app/validators/CustomValidators';
 
 @Component({
   selector: 'app-checkout-form',
@@ -147,7 +147,6 @@ export class CheckoutFormComponent implements OnInit {
   }
 
   loadCountryStatesByCountryName(country: any) {
-    console.log(this.checkoutForm.controls['address']);
     this.states = this.addressService.getStatesByCountry(country);
   }
 
@@ -171,6 +170,45 @@ export class CheckoutFormComponent implements OnInit {
 
   onSubmit() {
     this.checkoutForm.markAllAsTouched();
+    console.log('purchase dto: ', {
+      customer: {
+        firstName: this.checkoutForm.get('customer.firstName')?.value,
+        lastName: this.checkoutForm.get('customer.lastName')?.value,
+        email: this.checkoutForm.get('customer.email')?.value,
+      },
+      order: {
+        shippingAddress: {
+          country: this.checkoutForm.get('address.country')?.value,
+          state: this.checkoutForm.get('address.state')?.value,
+          city: this.checkoutForm.get('address.city')?.value,
+          street: this.checkoutForm.get('address.street')?.value,
+          zipCode: this.checkoutForm.get('address.zipCode')?.value,
+        },
+        billingAddress: {
+          country: this.checkoutForm.get('billingAddress.country')?.value,
+          state: this.checkoutForm.get('billingAddress.state')?.value,
+          city: this.checkoutForm.get('billingAddress.city')?.value,
+          street: this.checkoutForm.get('billingAddress.street')?.value,
+          zipCode: this.checkoutForm.get('billingAddress.zipCode')?.value,
+        },
+        items: this.cartService.cartItems,
+        totalPrice: this.totalPrice,
+        totalQuantity: this.totalQuantity,
+        // creditCard: {
+        //   cardNumber: this.checkoutForm.get('creditCard.cardNumber')?.value,
+        //   cardHolderName: this.checkoutForm.get('creditCard.cardHolderName')
+        //     ?.value,
+        //   cardExpirationMonth: this.checkoutForm.get(
+        //     'creditCard.cardExpirationMonth'
+        //   )?.value,
+        //   cardExpirationYear: this.checkoutForm.get(
+        //     'creditCard.cardExpirationYear'
+        //   )?.value,
+        //   cardSecurityCode: this.checkoutForm.get('creditCard.cardSecurityCode')
+        //     ?.value,
+        // },
+      },
+    });
     console.warn(this.checkoutForm?.get('customer')?.value);
     console.warn(this.checkoutForm?.get('address')?.value);
     console.warn(this.checkoutForm?.get('billingAddress')?.value);

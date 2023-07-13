@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { ProductListComponent } from './product-list/product-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from './services/product.service';
-import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CategorySidebarComponent } from './category-sidebar/category-sidebar.component';
 import { CategoryService } from './services/category.service';
 import { RouterModule, Routes } from '@angular/router';
-import { SearchFormComponent } from './search-form/search-form.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { CartStatusComponent } from './cart-status/cart-status.component';
-import { CartDetailsComponent } from './cart-details/cart-details.component';
-import { CheckoutFormComponent } from './checkout-form/checkout-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { CartStatusComponent } from './components/cart-status/cart-status.component';
+import { CategorySidebarComponent } from './components/category-sidebar/category-sidebar.component';
+import { CheckoutFormComponent } from './components/checkout-form/checkout-form.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { SearchFormComponent } from './components/search-form/search-form.component';
 
 const routes: Routes = [
   { path: 'search/:name', component: ProductListComponent },
