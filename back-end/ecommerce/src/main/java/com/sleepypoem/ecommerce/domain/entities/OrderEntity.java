@@ -1,6 +1,7 @@
 package com.sleepypoem.ecommerce.domain.entities;
 
 import com.sleepypoem.ecommerce.domain.entities.abstracts.EntityWithTimeStamps;
+import com.sleepypoem.ecommerce.enums.CheckoutStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,8 +20,8 @@ public class OrderEntity extends EntityWithTimeStamps {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "tracking_number")
-    private String trackingNumber;
+    @Column(name = "order_tracking_number")
+    private String orderTrackingNumber;
 
     @Column(name = "total_price")
     private BigDecimal totalPrice;
@@ -29,13 +30,14 @@ public class OrderEntity extends EntityWithTimeStamps {
     private Integer totalQuantity;
 
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private CheckoutStatus status;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "billing_address_id", referencedColumnName = "id")
     private AddressEntity billingAddress;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
     private AddressEntity shippingAddress;
 
