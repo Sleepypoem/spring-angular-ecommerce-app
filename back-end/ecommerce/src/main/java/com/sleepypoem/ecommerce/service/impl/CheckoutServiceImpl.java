@@ -59,7 +59,7 @@ public class CheckoutServiceImpl implements CheckoutService {
         return customerRepository.findByEmail(customerEmail).isPresent();
     }
 
-    public String generateTrackingNumber() {
+    private String generateTrackingNumber() {
         String timestamp = Long.toString(System.currentTimeMillis());
         return UUID.randomUUID() + "-" + timestamp;
     }
