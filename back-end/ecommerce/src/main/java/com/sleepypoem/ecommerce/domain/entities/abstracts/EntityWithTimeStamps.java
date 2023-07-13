@@ -1,24 +1,24 @@
 package com.sleepypoem.ecommerce.domain.entities.abstracts;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter
+@MappedSuperclass
 public class EntityWithTimeStamps {
 
     @Column(name = "created_at")
-    protected Date createdAt;
+    @CreationTimestamp
+    protected LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    protected Date updatedAt;
-
-    protected EntityWithTimeStamps() {
-        this.createdAt = new Date();
-        this.updatedAt = new Date();
-    }
+    @UpdateTimestamp
+    protected LocalDateTime updatedAt;
 }
