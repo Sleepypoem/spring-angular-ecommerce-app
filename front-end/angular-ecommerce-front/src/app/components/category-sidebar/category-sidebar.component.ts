@@ -1,6 +1,6 @@
-import { Category } from '../category';
-import { CategoryService } from './../services/category.service';
 import { Component } from '@angular/core';
+import { Category } from 'src/app/dtos/category';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-category-sidebar',

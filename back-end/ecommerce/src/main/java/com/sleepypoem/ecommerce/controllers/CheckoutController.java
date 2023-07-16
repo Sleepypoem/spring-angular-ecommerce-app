@@ -4,13 +4,11 @@ import com.sleepypoem.ecommerce.domain.dtos.PurchaseDto;
 import com.sleepypoem.ecommerce.domain.dtos.PurchaseResponseDto;
 import com.sleepypoem.ecommerce.service.impl.CheckoutServiceImpl;
 import com.sleepypoem.ecommerce.service.interfaces.CheckoutService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/checkout")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CheckoutController {
 
     private final CheckoutService checkoutService;

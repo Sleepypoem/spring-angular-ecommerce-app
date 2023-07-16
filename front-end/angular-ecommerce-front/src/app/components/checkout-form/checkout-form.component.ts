@@ -1,9 +1,16 @@
+import { Customer } from './../../dtos/customer';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AddressService } from '../services/address.service';
+import { Router } from '@angular/router';
 import { ICountry, IState } from 'country-state-city';
-import { CustomValidators } from '../validators/CustomValidators';
-import { CartService } from '../services/cart.service';
+import { Address } from 'src/app/dtos/address';
+import { CreditCard } from 'src/app/dtos/creditCard';
+import { Order } from 'src/app/dtos/order';
+import { Purchase } from 'src/app/dtos/purchase';
+import { AddressService } from 'src/app/services/address.service';
+import { CartService } from 'src/app/services/cart.service';
+import { CheckoutService } from 'src/app/services/checkout.service';
+import { CustomValidators } from 'src/app/validators/CustomValidators';
 
 @Component({
   selector: 'app-checkout-form',
@@ -20,10 +27,14 @@ export class CheckoutFormComponent implements OnInit {
 
   totalQuantity: number = 0;
 
+  validationErrors: string[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private addressService: AddressService,
-    private cartService: CartService
+    private cartService: CartService,
+    private checkouService: CheckoutService,
+    private router: Router
   ) {
     this.countries = this.addressService.getCountries();
   }
@@ -79,8 +90,7 @@ export class CheckoutFormComponent implements OnInit {
         state: ['', [Validators.required]],
         zipCode: [
           '',
-          [Validators.required],
-          CustomValidators.notOnlyBlankSpaces,
+          [Validators.required, CustomValidators.notOnlyBlankSpaces],
         ],
       }),
       billingAddress: this.formBuilder.group({
@@ -128,8 +138,8 @@ export class CheckoutFormComponent implements OnInit {
             CustomValidators.notOnlyBlankSpaces,
           ],
         ],
-        cardExpirationMonth: ['', [Validators.required]],
-        cardExpirationYear: ['', [Validators.required]],
+        cardExpirationMonth: [''],
+        cardExpirationYear: [''],
         cardSecurityCode: [
           '',
           [
@@ -147,7 +157,6 @@ export class CheckoutFormComponent implements OnInit {
   }
 
   loadCountryStatesByCountryName(country: any) {
-    console.log(this.checkoutForm.controls['address']);
     this.states = this.addressService.getStatesByCountry(country);
   }
 
@@ -170,10 +179,87 @@ export class CheckoutFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.checkoutForm.markAllAsTouched();
-    console.warn(this.checkoutForm?.get('customer')?.value);
-    console.warn(this.checkoutForm?.get('address')?.value);
-    console.warn(this.checkoutForm?.get('billingAddress')?.value);
+    if (this.checkoutForm.invalid) {
+      this.checkoutForm.markAllAsTouched();
+      console.log('form is invalid. errors: ');
+      this.getFormValidationErrors();
+      return;
+    }
+    let customer = this.getCustomerFromForm();
+    let order = new Order()
+      .withShippingAddress(this.getShippingAddressFromForm())
+      .withBillingAddress(this.getBillingAddressFromForm())
+      .withItems(this.cartService.cartItems)
+      .withTotalPrice(this.totalPrice)
+      .withTotalQuantity(this.totalQuantity);
+
+    let purchase = new Purchase(customer, order);
+    console.log('purchase dto: ', purchase);
+    this.checkouService.makeOrder(purchase).subscribe({
+      next: (response) => {
+        alert(
+          'Order placed successfully! tracking N0: ' +
+            response.orderTrackingNumber
+        );
+        this.cleanCart();
+      },
+      error: (err) => {
+        alert('Error while placing order: ' + err.error.message);
+      },
+    });
+  }
+
+  public cleanCart() {
+    this.cartService.cleanCart();
+    this.router.navigate(['/']);
+  }
+
+  getFormValidationErrors() {
+    Object.keys(this.checkoutForm.controls).forEach((key) => {
+      const controlErrors: any = this.checkoutForm.get(key)?.errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach((keyError) => {
+          this.validationErrors.push(keyError);
+        });
+      } else {
+        console.log('controlErrors is null');
+      }
+    });
+  }
+
+  public getCustomerFromForm(): Customer {
+    return new Customer()
+      .withFirstName(this.firstName?.value)
+      .withLastName(this.lastName?.value)
+      .withEmail(this.email?.value);
+  }
+
+  public getBillingAddressFromForm(): Address {
+    return new Address()
+      .withCity(this.billingCity?.value)
+      .withCountry(this.billingCountry?.value)
+      .withState(this.billingState?.value)
+      .withStreet(this.billingStreet?.value)
+      .withZipCode(this.billingZipCode?.value);
+  }
+
+  public getShippingAddressFromForm(): Address {
+    return new Address()
+      .withCity(this.city?.value)
+      .withCountry(this.country?.value)
+      .withState(this.state?.value)
+      .withStreet(this.street?.value)
+      .withZipCode(this.zipCode?.value);
+  }
+
+  public getCreditCardFromForm(): CreditCard {
+    return new CreditCard()
+      .withCardHolderName(this.cardHolderName?.value)
+      .withCardNumber(this.cardNumber?.value)
+      .withExpirationMonth(this.cardExpirationMonth?.value)
+      .withExpirationYear(this.cardExpirationYear?.value)
+      .withSecurityCode(this.cardSecurityCode?.value)
+      .withCardType(this.cardType?.value);
   }
 
   public get firstName() {

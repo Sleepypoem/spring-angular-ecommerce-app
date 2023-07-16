@@ -2,7 +2,7 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { CartService } from './cart.service';
-import { Product } from '../product';
+import { Product } from '../dtos/product';
 
 describe('Service: Cart', () => {
   let cartService: CartService;

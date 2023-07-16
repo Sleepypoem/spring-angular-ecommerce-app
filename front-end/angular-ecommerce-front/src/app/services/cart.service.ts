@@ -1,6 +1,6 @@
-import { CartItem } from './../cartItem';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { CartItem } from '../dtos/cartItem';
 
 @Injectable({
   providedIn: 'root',
@@ -58,6 +58,11 @@ export class CartService {
     if (index >= 0) {
       this.cartItems[index].quantity = newQuantity;
     }
+    this.computeCartTotals();
+  }
+
+  cleanCart() {
+    this.cartItems = [];
     this.computeCartTotals();
   }
 }
