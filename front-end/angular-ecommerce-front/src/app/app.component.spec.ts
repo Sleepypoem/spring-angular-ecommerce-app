@@ -1,11 +1,11 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { CategorySidebarComponent } from './category-sidebar/category-sidebar.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { SearchFormComponent } from './search-form/search-form.component';
-import { CartStatusComponent } from './cart-status/cart-status.component';
+import { CartStatusComponent } from './components/cart-status/cart-status.component';
+import { CategorySidebarComponent } from './components/category-sidebar/category-sidebar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SearchFormComponent } from './components/search-form/search-form.component';
 
 describe('AppComponent', () => {
   beforeEach(() =>

@@ -1,12 +1,10 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ProductService } from './services/product.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CategoryService } from './services/category.service';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { Routes, RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppComponent } from './app.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { CategorySidebarComponent } from './components/category-sidebar/category-sidebar.component';
@@ -15,6 +13,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
+import { CategoryService } from './services/category.service';
+import { ProductService } from './services/product.service';
 
 const routes: Routes = [
   { path: 'search/:name', component: ProductListComponent },
