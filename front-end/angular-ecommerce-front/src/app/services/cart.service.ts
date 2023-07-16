@@ -60,4 +60,9 @@ export class CartService {
     }
     this.computeCartTotals();
   }
+
+  cleanCart() {
+    this.cartItems = [];
+    this.computeCartTotals();
+  }
 }
