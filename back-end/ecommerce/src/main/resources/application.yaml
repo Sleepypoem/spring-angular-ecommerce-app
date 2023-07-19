@@ -15,5 +15,10 @@ spring:
             jdbc:
                 lob:
                 non_contextual_creation: true
+  data:
+    rest:
+      detection-strategy: ANNOTATED
 server:
   port: 8081
+app-config:
+  allowed-origins: http://localhost:4200, http://localhost:80
