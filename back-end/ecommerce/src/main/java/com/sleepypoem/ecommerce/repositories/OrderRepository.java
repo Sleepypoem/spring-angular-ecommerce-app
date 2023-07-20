@@ -9,5 +9,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(collectionResourceRel = "orders", path = "orders")
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
-    Page<OrderEntity> findAllByCustomerEmail(String email, Pageable pageable);
+    Page<OrderEntity> findAllByCustomerEmailOrderByCreatedAtDesc(String email, Pageable pageable);
 }
