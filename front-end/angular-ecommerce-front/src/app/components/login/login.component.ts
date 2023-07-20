@@ -26,22 +26,19 @@ export class LoginComponent {
         issuer: oktaConfig.oidc.issuer,
         scopes: oktaConfig.oidc.scopes,
       },
+      features: { registration: true },
     });
   }
 
   ngOnInit() {
     this.oktaSignIn.remove();
 
-    this.oktaSignIn.renderEl(
-      { el: '#okta-login-container' },
-      (response: any) => {
-        if (response.status === 'SUCCESS') {
-          this.oktaAuth.signInWithRedirect();
-        }
-      },
-      (error: any) => {
+    this.oktaSignIn
+      .showSignInAndRedirect({
+        el: '#okta-login-container',
+      })
+      .catch(function (error: any) {
         throw error;
-      }
-    );
+      });
   }
 }
