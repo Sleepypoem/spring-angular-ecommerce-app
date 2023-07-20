@@ -1,0 +1,27 @@
+<h3>Your Orders</h3>
+<div *ngIf="orders.length > 0">
+  <div class="table-responsive-xxl">
+    <table class="table table-primary">
+      <thead>
+        <tr>
+          <th scope="col">Tracking Number</th>
+          <th scope="col">Total Price</th>
+          <th scope="col">Total Quantity</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{order.orderTrackingNumber}}</td>
+          <td>{{order.totalPrice | currency: "USD"}}</td>
+          <td>{{order.totalQuantity}}</td>
+          <td>{{order.createdAt}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<div *ngIf="orders.length == 0" class="alert alert-warning text-center display-4 p-4 col-md-6 mx-auto" role="alert">
+  You don't have pending orders.
+</div>
