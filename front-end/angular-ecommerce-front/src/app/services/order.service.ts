@@ -30,7 +30,10 @@ export class OrderService {
   getOrdersByCustomerEmail(email: string): Observable<Order[]> {
     return this.http
       .get<getOrderResponse>(
-        this.baseUrl + '/search/findAllByCustomerEmail?email=' + email
+        this.baseUrl +
+          '/search/findAllByCustomerEmailOrderByCreatedAtDesc?email=' +
+          email +
+          '&size=100'
       )
       .pipe(map((response) => response._embedded.orders));
   }
@@ -43,7 +46,7 @@ export class OrderService {
     return this.http
       .get<getOrderResponse>(
         this.baseUrl +
-          '/search/findAllByCustomerEmail?email=' +
+          '/search/findAllByCustomerEmailOrderByCreatedAtDesc?email=' +
           email +
           '&page=' +
           page +
