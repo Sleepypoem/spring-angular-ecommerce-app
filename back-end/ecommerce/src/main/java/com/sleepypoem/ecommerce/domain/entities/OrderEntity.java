@@ -1,5 +1,6 @@
 package com.sleepypoem.ecommerce.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sleepypoem.ecommerce.domain.entities.abstracts.EntityWithTimeStamps;
 import com.sleepypoem.ecommerce.enums.CheckoutStatus;
 import jakarta.persistence.*;
@@ -43,6 +44,7 @@ public class OrderEntity extends EntityWithTimeStamps {
 
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @JsonIgnore
     private CustomerEntity customer;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")

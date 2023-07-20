@@ -1,5 +1,6 @@
 package com.sleepypoem.ecommerce.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sleepypoem.ecommerce.domain.entities.abstracts.EntityWithTimeStamps;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -17,6 +18,7 @@ public class OrderItemEntity extends EntityWithTimeStamps {
 
     @ManyToOne
     @JoinColumn(name = "order_id", referencedColumnName = "id")
+    @JsonIgnore
     private OrderEntity order;
 
 
