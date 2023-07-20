@@ -12,7 +12,15 @@ export class CartService {
 
   totalQuantity: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  constructor() {}
+  storage: Storage = sessionStorage;
+
+  constructor() {
+    let data = JSON.parse(this.storage.getItem('cartItems')!);
+    if (data) {
+      this.cartItems = data;
+      this.computeCartTotals();
+    }
+  }
 
   addToCart(cartItem: CartItem) {
     const index: number = this.cartItems.findIndex(
@@ -36,6 +44,7 @@ export class CartService {
     }
     this.totalPrice.next(totalPriceValue);
     this.totalQuantity.next(totalQuantityValue);
+    this.persistCartToStorage();
   }
 
   removeFromCart(cartItem: CartItem) {
@@ -59,6 +68,10 @@ export class CartService {
       this.cartItems[index].quantity = newQuantity;
     }
     this.computeCartTotals();
+  }
+
+  persistCartToStorage() {
+    this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
   }
 
   cleanCart() {

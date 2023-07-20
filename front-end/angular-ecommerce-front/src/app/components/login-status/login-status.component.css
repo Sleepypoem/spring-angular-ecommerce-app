@@ -1,0 +1,93 @@
+.unauthenticated {
+width: 350px;
+margin-right: 10px;
+}
+
+.unauthenticated button {
+  background-color: #000!important;
+  color:#fff;
+  border: none;
+  transition: all 0.5 ease-in-out;
+  transform: scale(1);
+}
+
+.unauthenticated button:hover {
+  background-color: #333!important;
+  transform: scale(1.1)!important;
+  /* padding: 20px 60px; */
+}
+
+.user-content a {
+  text-decoration: none;
+}
+
+.user-content nav {
+  font-family: monospace;
+}
+
+.user-content ul {
+  display: block;
+  list-style: none;
+  margin: 0 0;
+  padding-left: 0;
+  width: 350px;
+
+}
+
+.user-content li {
+  width: 350px;
+  color: #fff;
+  background: #000;
+  display: block;
+  float: left;
+  padding: 1rem;
+  position: relative;
+  text-decoration: none;
+  transition-duration: 0.5s;
+}
+
+.user-content li a {
+  color: #fff;
+}
+
+.user-content li:hover,
+li:focus-within {
+  background: #333;
+  cursor: pointer;
+}
+
+.user-content li:focus-within a {
+  outline: none;
+}
+
+.user-content ul li ul {
+  background: orange;
+  visibility: hidden;
+  opacity: 0;
+  min-width: 5rem;
+  position: absolute;
+  transition: all 0.5s ease;
+  margin-top: 25.8rem;
+  left: 0;
+  display: none;
+}
+
+.user-content ul li:hover > ul,
+ul li:focus-within > ul,
+ul li ul:hover,
+ul li ul:focus {
+  background: #5c5a5a;
+   visibility: visible;
+   opacity: 1;
+   display: block;
+}
+
+.user-content ul li ul li {
+  clear: both;
+  width: 100%;
+}
+
+.profile-photo {
+    width: 43px;
+    height: 43px;
+}
