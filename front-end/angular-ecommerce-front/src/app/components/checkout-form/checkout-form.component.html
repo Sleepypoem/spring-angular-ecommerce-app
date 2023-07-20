@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <form class="col-md-9 mx-auto" [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
         <!-- Customer area -->
-        <div formGroupName="customer" class="form-area">
+        <div *ngIf="customer == null" formGroupName="customer" class="form-area">
           <div class="text-center">
             <h3>Customer</h3>
           </div>
