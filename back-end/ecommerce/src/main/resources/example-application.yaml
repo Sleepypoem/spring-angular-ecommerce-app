@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:ecommerce}?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: ${MYSQL_USERNAME:admin}
+    password: ${MYSQL_PASSWORD:password}
+    jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
+      properties:
+        hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        format_sql: true
+        use_sql_comments: true
+        jdbc:
+          lob:
+          non_contextual_creation: true
+  data:
+    rest:
+      detection-strategy: ANNOTATED
+server:
+  port: 8081
+app-config:
+  allowed-origins: http://localhost:4200, http://localhost:80
+okta:
+  oauth2:
+    client-id: paste your okta client here
+    issuer: paste your okta dev url here and add /oauth2/default

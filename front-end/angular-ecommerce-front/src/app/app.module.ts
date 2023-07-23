@@ -1,21 +1,64 @@
-import { NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { Injector, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { HttpClientModule } from '@angular/common/http';
-import { ProductService } from './services/product.service';
-import { NavbarComponent } from './navbar/navbar.component';
+import { Routes, RouterModule, Router } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CategorySidebarComponent } from './category-sidebar/category-sidebar.component';
+import { AppComponent } from './app.component';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { CartStatusComponent } from './components/cart-status/cart-status.component';
+import { CategorySidebarComponent } from './components/category-sidebar/category-sidebar.component';
+import { CheckoutFormComponent } from './components/checkout-form/checkout-form.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { SearchFormComponent } from './components/search-form/search-form.component';
 import { CategoryService } from './services/category.service';
-import { RouterModule, Routes } from '@angular/router';
-import { SearchFormComponent } from './search-form/search-form.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductService } from './services/product.service';
+import { LoginComponent } from './components/login/login.component';
+import { LoginStatusComponent } from './components/login-status/login-status.component';
+import oktaConfig from '../config/auth-server-config';
+import {
+  OktaAuthModule,
+  OktaCallbackComponent,
+  OKTA_CONFIG,
+  OktaAuthGuard,
+} from '@okta/okta-angular';
+
+import { OktaAuth } from '@okta/okta-auth-js';
+import { MembershipsComponent } from './components/memberships/memberships.component';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+
+const oktaConfigObject = oktaConfig.oidc;
+
+const oktaAuth = new OktaAuth(oktaConfigObject);
+
+function redirectToLoginPage(oktaAuth: OktaAuth, injector: Injector) {
+  const router = injector.get(Router);
+  router.navigate(['/login']);
+}
 
 const routes: Routes = [
+  { path: 'login/callback', component: OktaCallbackComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'search/:name', component: ProductListComponent },
   { path: 'category/:id', component: ProductListComponent },
   { path: 'products/:id', component: ProductDetailComponent },
+  {
+    path: 'memberships',
+    component: MembershipsComponent,
+    canActivate: [OktaAuthGuard],
+    data: { onAuthRequired: redirectToLoginPage },
+  },
+  {
+    path: 'orders',
+    component: OrderHistoryComponent,
+    canActivate: [OktaAuthGuard],
+    data: { onAuthRequired: redirectToLoginPage },
+  },
+  { path: 'cart', component: CartDetailsComponent },
+  { path: 'checkout', component: CheckoutFormComponent },
   { path: 'category', component: ProductListComponent },
   { path: 'products', component: ProductListComponent },
   { path: '', redirectTo: '/products', pathMatch: 'full' },
@@ -29,15 +72,34 @@ const routes: Routes = [
     CategorySidebarComponent,
     SearchFormComponent,
     ProductDetailComponent,
+    CartStatusComponent,
+    CartDetailsComponent,
+    CheckoutFormComponent,
+    LoginComponent,
+    LoginStatusComponent,
+    MembershipsComponent,
+    OrderHistoryComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     NgbModule,
     RouterModule.forRoot(routes),
+    FormsModule,
+    ReactiveFormsModule,
+    OktaAuthModule,
   ],
   exports: [RouterModule],
-  providers: [ProductService, CategoryService],
+  providers: [
+    ProductService,
+    CategoryService,
+    { provide: OKTA_CONFIG, useValue: { oktaAuth } },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

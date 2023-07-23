@@ -1,0 +1,30 @@
+<div class="d-flex user-content">
+
+  <div *ngIf="isAuthenticated && username" class="d-flex flex-column">
+
+    <ul>
+      <li class="d-flex justify-content-between align-items-center"><img class="profile-photo rounded-circle"
+          src="../../../assets/images/products/placeholder.jpg" alt="blabla" />
+
+        <a class="text-nowrap" href="#" aria-haspopup="true">{{username}}</a>
+        <ul class="dropdown" aria-label="submenu">
+          <li class="d-flex justify-content-between align-items-center"><a href="#">Account</a><i style="font-size: 2.2rem; color: #fff;"
+              class="bi bi-person-circle"></i></li>
+          <li (click)="navigateToUrl('/cart')" class="d-flex justify-content-between align-items-center"><a>Cart details</a><i
+              style="font-size: 2.2rem; color: #fff;" class="bi bi-cart4"></i></li>
+          <li (click)="navigateToUrl('orders')" class="d-flex justify-content-between align-items-center"><a>Orders</a><i
+              style="font-size: 2.2rem; color: #fff;" class="bi bi-truck"></i></li>
+          <li (click)="navigateToUrl('/memberships')" class="d-flex justify-content-between align-items-center"><a>Memberships</a><i
+              style="font-size: 2.2rem; color: #fff;" class="bi bi-cash-coin"></i></li>
+          <li (click)="logout()" class="d-flex justify-content-between align-items-center"><a>Logout</a><i style="font-size: 2.2rem; color: #fff;"
+              class="bi bi-box-arrow-right"></i></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="unauthenticated d-flex justify-content-evenly" *ngIf="!isAuthenticated">
+    <button routerLink="/login" class="btn">Login</button><button class="btn">Register</button>
+  </div>
+  <div>
+
+  </div>
