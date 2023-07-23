@@ -29,6 +29,10 @@ export class CheckoutFormComponent implements OnInit {
 
   validationErrors: string[] = [];
 
+  sessionStorage: Storage = sessionStorage;
+
+  customer: Customer = new Customer();
+
   constructor(
     private formBuilder: FormBuilder,
     private addressService: AddressService,
@@ -37,13 +41,14 @@ export class CheckoutFormComponent implements OnInit {
     private router: Router
   ) {
     this.countries = this.addressService.getCountries();
+    this.customer = JSON.parse(this.sessionStorage.getItem('customer')!);
   }
 
   ngOnInit() {
     this.checkoutForm = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: [
-          '',
+          this.customer?.firstName,
           [
             Validators.required,
             Validators.minLength(3),
@@ -52,7 +57,7 @@ export class CheckoutFormComponent implements OnInit {
           ],
         ],
         lastName: [
-          '',
+          this.customer?.lastName,
           [
             Validators.required,
             Validators.minLength(3),
@@ -61,7 +66,7 @@ export class CheckoutFormComponent implements OnInit {
           ],
         ],
         email: [
-          '',
+          this.customer?.email,
           [
             Validators.required,
             Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/),
@@ -154,6 +159,9 @@ export class CheckoutFormComponent implements OnInit {
       }),
     });
     this.updateCartReviewDetails();
+    if (this.customer != null) {
+      this.checkoutForm.controls['customer'].disable();
+    }
   }
 
   loadCountryStatesByCountryName(country: any) {

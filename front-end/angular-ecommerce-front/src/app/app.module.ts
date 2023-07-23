@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { Injector, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,6 +27,8 @@ import {
 
 import { OktaAuth } from '@okta/okta-auth-js';
 import { MembershipsComponent } from './components/memberships/memberships.component';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 const oktaConfigObject = oktaConfig.oidc;
 
@@ -46,6 +48,12 @@ const routes: Routes = [
   {
     path: 'memberships',
     component: MembershipsComponent,
+    canActivate: [OktaAuthGuard],
+    data: { onAuthRequired: redirectToLoginPage },
+  },
+  {
+    path: 'orders',
+    component: OrderHistoryComponent,
     canActivate: [OktaAuthGuard],
     data: { onAuthRequired: redirectToLoginPage },
   },
@@ -70,6 +78,7 @@ const routes: Routes = [
     LoginComponent,
     LoginStatusComponent,
     MembershipsComponent,
+    OrderHistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +94,11 @@ const routes: Routes = [
     ProductService,
     CategoryService,
     { provide: OKTA_CONFIG, useValue: { oktaAuth } },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

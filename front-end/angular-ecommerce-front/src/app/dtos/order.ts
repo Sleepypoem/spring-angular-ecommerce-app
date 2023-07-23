@@ -10,6 +10,8 @@ export class Order {
   billingAddress?: Address;
   items?: CartItem[];
   id?: number;
+  createdAt?: string;
+  updatedAt?: string;
 
   constructor() {}
 

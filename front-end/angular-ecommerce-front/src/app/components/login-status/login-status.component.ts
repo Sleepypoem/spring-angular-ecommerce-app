@@ -1,6 +1,8 @@
 import { OktaAuth } from '@okta/okta-auth-js';
 import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import { Component, Inject } from '@angular/core';
+import { Customer } from 'src/app/dtos/customer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-status',
@@ -10,10 +12,12 @@ import { Component, Inject } from '@angular/core';
 export class LoginStatusComponent {
   isAuthenticated: boolean = false;
   username: string = '';
+  sessionStorage: Storage = sessionStorage;
 
   constructor(
     private authService: OktaAuthStateService,
-    @Inject(OKTA_AUTH) private oktaAuth: OktaAuth
+    @Inject(OKTA_AUTH) private oktaAuth: OktaAuth,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -26,6 +30,11 @@ export class LoginStatusComponent {
   getUserDetails(): void {
     if (this.isAuthenticated) {
       this.oktaAuth.getUser().then((user) => {
+        let customer = new Customer()
+          .withFirstName(user.given_name!)
+          .withLastName(user.family_name!)
+          .withEmail(user.email!);
+        this.sessionStorage.setItem('customer', JSON.stringify(customer));
         this.username = user.name!;
       });
     }
@@ -33,5 +42,10 @@ export class LoginStatusComponent {
 
   logout() {
     this.oktaAuth.signOut();
+    this.sessionStorage.clear();
+  }
+
+  navigateToUrl(url: string) {
+    this.router.navigateByUrl(url);
   }
 }
