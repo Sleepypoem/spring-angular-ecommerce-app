@@ -18,11 +18,18 @@ spring:
   data:
     rest:
       detection-strategy: ANNOTATED
-server:
-  port: 8081
 app-config:
-  allowed-origins: http://localhost:4200, http://localhost:80
+  allowed-origins: https://localhost:4200, http://localhost:80
 okta:
   oauth2:
     client-id: paste your okta client here
     issuer: paste your okta dev url here and add /oauth2/default
+## HTTPS CONFIGURATION ##
+server:
+  port: 8081
+  ssl:
+    enabled: true
+    key-alias: sleepypoem
+    key-store: classpath:sleepypoem-keystore.p12
+    key-store-password: secret
+    key-store-type: PKCS12
