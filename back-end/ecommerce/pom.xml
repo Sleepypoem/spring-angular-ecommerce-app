@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.sleepypoem</groupId>
 	<artifactId>ecommerce</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 	<name>ecommerce</name>
 	<description>The backend of an e-commerce app.</description>
 	<properties>
@@ -48,7 +48,6 @@
 		</dependency>
 
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
