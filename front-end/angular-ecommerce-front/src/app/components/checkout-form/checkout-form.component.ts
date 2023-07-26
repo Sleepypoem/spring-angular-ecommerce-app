@@ -1,6 +1,11 @@
 import { Customer } from './../../dtos/customer';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ICountry, IState } from 'country-state-city';
 import { Address } from 'src/app/dtos/address';
@@ -33,6 +38,17 @@ export class CheckoutFormComponent implements OnInit {
 
   customer: Customer = new Customer();
 
+  todayDate: Date = new Date();
+
+  actualMonth: number = this.todayDate.getMonth() + 1;
+
+  actualYear: number = this.todayDate.getFullYear();
+
+  commonValidators: ValidationErrors[] = [
+    Validators.required,
+    CustomValidators.notOnlyBlankSpaces,
+  ];
+
   constructor(
     private formBuilder: FormBuilder,
     private addressService: AddressService,
@@ -44,124 +60,31 @@ export class CheckoutFormComponent implements OnInit {
     this.customer = JSON.parse(this.sessionStorage.getItem('customer')!);
   }
 
+  createField(initialValue: string, validators: ValidationErrors[] = []): any {
+    return [initialValue, validators];
+  }
+
   ngOnInit() {
-    this.checkoutForm = this.formBuilder.group({
-      customer: this.formBuilder.group({
-        firstName: [
-          this.customer?.firstName,
-          [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(20),
-            CustomValidators.notOnlyBlankSpaces,
-          ],
-        ],
-        lastName: [
-          this.customer?.lastName,
-          [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(20),
-            CustomValidators.notOnlyBlankSpaces,
-          ],
-        ],
-        email: [
-          this.customer?.email,
-          [
-            Validators.required,
-            Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/),
-          ],
-        ],
-      }),
-      address: this.formBuilder.group({
-        country: ['', [Validators.required]],
-        street: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(50),
-            CustomValidators.notOnlyBlankSpaces,
-          ],
-        ],
-        city: [
-          '',
-          [
-            Validators.required,
-            Validators.maxLength(50),
-            CustomValidators.notOnlyBlankSpaces,
-          ],
-        ],
-        state: ['', [Validators.required]],
-        zipCode: [
-          '',
-          [Validators.required, CustomValidators.notOnlyBlankSpaces],
-        ],
-      }),
-      billingAddress: this.formBuilder.group({
-        country: ['', [Validators.required]],
-        street: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(50),
-            CustomValidators.notOnlyBlankSpaces,
-          ],
-        ],
-        city: [
-          '',
-          [
-            Validators.required,
-            Validators.maxLength(50),
-            CustomValidators.notOnlyBlankSpaces,
-          ],
-        ],
-        state: ['', [Validators.required]],
-        zipCode: [
-          '',
-          [Validators.required, CustomValidators.notOnlyBlankSpaces],
-        ],
-      }),
-      creditCard: this.formBuilder.group({
-        cardNumber: [
-          '',
-          [
-            Validators.required,
-            Validators.maxLength(16),
-            Validators.minLength(16),
-            CustomValidators.notOnlyBlankSpaces,
-            Validators.pattern(/^\d+$/),
-          ],
-        ],
-        cardHolderName: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(50),
-            CustomValidators.notOnlyBlankSpaces,
-          ],
-        ],
-        cardExpirationMonth: [''],
-        cardExpirationYear: [''],
-        cardSecurityCode: [
-          '',
-          [
-            Validators.required,
-            Validators.maxLength(3),
-            Validators.minLength(3),
-            CustomValidators.notOnlyBlankSpaces,
-            Validators.pattern(/^\d+$/),
-          ],
-        ],
-        cardType: ['', [Validators.required]],
-      }),
-    });
+    this.buildForm();
     this.updateCartReviewDetails();
+
     if (this.customer != null) {
-      this.checkoutForm.controls['customer'].disable();
+      this.hideCustomerSection();
     }
+  }
+
+  private buildForm(): void {
+    this.checkoutForm = this.formBuilder.group({
+      customer: this.formBuilder.group(this.createCustomerFields()),
+      address: this.formBuilder.group(this.createAddressFields()),
+
+      billingAddress: this.formBuilder.group(this.createAddressFields()),
+      creditCard: this.formBuilder.group(this.createCreditCardFields()),
+    });
+  }
+
+  private hideCustomerSection(): void {
+    this.checkoutForm.controls['customer'].disable();
   }
 
   loadCountryStatesByCountryName(country: any) {
@@ -173,7 +96,90 @@ export class CheckoutFormComponent implements OnInit {
     this.cartService.totalQuantity.subscribe(
       (data) => (this.totalQuantity = data)
     );
-    console.log('updateCartReviewDetails');
+  }
+
+  private createCustomerFields(): any {
+    return {
+      firstName: this.createField(
+        this.customer?.firstName!,
+        this.commonValidators.concat(
+          Validators.minLength(3),
+          Validators.maxLength(50)
+        )
+      ),
+      lastName: this.createField(
+        this.customer?.lastName!,
+        this.commonValidators.concat(
+          Validators.minLength(3),
+          Validators.maxLength(50)
+        )
+      ),
+      email: this.createField(this.customer?.email!, [
+        Validators.required,
+        Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/),
+      ]),
+    };
+  }
+
+  private createAddressFields(): any {
+    return {
+      country: this.createField('Select a country...', this.commonValidators),
+      street: this.createField(
+        '',
+        this.commonValidators.concat(
+          Validators.minLength(5),
+          Validators.maxLength(50)
+        )
+      ),
+      city: this.createField(
+        '',
+        this.commonValidators.concat(Validators.maxLength(50))
+      ),
+      state: this.createField('Select a state...', this.commonValidators),
+      zipCode: this.createField('', this.commonValidators),
+    };
+  }
+
+  private createCreditCardFields(): any {
+    let today = new Date();
+    return {
+      cardNumber: this.createField(
+        '',
+        this.commonValidators.concat(
+          Validators.maxLength(16),
+          Validators.minLength(16),
+          Validators.pattern(/^\d+$/)
+        )
+      ),
+      cardHolderName: this.createField(
+        '',
+        this.commonValidators.concat(
+          Validators.minLength(3),
+          Validators.maxLength(50)
+        )
+      ),
+      cardExpirationMonth: this.createField(
+        today.getMonth() + 1 + '',
+        this.commonValidators.concat(
+          Validators.maxLength(2),
+          Validators.minLength(2),
+          Validators.pattern(/^\d+$/)
+        )
+      ),
+      cardExpirationYear: this.createField(
+        today.getFullYear() + '',
+        this.commonValidators.concat(
+          Validators.maxLength(4),
+          Validators.minLength(4),
+          Validators.pattern(/^\d+$/)
+        )
+      ),
+      cardSecurityCode: this.createField(
+        '',
+        this.commonValidators.concat(Validators.maxLength(3))
+      ),
+      cardType: this.createField('', this.commonValidators),
+    };
   }
 
   copyAddressToBillingAddress(event: any) {
@@ -188,11 +194,19 @@ export class CheckoutFormComponent implements OnInit {
 
   onSubmit() {
     if (this.checkoutForm.invalid) {
-      this.checkoutForm.markAllAsTouched();
-      console.log('form is invalid. errors: ');
-      this.getFormValidationErrors();
+      this.markFieldsAndDisplayErrors();
       return;
     }
+    let purchase = this.preparePurchase();
+    this.makeOrder(purchase);
+  }
+
+  private markFieldsAndDisplayErrors(): void {
+    this.checkoutForm.markAllAsTouched();
+    this.displayFormValidationErrors();
+  }
+
+  private preparePurchase(): Purchase {
     let customer = this.getCustomerFromForm();
     let order = new Order()
       .withShippingAddress(this.getShippingAddressFromForm())
@@ -201,8 +215,10 @@ export class CheckoutFormComponent implements OnInit {
       .withTotalPrice(this.totalPrice)
       .withTotalQuantity(this.totalQuantity);
 
-    let purchase = new Purchase(customer, order);
-    console.log('purchase dto: ', purchase);
+    return new Purchase(customer, order);
+  }
+
+  private makeOrder(purchase: Purchase): void {
     this.checkouService.makeOrder(purchase).subscribe({
       next: (response) => {
         alert(
@@ -212,7 +228,7 @@ export class CheckoutFormComponent implements OnInit {
         this.cleanCart();
       },
       error: (err) => {
-        alert('Error while placing order: ' + err.error.message);
+        alert('Error while placing order: ' + err.message);
       },
     });
   }
@@ -222,12 +238,12 @@ export class CheckoutFormComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  getFormValidationErrors() {
+  private displayFormValidationErrors() {
     Object.keys(this.checkoutForm.controls).forEach((key) => {
       const controlErrors: any = this.checkoutForm.get(key)?.errors;
       if (controlErrors != null) {
         Object.keys(controlErrors).forEach((keyError) => {
-          this.validationErrors.push(keyError);
+          console.log(keyError);
         });
       } else {
         console.log('controlErrors is null');
