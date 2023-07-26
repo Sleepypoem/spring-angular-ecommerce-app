@@ -11,8 +11,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let cartItem of cartItems">
-            <td><img src="{{cartItem.product.image}}" class="img-responsive" width="300px"
-                alt="product image"></td>
+            <td><img src="{{cartItem.product.image}}" class="img-responsive" width="300px" alt="product image"></td>
             <td>
               <p>{{cartItem.product.name}}</p>
               <p>{{cartItem.product.description}}</p>
@@ -22,14 +21,13 @@
               <div class="items d-flex justify-content-between">
                 <label class="quantity-label">Quantity: </label>
                 <div class="d-flex">
-                  <button (click)="decrementQuantity(cartItem)" type="button"
-                    class="btn btn-primary decrement"><i class="bi bi-cart-dash icon"></i></button>
+                  <button (click)="decrementQuantity(cartItem)" type="button" class="btn btn-primary decrement"><i
+                      class="bi bi-cart-dash icon"></i></button>
                   <p class="quantity-display text-center">{{cartItem.quantity}}</p>
-                  <button (click)="incrementQuantity(cartItem)" class="btn btn-primary increment"><i
-                      class="bi bi-cart-plus icon"></i></button>
+                  <button (click)="incrementQuantity(cartItem)" class="btn btn-primary increment"><i class="bi bi-cart-plus icon"></i></button>
                 </div>
               </div>
-              <p>Sub-total {{cartItem.product.price * cartItem.quantity | currency: 'USD'}}</p>
+              <p>Sub-total {{cartItem.product.price! * cartItem.quantity | currency: 'USD'}}</p>
               <a (click)="remove(cartItem)" class="btn btn-danger align-self-end">Remove</a>
             </td>
           </tr>
@@ -45,8 +43,7 @@
           </tr>
         </tfoot>
       </table>
-      <div *ngIf="cartItems.length == 0"
-        class="alert alert-warning text-center display-4 p-4 col-md-6 mx-auto" role="alert">
+      <div *ngIf="cartItems.length == 0" class="alert alert-warning text-center display-4 p-4 col-md-6 mx-auto" role="alert">
         There are no products on the checkout! go add some more.
       </div>
 
