@@ -2,7 +2,7 @@
   <div class="section-content section-content-p30 e-spc">
     <div class="container-fluid">
       <form class="col-md-9 mx-auto" [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
-        <div class="form-area">
+        <div [ngClass]="['form-area', customer == null ? '' : 'hidden' ]">
           <div class="text-center">
             <h3>Customer</h3>
           </div>

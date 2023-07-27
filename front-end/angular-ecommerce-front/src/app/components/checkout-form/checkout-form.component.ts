@@ -98,7 +98,6 @@ export class CheckoutFormComponent implements OnInit {
       console.log(this.checkoutForm.value);
       return;
     }
-    console.log(this.checkoutForm.value);
 
     let purchase = this.preparePurchase();
     this.makeOrder(purchase);
@@ -155,6 +154,10 @@ export class CheckoutFormComponent implements OnInit {
   }
 
   public getCustomerFromForm(): Customer {
+    if (this.customer != null) {
+      return this.customer;
+    }
+
     return new Customer()
       .withFirstName(this.customerFormComponent.firstName?.value)
       .withLastName(this.customerFormComponent.lastName?.value)
