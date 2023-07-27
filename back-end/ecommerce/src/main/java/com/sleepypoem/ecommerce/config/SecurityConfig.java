@@ -17,7 +17,6 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authz -> authz
                         .requestMatchers("/orders/**").authenticated()
-                        .requestMatchers("/checkout/*").authenticated()
                         .anyRequest().permitAll()
                 )
                 .oauth2Login(Customizer.withDefaults())
