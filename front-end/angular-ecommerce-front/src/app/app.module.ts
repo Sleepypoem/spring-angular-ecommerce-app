@@ -29,6 +29,10 @@ import { OktaAuth } from '@okta/okta-auth-js';
 import { MembershipsComponent } from './components/memberships/memberships.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { CustomerFormComponent } from './components/customer-form/customer-form.component';
+import { AddressFormComponent } from './components/address-form/address-form.component';
+import { BillingAddressFormComponent } from './components/billing-address-form/billing-address-form.component';
+import { CreditCardFormComponent } from './components/credit-card-form/credit-card-form.component';
 
 const oktaConfigObject = oktaConfig.oidc;
 
@@ -79,6 +83,10 @@ const routes: Routes = [
     LoginStatusComponent,
     MembershipsComponent,
     OrderHistoryComponent,
+    CustomerFormComponent,
+    AddressFormComponent,
+    BillingAddressFormComponent,
+    CreditCardFormComponent,
   ],
   imports: [
     BrowserModule,

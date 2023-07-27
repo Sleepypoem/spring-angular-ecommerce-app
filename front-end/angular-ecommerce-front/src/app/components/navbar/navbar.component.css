@@ -12,7 +12,7 @@
     right:0;
     left:200px;
     height:75px;
-    z-index:3
+    z-index:999
 }
 
 .header-desktop .section-content{

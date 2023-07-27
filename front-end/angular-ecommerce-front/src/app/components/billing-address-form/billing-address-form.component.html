@@ -1,0 +1,80 @@
+<div [formGroup]="parentForm">
+  <div formGroupName="{{formGroupName}}">
+    <div class="row">
+      <div class="col-md-2">
+        <label>Country</label>
+      </div>
+      <div class="col-md-9">
+        <div class="input-space">
+          <select [ngClass]="['form-control', country?.invalid && (country?.touched || country?.dirty) ? 'is-invalid' : 'is-valid' ]" #countrySelector formControlName="country" title="country selector" (change)="
+                    loadCountryStatesByCountryName(countrySelector.value)
+                  ">
+            <option *ngFor="let countryElement of countries" value="{{ countryElement.isoCode }}" [selected]="countryElement.name == 'United States'">
+              {{ countryElement.name }}
+            </option>
+          </select>
+          <div *ngIf="country?.invalid && (country?.dirty || country?.touched)">
+            <div *ngIf="country?.errors?.['required']" class="invalid-feedback position-relative text-center">
+              Please select a country.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"><label>Street</label></div>
+      <div class="col-md-9">
+        <div class="input-space">
+          <input [ngClass]="['form-control', street?.invalid && (street?.touched || street?.dirty) ? 'is-invalid' : 'is-valid' ]" formControlName="street" type="text" placeholder="Street" />
+          <div *ngIf="street?.invalid && (street?.dirty || street?.touched)">
+            <div *ngIf="street?.errors?.['required'] || street?.errors?.['notOnlyBlankSpaces']" class="invalid-feedback position-relative text-center">
+              Please provide your street.
+            </div>
+            <div *ngIf="street?.errors?.['minlength'] || street?.errors?.['maxlength']" class="invalid-feedback position-relative text-center">
+              Please provide a valid street, it should be at least 3
+              chars min and 50 chars max.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"><label>City</label></div>
+      <div class="col-md-9">
+        <div class="input-space">
+          <input [ngClass]="['form-control', city?.invalid && (city?.touched || city?.dirty) ? 'is-invalid' : 'is-valid' ]" formControlName="city" type="text" placeholder="City" />
+          <div *ngIf="city?.invalid && (city?.dirty || city?.touched)">
+            <div *ngIf="city?.errors?.['required'] || city?.errors?.['notOnlyBlankSpaces']" class="invalid-feedback position-relative text-center">
+              Please provide your city name.
+            </div>
+            <div *ngIf="city?.errors?.['maxlength']" class="invalid-feedback position-relative text-center">
+              Please provide a valid city name, max 50 chars long.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label>State</label>
+      </div>
+      <div class="col-md-9">
+        <div class="input-space">
+          <select [ngClass]="['form-control', state?.invalid && (state?.touched || state?.dirty) ? 'is-invalid' : 'is-valid' ]" formControlName="state" title="state selector">
+            <option *ngFor="let state of states" [selected]="state.name == states[0].name">{{ state.name }}</option>
+          </select>
+          <div *ngIf="state?.invalid && (state?.dirty || state?.touched)">
+            <div *ngIf="state?.errors?.['required']" class="invalid-feedback position-relative text-center">
+              Please select a state.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"><label>Zip code</label></div>
+      <div class="col-md-9">
+        <div class="input-space">
+          <input [ngClass]="['form-control', zipCode?.invalid && (zipCode?.touched || zipCode?.dirty) ? 'is-invalid' : 'is-valid' ]" formControlName="zipCode" type="text" placeholder="Zip code" />
+          <div *ngIf="zipCode?.invalid && (zipCode?.dirty || zipCode?.touched)">
+            <div *ngIf="zipCode?.errors?.['required'] || zipCode?.errors?.['notOnlyBlankSpaces']" class="invalid-feedback position-relative text-center">
+              Please provide your zip code.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
