@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Order } from '../dtos/order';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  private baseUrl: string = 'http://localhost:8081/orders';
+  private baseUrl: string = environment.backendUrl + 'orders';
 
   constructor(private http: HttpClient) {}
 

@@ -42,27 +42,6 @@
     border:1px solid #ccc
 }
 
-.is-invalid {
-  border: 1px solid red!important;
-}
-
-input[type=number]:hover::-webkit-inner-spin-button {
-    width: 20px;
-    height: 36px;
-}
-.input-space select{
-    width:100%;
-    height:40px;
-    border-radius:30px;
-    outline:0;
-    padding:0 10px;
-    border:1px solid #ccc
-}
-
-.invalid-feedback {
-  display: block!important;
-}
-
 /* CheckBox https://codepen.io/alvarotrigo */
 
 .checkbox-rect input[type="checkbox"] {
@@ -124,5 +103,9 @@ option:first{
 }
 select{
     color:#828482
+}
+
+.hidden {
+  display: none;
 }
 

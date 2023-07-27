@@ -39,7 +39,7 @@ export class CartService {
     let totalQuantityValue = 0;
 
     for (const item of this.cartItems) {
-      totalPriceValue += item.quantity * item.product.price;
+      totalPriceValue += item.quantity * item.product.price!;
       totalQuantityValue += item.quantity;
     }
     this.totalPrice.next(totalPriceValue);

@@ -1,0 +1,88 @@
+<div [formGroup]="parentForm">
+  <div formGroupName="{{formGroupName}}">
+    <div class="row">
+      <div class="col-md-2">
+        <label>Card type</label>
+      </div>
+      <div class="col-md-9">
+        <div class="input-space">
+          <select [ngClass]="['form-control', cardType?.invalid && (cardType?.touched || cardType?.dirty) ? 'is-invalid' : 'is-valid' ]" formControlName="cardType" title="card type selector">
+            <option default [selected]="true" value="VISA">VISA</option>
+            <option value="MASTERCARD">MASTERCARD</option>
+          </select>
+          <div *ngIf="cardType?.invalid && (cardType?.dirty || cardType?.touched)">
+            <div *ngIf="cardType?.errors?.['required']" class="invalid-feedback position-relative text-center">
+              Please select the type of your card.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"><label>Name on card</label></div>
+      <div class="col-md-9">
+        <div class="input-space">
+          <input [ngClass]="['form-control', cardHolderName?.invalid && (cardHolderName?.touched || cardHolderName?.dirty) ? 'is-invalid' : 'is-valid' ]" formControlName="cardHolderName" type="text" placeholder="Name on card" />
+
+          <div *ngIf="cardHolderName?.invalid && (cardHolderName?.dirty || cardHolderName?.touched)">
+            <div *ngIf="cardHolderName?.errors?.['required'] || cardHolderName?.errors?.['notOnlyBlankSpaces']" class="invalid-feedback position-relative text-center">
+              Please provide the cardholder name in your card.
+            </div>
+            <div *ngIf="cardHolderName?.errors?.['minlength'] || cardHolderName?.errors?.['maxlength']" class="invalid-feedback position-relative text-center">
+              Please provide a valid name, it must be at least 3
+              chars min and 50 chars max.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"><label>Card number</label></div>
+      <div class="col-md-9">
+        <div class="input-space">
+          <input [ngClass]="['form-control', cardNumber?.invalid && (cardNumber?.touched || cardNumber?.dirty) ? 'is-invalid' : 'is-valid' ]" formControlName="cardNumber" type="text" placeholder="Card number" [maxlength]="16" />
+          <div *ngIf="cardNumber?.invalid && (cardNumber?.dirty || cardNumber?.touched)">
+            <div *ngIf="cardNumber?.errors?.['required'] || cardNumber?.errors?.['notOnlyBlankSpaces']" class="invalid-feedback position-relative text-center">
+              Please provide your card number.
+            </div>
+            <div *ngIf="cardNumber?.errors?.['minlength'] || cardNumber?.errors?.['maxlength']" class="invalid-feedback position-relative text-center">
+              Please provide a valid card number, it should be 16 chars long.
+            </div>
+            <div *ngIf="cardNumber?.errors?.['pattern']" class="invalid-feedback position-relative text-center">
+              Only numbers allowed.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"><label>Card CVC</label></div>
+      <div class="col-md-9">
+        <div class="input-space">
+          <input [ngClass]="['form-control', cardSecurityCode?.invalid && (cardSecurityCode?.touched || cardSecurityCode?.dirty) ? 'is-invalid' : 'is-valid' ]" formControlName="cardSecurityCode" type="text" placeholder="Card CVC" [maxlength]="3" />
+          <div *ngIf="cardSecurityCode?.invalid && (cardSecurityCode?.dirty || cardSecurityCode?.touched)">
+            <div *ngIf="cardSecurityCode?.errors?.['required'] || cardSecurityCode?.errors?.['notOnlyBlankSpaces']" class="invalid-feedback position-relative text-center">
+              Please provide your security code.
+            </div>
+            <div *ngIf="cardSecurityCode?.errors?.['minlength'] || cardSecurityCode?.errors?.['maxlength']" class="invalid-feedback position-relative text-center">
+              Please provide a valid security code, it should be 3 chars long.
+            </div>
+            <div *ngIf="cardSecurityCode?.errors?.['pattern']" class="invalid-feedback position-relative text-center">
+              Only numbers allowed.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label>Card expiration month</label>
+      </div>
+      <div class="col-md-9">
+        <div class="input-space">
+          <input title="Enter your card's exp month" onkeydown="return false" type="number" min="1" max="12" step="1" value="{{today.getMonth() +1}}" />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label>Card expiration year</label>
+      </div>
+      <div class="col-md-9">
+        <div class="input-space">
+          <input title="Enter your card's exp year" type="number" onkeydown="return false" min="1900" max="3099" step="1" value="{{today.getFullYear()}}" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
