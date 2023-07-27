@@ -1,10 +1,10 @@
 {
   "name": "angular-ecommerce-front",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --ssl=true --ssl-key=./ssl-localhost/localhost.key --ssl-cert=./ssl-localhost/localhost.crt --open",
-    "build": "ng build",
+    "build": "ng build --optimization=true",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
