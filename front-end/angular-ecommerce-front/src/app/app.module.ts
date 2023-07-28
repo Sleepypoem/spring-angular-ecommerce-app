@@ -33,6 +33,7 @@ import { CustomerFormComponent } from './components/customer-form/customer-form.
 import { AddressFormComponent } from './components/address-form/address-form.component';
 import { BillingAddressFormComponent } from './components/billing-address-form/billing-address-form.component';
 import { CreditCardFormComponent } from './components/credit-card-form/credit-card-form.component';
+import { AccountDetailsComponent } from './components/account-details/account-details.component';
 
 const oktaConfigObject = oktaConfig.oidc;
 
@@ -58,6 +59,12 @@ const routes: Routes = [
   {
     path: 'orders',
     component: OrderHistoryComponent,
+    canActivate: [OktaAuthGuard],
+    data: { onAuthRequired: redirectToLoginPage },
+  },
+  {
+    path: 'customer/details',
+    component: AccountDetailsComponent,
     canActivate: [OktaAuthGuard],
     data: { onAuthRequired: redirectToLoginPage },
   },
@@ -87,6 +94,7 @@ const routes: Routes = [
     AddressFormComponent,
     BillingAddressFormComponent,
     CreditCardFormComponent,
+    AccountDetailsComponent,
   ],
   imports: [
     BrowserModule,
