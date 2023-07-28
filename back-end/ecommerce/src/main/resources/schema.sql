@@ -64,6 +64,8 @@ CREATE TABLE IF NOT EXISTS
         `first_name` varchar(255) DEFAULT NULL,
         `last_name` varchar(255) DEFAULT NULL,
         `email` varchar(255) DEFAULT NULL,
+        `phone` varchar(255) DEFAULT NULL,
+        `image` varchar(255) DEFAULT NULL,
         `created_at` datetime(6) DEFAULT NULL,
         `updated_at` datetime(6) DEFAULT NULL,
         PRIMARY KEY (`id`)

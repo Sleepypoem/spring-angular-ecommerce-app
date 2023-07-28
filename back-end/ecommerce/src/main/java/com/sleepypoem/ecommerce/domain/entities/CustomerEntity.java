@@ -26,6 +26,10 @@ public class CustomerEntity extends EntityWithTimeStamps {
 
     private String email;
 
+    private String phone;
+
+    private String image;
+
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<OrderEntity> orders = new HashSet<>();
 

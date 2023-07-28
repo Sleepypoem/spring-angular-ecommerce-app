@@ -2,6 +2,8 @@ export class Customer {
   firstName?: string;
   lastName?: string;
   email?: string;
+  phone?: string;
+  image?: string;
   id?: number;
   constructor() {}
 
