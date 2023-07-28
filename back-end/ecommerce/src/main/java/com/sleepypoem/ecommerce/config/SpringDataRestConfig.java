@@ -30,7 +30,6 @@ public class SpringDataRestConfig
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
 
         configReadOnlyRestRepository(OrderEntity.class, config);
-        configReadOnlyRestRepository(CustomerEntity.class, config);
 
         cors.addMapping( "/**")
                 .allowedOrigins(this.allowedOrigins)
