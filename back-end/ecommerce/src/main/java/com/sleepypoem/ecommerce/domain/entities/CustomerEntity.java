@@ -1,9 +1,11 @@
 package com.sleepypoem.ecommerce.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sleepypoem.ecommerce.domain.entities.abstracts.EntityWithTimeStamps;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.hateoas.server.core.Relation;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "customers")
+@Relation(collectionRelation = "customers", itemRelation = "customer")
 public class CustomerEntity extends EntityWithTimeStamps {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +36,13 @@ public class CustomerEntity extends EntityWithTimeStamps {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<OrderEntity> orders = new HashSet<>();
 
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String encodedImage;
+
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
 
     public void addOrder(OrderEntity order) {
         if(order == null) {
