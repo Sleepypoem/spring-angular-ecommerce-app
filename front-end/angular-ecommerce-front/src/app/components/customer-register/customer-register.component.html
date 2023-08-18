@@ -1,0 +1,19 @@
+<div class="main-content page-m">
+  <div class="section-content section-content-p30 e-spc">
+    <div class="container-fluid">
+      <div>
+        <form class="col-md-9 mx-auto mt-4" (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+
+          <app-dinamic-form [fields]="customerForm" [title]="'New Customer'" [parentForm]="formGroup" [formGroupName]="'customer'"></app-dinamic-form>
+          <div class="form-area">
+            <app-drag-n-drop (imageEventEmitter)="receiveImage($event)"></app-drag-n-drop>
+          </div>
+          <div class="form-row btn btn-info">
+            <button type="submit">Save</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
