@@ -9,8 +9,8 @@ export class AddressService {
     return Country.getAllCountries();
   }
 
-  getStatesByCountry(countryShotName: string) {
-    return State.getStatesOfCountry(countryShotName);
+  getStatesByCountry(countryShortName: string) {
+    return State.getStatesOfCountry(countryShortName);
   }
 
   getCitiesByState(country: string, state: string) {
