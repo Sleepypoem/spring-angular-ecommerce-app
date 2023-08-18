@@ -6,8 +6,8 @@ import com.sleepypoem.ecommerce.domain.entities.CustomerEntity;
 import com.sleepypoem.ecommerce.domain.entities.OrderEntity;
 import com.sleepypoem.ecommerce.domain.entities.OrderItemEntity;
 import com.sleepypoem.ecommerce.enums.CheckoutStatus;
-import com.sleepypoem.ecommerce.repositories.CustomerRepository;
 import com.sleepypoem.ecommerce.service.interfaces.CheckoutService;
+import com.sleepypoem.ecommerce.service.interfaces.CustomerService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,28 +17,26 @@ import java.util.UUID;
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
 
-    private final CustomerRepository customerRepository;
+    private final CustomerService customerService;
 
 
-    public CheckoutServiceImpl(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public CheckoutServiceImpl(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     @Override
     @Transactional
     public PurchaseResponseDto makeOrder(PurchaseDto purchaseDto) {
-        CustomerEntity customerEntity;
-
-        if(customerExists(purchaseDto.getCustomer().getEmail())){
-            customerEntity = getCustomerByEmail(purchaseDto.getCustomer().getEmail());
-        } else {
-            customerEntity = purchaseDto.getCustomer();
-        }
-
+        CustomerEntity customerEntity = getIfExists(purchaseDto);
         OrderEntity orderEntity = prepareOrder(purchaseDto);
 
         customerEntity.addOrder(orderEntity);
-        customerRepository.save(customerEntity);
+
+        if(customerEntity.getId() == null){
+            customerService.create(customerEntity);
+        }else {
+            customerService.update(customerEntity.getId(), customerEntity);
+        }
         return new PurchaseResponseDto(orderEntity.getOrderTrackingNumber(), orderEntity.getStatus());
     }
 
@@ -52,11 +50,19 @@ public class CheckoutServiceImpl implements CheckoutService {
     }
 
     public CustomerEntity getCustomerByEmail(String email) {
-        return customerRepository.findByEmail(email).orElseThrow(RuntimeException::new);
+        return customerService.getByEmail(email);
     }
 
     private boolean customerExists(String customerEmail) {
-        return customerRepository.findByEmail(customerEmail).isPresent();
+        return customerService.existsByEmail(customerEmail);
+    }
+
+    private CustomerEntity getIfExists(PurchaseDto purchaseDto) {
+        if(customerExists(purchaseDto.getCustomer().getEmail())){
+            return getCustomerByEmail(purchaseDto.getCustomer().getEmail());
+        } else {
+            return purchaseDto.getCustomer();
+        }
     }
 
     private String generateTrackingNumber() {
