@@ -1,5 +1,6 @@
 package com.sleepypoem.ecommerce.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sleepypoem.ecommerce.domain.entities.abstracts.EntityWithTimeStamps;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -22,5 +23,6 @@ public class CategoryEntity extends EntityWithTimeStamps {
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    @JsonIgnore
     private Set<ProductEntity> products;
 }
