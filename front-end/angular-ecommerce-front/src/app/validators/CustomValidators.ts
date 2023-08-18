@@ -7,4 +7,25 @@ export class CustomValidators {
     }
     return null;
   }
+
+  static passwordMatchValidator(control: FormControl) {
+    let passwordControl = control.parent?.get('password');
+    let confirmPasswordControl = control.parent?.get('confirmPassword');
+
+    passwordControl?.valueChanges.subscribe(() => {
+      if (passwordControl?.value !== confirmPasswordControl?.value) {
+        confirmPasswordControl?.setErrors({ passwordMatch: true });
+      } else {
+        confirmPasswordControl?.setErrors(null);
+      }
+    });
+
+    confirmPasswordControl?.valueChanges.subscribe(() => {
+      if (passwordControl?.value !== confirmPasswordControl?.value) {
+        confirmPasswordControl?.setErrors({ passwordMatch: true });
+      } else {
+        confirmPasswordControl?.setErrors(null);
+      }
+    });
+  }
 }
