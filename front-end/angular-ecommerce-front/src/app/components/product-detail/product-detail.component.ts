@@ -4,6 +4,7 @@ import { CartItem } from 'src/app/dtos/cartItem';
 import { Product } from 'src/app/dtos/product';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,6 +14,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductDetailComponent {
   productId: string = '';
   public product: Product = {} as Product;
+  imageServerUrl: string = environment.imageServerUrl;
 
   constructor(
     private productService: ProductService,

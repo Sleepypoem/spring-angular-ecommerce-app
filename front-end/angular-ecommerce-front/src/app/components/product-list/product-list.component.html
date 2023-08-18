@@ -8,16 +8,13 @@
             <div class="col-md-9">
               <div class="row">
                 <div class="col-md-3">
-                  <ngb-pagination [(page)]="page" [pageSize]="pageSize" [maxSize]="5"
-                    [boundaryLinks]="true" [collectionSize]="totalRecords"
-                    (pageChange)="getProducts()"></ngb-pagination>
+                  <ngb-pagination [(page)]="page" [pageSize]="pageSize" [maxSize]="5" [boundaryLinks]="true" [collectionSize]="totalRecords" (pageChange)="getProducts()"></ngb-pagination>
                 </div>
               </div>
             </div>
             <div style="text-align: right;" class="col-md-3 my-auto">
               <span class="mr-2">Showing
-                <select #pageSelector title="page selector"
-                  (change)="setPageSize(pageSelector.value)">
+                <select #pageSelector title="page selector" (change)="setPageSize(pageSelector.value)">
                   <option selected="true">5</option>
                   <option>10</option>
                   <option>20</option>
@@ -31,7 +28,7 @@
         <div *ngFor="let product of products" class="col-md-3 d-flex">
           <div class="product-box">
             <a routerLink="/products/{{product.id}}">
-        										<img src="{{product.image}}" class="img-responsive" alt="product-image">
+        										<img src="{{imageServerUrl + product.image}}" class="img-responsive" alt="product-image">
         									</a>
             <a routerLink="/products/{{product.id}}">
         										<h1>{{product.name}}</h1>
@@ -42,8 +39,7 @@
           </div>
         </div>
 
-        <div *ngIf="products?.length == 0"
-          class="alert alert-warning text-center display-4 p-4 col-md-6 mx-auto" role="alert">
+        <div *ngIf="products?.length == 0" class="alert alert-warning text-center display-4 p-4 col-md-6 mx-auto" role="alert">
           No products found!
         </div>
 
