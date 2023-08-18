@@ -1,56 +1,36 @@
 <div class="main-content page-m">
   <div class="section-content section-content-p30 e-spc">
     <div class="container-fluid">
-      <form class="col-md-9 mx-auto" [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
-        <div [ngClass]="['form-area', customer == null ? '' : 'hidden' ]">
-          <div class="text-center">
-            <h3>Customer</h3>
+      <div>
+        <form class="col-md-9 mx-auto mt-4" (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+          <div *ngIf="loggedCustomer == null">
+            <app-dinamic-form [fields]="customer" [title]="'Customer'" [parentForm]="formGroup" [formGroupName]="'customer'"></app-dinamic-form>
           </div>
-          <app-customer-form [parentForm]="checkoutForm" [formGroupName]="'customer'"></app-customer-form>
-        </div>
-        <!-- Address area -->
-        <div class="form-area">
-          <div class="text-center">
-            <h3>Address</h3>
+          <app-address-form [formGroup]="formGroup"></app-address-form>
+          <!-- is billing address same as address? -->
+          <div class="item input-space">
+            <div class="checkbox-rect">
+              <input (change)="copyAddressToBillingAddress($event)" type="checkbox" id="checkbox-rect1" name="check" />
+              <label for="checkbox-rect1">Is billing address same as address?</label>
+            </div>
           </div>
-          <app-address-form [parentForm]="checkoutForm" [formGroupName]="'address'"></app-address-form>
-        </div>
+          <app-billing-address-form [formGroup]="formGroup"></app-billing-address-form>
+          <app-credit-card-form [formGroup]="formGroup"></app-credit-card-form>
+          <!-- Order review area -->
+          <div class="form-area">
+            <div class="text-center">
+              <h3>Review your order</h3>
+            </div>
+            <b>Total Quantity: {{totalQuantity}}</b>
+            <h4>Shipping: FREE</h4>
+            <B>Total Price: {{totalPrice | currency: 'USD'}}</B>
+          </div>
+          <div class="form-row btn btn-info">
+            <button type="submit">Save</button>
+          </div>
 
-        <!-- is billing address same as address? -->
-        <div class="item input-space">
-          <div class="checkbox-rect">
-            <input #billCheckBox (change)="copyAddressToBillingAddress($event)" type="checkbox" id="checkbox-rect1" name="check" />
-            <label for="checkbox-rect1">Is billing address same as address?</label>
-          </div>
-        </div>
-
-        <!-- Billing address area -->
-        <div [ngClass]="['form-area', billCheckBox.checked ? 'hidden' : '' ]">
-          <div class="text-center">
-            <h3>Billing address</h3>
-          </div>
-          <app-billing-address-form [parentForm]="checkoutForm" [formGroupName]="'billingAddress'"></app-billing-address-form>
-        </div>
-
-        <!-- Credit card area -->
-        <div class="form-area">
-          <div class="text-center">
-            <h3>Credit card</h3>
-          </div>
-          <app-credit-card-form [parentForm]="checkoutForm" [formGroupName]="'creditCard'"></app-credit-card-form>
-        </div>
-
-        <!-- Order review area -->
-        <div class="form-area">
-          <div class="text-center">
-            <h3>Review your order</h3>
-          </div>
-          <b>Total Quantity: {{totalQuantity}}</b>
-          <h4>Shipping: FREE</h4>
-          <B>Total Price: {{totalPrice | currency: 'USD'}}</B>
-        </div>
-        <button type="submit" class="btn btn-info">Purchase</button>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </div>
