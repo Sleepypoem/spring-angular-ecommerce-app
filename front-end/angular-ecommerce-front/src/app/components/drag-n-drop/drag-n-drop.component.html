@@ -1,0 +1,21 @@
+<div class="d-flex mb-4">
+  <div class="col-md-6 mx-auto" appDragNDrop (fileDropped)="onImageDrop($event)">
+    <div class="input-space">
+      <div class="dropzone">
+        <input type="file" #fileDragDrop id="fileDragDrop" title="Drop your image here" (change)="onFileChange($event)" />
+        <i class="bi bi-image"></i>
+        <h3>Drag and drop image here</h3>
+        <h3>---- Or ----</h3>
+        <label for="fileDragDrop">Browse files</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 mx-auto">
+    <div class="input-space">
+      <div class="dropzone">
+        <img src="{{previewImage}}" alt="Image preview">
+      </div>
+    </div>
+  </div>
+</div>
