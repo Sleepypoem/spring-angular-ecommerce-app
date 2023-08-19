@@ -60,10 +60,9 @@ public class CustomerServiceImpl implements CustomerService {
         }
         CustomerEntity customerEntityFromDB = getById(id);
         if(customerEntity.getEncodedImage() != null){
-            customerEntity.setImage(imageService.addImageToFolder(customerEntity.getEncodedImage(), IMAGE_FOLDER));
             imageService.deleteImage(customerEntity.getImage());
+            customerEntity.setImage(imageService.addImageToFolder(customerEntity.getEncodedImage(), IMAGE_FOLDER));
         }
-        oktaUserService.updateOktaUser(customerEntityFromDB.getEmail(), customerEntity);
         //Email cannot be edited
         customerEntity.setEmail(customerEntityFromDB.getEmail());
         return customerRepository.save(customerEntity);
