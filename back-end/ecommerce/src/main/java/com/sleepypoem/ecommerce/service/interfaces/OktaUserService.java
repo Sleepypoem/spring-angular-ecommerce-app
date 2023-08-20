@@ -13,9 +13,5 @@ public interface OktaUserService {
 
     List<User> getAllOktaUsers();
 
-
-    CustomerEntity updateOktaUser(String id, CustomerEntity customerEntity);
-
-
     void deleteOktaUser(String email);
 }
