@@ -33,9 +33,4 @@ public class OktaUserController {
     public void deleteOktaUserById(@PathVariable String id) {
         oktaUserService.deleteOktaUser(id);
     }
-
-    @PutMapping("/{id}")
-    public void updateOktaUserById(@PathVariable String id, @RequestBody CustomerEntity customerEntity) {
-        oktaUserService.updateOktaUser(id, customerEntity);
-    }
 }
