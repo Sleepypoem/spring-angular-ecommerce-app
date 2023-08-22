@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductDetailComponent {
   productId: string = '';
-  public product: Product = {} as Product;
+  public product: Product;
   imageServerUrl: string = environment.imageServerUrl;
 
   constructor(

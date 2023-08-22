@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent {
-  products: Product[] = [];
+  products: Product[];
 
   page: number = 1;
   pageSize: number = 5;

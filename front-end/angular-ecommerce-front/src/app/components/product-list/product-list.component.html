@@ -42,6 +42,9 @@
         <div *ngIf="products?.length == 0" class="alert alert-warning text-center display-4 p-4 col-md-6 mx-auto" role="alert">
           No products found!
         </div>
+        <div *ngIf="!products">
+          <app-loading />
+        </div>
 
       </div>
 
