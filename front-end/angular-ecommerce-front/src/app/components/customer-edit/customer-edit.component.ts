@@ -1,9 +1,11 @@
+import { AuthenticationService } from './../../services/authentication.service';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Customer } from 'src/app/dtos/customer';
 import { CustomerService } from 'src/app/services/customer.service';
 import { customerForm } from 'src/config/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-customer-edit',
@@ -16,14 +18,16 @@ export class CustomerEditComponent {
   image: string;
   customerId: string;
   customer: Customer;
-  sessionStorage: Storage = sessionStorage;
+  submitted: boolean = false;
 
   constructor(
     private customerService: CustomerService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authenticationService: AuthenticationService
   ) {
     this.buildForm();
+    this.disableEmailField();
   }
 
   ngOnInit(): void {
@@ -38,13 +42,21 @@ export class CustomerEditComponent {
       });
   }
 
+  private disableEmailField() {
+    this.customerForm[2].disabled = true;
+  }
+
   private buildForm() {
     this.formGroup = new FormGroup({});
   }
 
   onSubmit() {
-    this.markAllSubformsAsTouched(this.formGroup);
     this.formGroup.updateValueAndValidity();
+    if (this.formGroup.invalid) {
+      this.markAllSubformsAsTouched(this.formGroup);
+      return;
+    }
+    this.submitted = true;
     let customer = this.customerFromForm;
     customer.encodedImage = this.image;
     customer.id = Number(this.customerId);
@@ -55,9 +67,8 @@ export class CustomerEditComponent {
   makeRequest(customer: Customer) {
     this.customerService.updateCustomer(customer.id!, customer).subscribe(
       (response) => {
-        console.log(response);
-        this.sessionStorage.setItem('customer', JSON.stringify(customer));
-        this.router.navigate(['/customer/details']);
+        this.authenticationService.updateUser(response);
+        this.router.navigate(['customer/details']);
       },
       (error) => {
         alert('User update failed');
