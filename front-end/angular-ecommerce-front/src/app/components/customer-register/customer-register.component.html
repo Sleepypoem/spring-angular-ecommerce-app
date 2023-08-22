@@ -9,7 +9,7 @@
             <app-drag-n-drop (imageEventEmitter)="receiveImage($event)"></app-drag-n-drop>
           </div>
           <div class="form-row btn btn-info">
-            <button type="submit">Save</button>
+            <button type="submit" [disabled]="submitted">Register</button>
           </div>
 
         </form>

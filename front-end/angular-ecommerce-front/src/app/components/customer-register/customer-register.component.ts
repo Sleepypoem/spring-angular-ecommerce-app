@@ -14,6 +14,7 @@ export class CustomerRegisterComponent {
   customerForm: any = customerSignUpForm;
   formGroup: FormGroup;
   image: string;
+  submitted: boolean = false;
 
   constructor(
     private customerService: CustomerService,
@@ -27,8 +28,12 @@ export class CustomerRegisterComponent {
   }
 
   onSubmit() {
-    this.markAllSubformsAsTouched(this.formGroup);
     this.formGroup.updateValueAndValidity();
+    if (this.formGroup.invalid) {
+      this.markAllSubformsAsTouched(this.formGroup);
+      return;
+    }
+    this.submitted = true;
     let customer = this.customerFromForm;
     customer.encodedImage = this.image;
     this.makeRequest(customer);
