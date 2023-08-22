@@ -15,6 +15,10 @@ export class AuthenticationService {
     this.loggedInUserSubject.next(user);
   }
 
+  logout() {
+    this.loggedInUserSubject.next(null);
+  }
+
   updateUser(updatedUser: Customer) {
     this.loggedInUserSubject.next(updatedUser);
   }
