@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="main-body">
+  <div class="main-body" *ngIf="customer">
 
     <nav aria-label="breadcrumb" class="main-breadcrumb">
       <ol class="breadcrumb">
@@ -17,8 +17,9 @@
               <div class="mt-3">
                 <h4>{{customer.firstName + " " + customer.lastName}}</h4>
                 <p class="text-secondary mb-1">User Role</p>
-                <button class="btn btn-primary mx-2">Orders</button>
-                <button class="btn btn-outline-primary">Memberships</button>
+                <button routerLink="/orders" class="btn btn-primary mx-2">Orders</button>
+                <button routerLink="/memberships" class="btn btn-primary mx-2">Memberships</button>
+                <button href="#" class="btn btn-warning mx-2">Reset Password</button>
               </div>
             </div>
           </div>
@@ -65,5 +66,8 @@
       </div>
     </div>
 
+  </div>
+  <div *ngIf="!customer">
+    <app-loading />
   </div>
 </div>
