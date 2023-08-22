@@ -10,6 +10,7 @@ export class FieldBase<T> {
   maxValue: number | undefined;
   minValue: number | undefined;
   placeholder: string;
+  disabled: boolean;
   customVaLidationMessages: Map<string, string>;
   options: { key: string; value: string }[];
 
@@ -23,6 +24,7 @@ export class FieldBase<T> {
       controlType?: string;
       maxValue?: number;
       minValue?: number;
+      disabled?: boolean;
       type?: string;
       customValidationMessages?: Map<string, string>;
       options?: { key: string; value: string }[];
@@ -36,6 +38,7 @@ export class FieldBase<T> {
     this.controlType = options.controlType || '';
     this.maxValue = options.maxValue;
     this.minValue = options.minValue;
+    this.disabled = !!options.disabled;
     this.type = options.type || '';
     this.customVaLidationMessages =
       options.customValidationMessages || new Map<string, string>();

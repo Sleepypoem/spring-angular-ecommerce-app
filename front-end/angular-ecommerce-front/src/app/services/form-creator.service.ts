@@ -11,7 +11,7 @@ export class FormCreatorService {
 
     fields.forEach((field) => {
       group[field.key] = new FormControl(
-        field.value || '',
+        { value: field.value, disabled: field.disabled },
         field.validators || []
       );
     });
