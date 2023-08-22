@@ -1,3 +1,4 @@
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,20 +22,19 @@ export class CheckoutFormComponent {
   customer: any = customerForm;
   sessionStorage: Storage = sessionStorage;
   totalPrice: number = 0.0;
+  submitted: boolean = false;
 
   totalQuantity: number = 0;
-
-  receiveImage(event: any) {
-    console.log(event);
-  }
 
   constructor(
     private checkoutService: CheckoutService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private authenticationService: AuthenticationService
   ) {
-    this.loggedCustomer = JSON.parse(this.sessionStorage.getItem('customer')!);
-    console.log(this.loggedCustomer);
+    this.authenticationService.loggedInUser$.subscribe((user) => {
+      this.loggedCustomer = user!;
+    });
   }
 
   ngOnInit() {
@@ -66,12 +66,15 @@ export class CheckoutFormComponent {
   }
 
   public onSubmit() {
+    if (this.loggedCustomer != null) {
+      this.formGroup.controls['customer'].disable();
+    }
+    this.formGroup.updateValueAndValidity();
     if (this.formGroup.invalid) {
       this.markAllSubformsAsTouched(this.formGroup);
-      this.formGroup.updateValueAndValidity();
       return;
     }
-
+    this.submitted = true;
     let customer = this.customerFromForm;
     let order = this.prepareOrder();
     let purchase = new Purchase(customer, order);
