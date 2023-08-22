@@ -40,6 +40,7 @@ import { BillingAddressFormComponent } from './components/billing-address-form/b
 import { AddressFormComponent } from './components/address-form/address-form.component';
 import { CustomerRegisterComponent } from './components/customer-register/customer-register.component';
 import { CustomerEditComponent } from './components/customer-edit/customer-edit.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 const oktaConfigObject = oktaConfig.oidc;
 
@@ -117,6 +118,7 @@ const routes: Routes = [
     DragNDropComponent,
     CustomerRegisterComponent,
     CustomerEditComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
