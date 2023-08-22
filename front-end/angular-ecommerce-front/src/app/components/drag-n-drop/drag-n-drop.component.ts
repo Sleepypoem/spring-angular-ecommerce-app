@@ -10,16 +10,16 @@ export class DragNDropComponent {
   @Input() defaultImage: string | null;
   @Output() imageEventEmitter = new EventEmitter<string>();
   imageServerUrl: string = environment.imageServerUrl;
+  fallbackImage: string = environment.fallbackImage;
   previewImage: string;
   constructor() {}
 
   ngOnInit(): void {
-    if (this.defaultImage != null)
+    if (this.defaultImage != null) {
       this.previewImage = this.imageServerUrl + this.defaultImage;
-    else
-      this.previewImage =
-        this.imageServerUrl +
-        'spring-angular-ecommerce/assets/images/vyspi9t7uokt16nsym91';
+    } else {
+      this.previewImage = this.imageServerUrl + this.fallbackImage;
+    }
   }
 
   public onImageDrop(file: File): void {
