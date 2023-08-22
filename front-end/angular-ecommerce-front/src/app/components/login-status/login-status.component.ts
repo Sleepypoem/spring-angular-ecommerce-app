@@ -2,9 +2,10 @@ import { OktaAuth } from '@okta/okta-auth-js';
 import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import { Component, Inject } from '@angular/core';
 import { Customer } from 'src/app/dtos/customer';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { CustomerService } from 'src/app/services/customer.service';
 import { environment } from 'src/environments/environment';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-login-status',
@@ -13,9 +14,6 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginStatusComponent {
   isAuthenticated: boolean = false;
-  username: string = '';
-  userImage: string =
-    'spring-angular-ecommerce/assets/images/vyspi9t7uokt16nsym91';
   sessionStorage: Storage = sessionStorage;
   customer: Customer;
   imageServerUrl = environment.imageServerUrl;
@@ -24,7 +22,8 @@ export class LoginStatusComponent {
     private authService: OktaAuthStateService,
     @Inject(OKTA_AUTH) private oktaAuth: OktaAuth,
     private customerService: CustomerService,
-    private router: Router
+    private router: Router,
+    private myAuthService: AuthenticationService
   ) {}
 
   ngOnInit() {
@@ -40,21 +39,20 @@ export class LoginStatusComponent {
         this.customerService
           .getCustomerByEmail(user.email!)
           .subscribe((data) => {
-            this.userImage = data.image!;
-            this.sessionStorage.setItem('customer', JSON.stringify(data));
+            this.myAuthService.login(data);
           });
-        this.username = user.name!;
       });
     }
 
-    this.customer = JSON.parse(
-      this.sessionStorage.getItem('customer')!
-    ) as Customer;
+    this.myAuthService.loggedInUser$.subscribe((user) => {
+      this.customer = user!;
+    });
   }
 
   logout() {
     this.oktaAuth.signOut();
     this.sessionStorage.clear();
+    this.myAuthService.logout();
   }
 
   navigateToUrl(url: string) {

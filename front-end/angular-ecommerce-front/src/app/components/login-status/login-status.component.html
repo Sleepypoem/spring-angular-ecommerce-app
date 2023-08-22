@@ -1,11 +1,11 @@
 <div class="d-flex user-content">
 
-  <div *ngIf="isAuthenticated" class="d-flex flex-column">
+  <div *ngIf="isAuthenticated && customer" class="d-flex flex-column">
 
     <ul>
-      <li class="d-flex justify-content-between align-items-center"><img class="profile-photo rounded-circle" src="{{imageServerUrl + userImage}}" alt="blabla" />
-
-        <a class="text-nowrap" href="#" aria-haspopup="true">{{username}}</a>
+      <li class="d-flex justify-content-between align-items-center">
+        <img src="{{imageServerUrl + customer.image!}}" alt="alt" class="profile-photo rounded-circle">
+        <a class="text-nowrap" href="#" aria-haspopup="true">{{customer.firstName + " " + customer.lastName}}</a>
         <ul class="dropdown" aria-label="submenu">
           <li (click)="navigateToUrl('/customer/details')" class="d-flex justify-content-between align-items-center"><a>Account</a><i style="font-size: 2.2rem; color: #fff;" class="bi bi-person-circle"></i></li>
           <li (click)="navigateToUrl('/cart')" class="d-flex justify-content-between align-items-center"><a>Cart details</a><i style="font-size: 2.2rem; color: #fff;" class="bi bi-cart4"></i></li>
