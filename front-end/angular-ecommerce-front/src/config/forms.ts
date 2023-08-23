@@ -356,3 +356,66 @@ export const creditCardForm: FieldBase<string>[] = [
     validators: [Validators.required],
   }),
 ];
+
+export const passwordChangeForm: FieldBase<string>[] = [
+  new PasswordField({
+    key: 'oldPassword',
+    label: 'Old Password',
+    value: '',
+    placeholder: 'Enter your old password',
+    validators: [
+      Validators.required,
+      CustomValidators.notOnlyBlankSpaces,
+      Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/),
+    ],
+    customValidationMessages: new Map<string, string>([
+      [
+        'pattern',
+        'Please enter a valid password, 8 characters long, one uppercase letter, one lowercase letter and one number.',
+      ],
+      ['required', 'Password is required'],
+      ['notOnlyBlankSpaces', 'This field cannot contain only blank spaces.'],
+    ]),
+  }),
+  new PasswordField({
+    key: 'password',
+    label: 'Password',
+    value: '',
+    placeholder: 'Enter your new password',
+    validators: [
+      Validators.required,
+      CustomValidators.notOnlyBlankSpaces,
+      Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/),
+    ],
+    customValidationMessages: new Map<string, string>([
+      ['required', 'Password is required'],
+      [
+        'pattern',
+        'Please enter a valid password, 8 characters long, one uppercase letter, one lowercase letter and one number.',
+      ],
+      ['notOnlyBlankSpaces', 'This field cannot contain only blank spaces.'],
+      ['passwordMatch', "Passwords don't match"],
+    ]),
+  }),
+  new PasswordField({
+    key: 'confirmPassword',
+    label: 'Confirm Password',
+    value: '',
+    placeholder: 'Confirm your new password',
+    validators: [
+      Validators.required,
+      CustomValidators.notOnlyBlankSpaces,
+      CustomValidators.passwordMatchValidator,
+      Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/),
+    ],
+    customValidationMessages: new Map<string, string>([
+      ['required', 'Password is required'],
+      [
+        'pattern',
+        'Please enter a valid password, 8 characters long, one uppercase letter, one lowercase letter and one number.',
+      ],
+      ['notOnlyBlankSpaces', 'This field cannot contain only blank spaces.'],
+      ['passwordMatch', "Passwords don't match"],
+    ]),
+  }),
+];
