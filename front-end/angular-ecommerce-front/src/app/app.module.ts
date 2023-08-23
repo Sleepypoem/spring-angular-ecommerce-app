@@ -41,6 +41,7 @@ import { AddressFormComponent } from './components/address-form/address-form.com
 import { CustomerRegisterComponent } from './components/customer-register/customer-register.component';
 import { CustomerEditComponent } from './components/customer-edit/customer-edit.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 const oktaConfigObject = oktaConfig.oidc;
 
@@ -78,6 +79,12 @@ const routes: Routes = [
   {
     path: 'customer/signup',
     component: CustomerRegisterComponent,
+  },
+  {
+    path: 'customer/change-password',
+    component: ChangePasswordComponent,
+    canActivate: [OktaAuthGuard],
+    data: { onAuthRequired: redirectToLoginPage },
   },
   {
     path: 'customer/edit/:id',
@@ -119,6 +126,7 @@ const routes: Routes = [
     CustomerRegisterComponent,
     CustomerEditComponent,
     LoadingComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
