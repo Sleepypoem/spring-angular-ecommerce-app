@@ -35,6 +35,19 @@ export class CustomerService {
       customer
     );
   }
+
+  public changeCustomerPassword(
+    id: string,
+    customerId: string,
+    oldPassword: string,
+    newPassword: string
+  ) {
+    return this.httpClient.patch(this.baseUrl + '/' + id, {
+      customerId: customerId,
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+    });
+  }
 }
 
 interface GetResponse {
