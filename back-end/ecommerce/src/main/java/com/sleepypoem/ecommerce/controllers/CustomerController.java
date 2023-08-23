@@ -4,7 +4,6 @@ import com.sleepypoem.ecommerce.controllers.asemblers.CustomerAssembler;
 import com.sleepypoem.ecommerce.domain.dtos.PasswordChangeRequestDto;
 import com.sleepypoem.ecommerce.domain.entities.CustomerEntity;
 import com.sleepypoem.ecommerce.service.interfaces.CustomerService;
-import com.sleepypoem.ecommerce.service.interfaces.OktaUserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -23,13 +22,10 @@ public class CustomerController {
 
     private final CustomerAssembler customerAssembler;
 
-    private final OktaUserService oktaUserService;
-
-    public CustomerController(CustomerService customerService, PagedResourcesAssembler<CustomerEntity> pagedResourcesAssembler, CustomerAssembler customerAssembler, OktaUserService oktaUserService) {
+    public CustomerController(CustomerService customerService, PagedResourcesAssembler<CustomerEntity> pagedResourcesAssembler, CustomerAssembler customerAssembler) {
         this.customerService = customerService;
         this.pagedResourcesAssembler = pagedResourcesAssembler;
         this.customerAssembler = customerAssembler;
-        this.oktaUserService = oktaUserService;
     }
 
     @GetMapping
@@ -79,10 +75,9 @@ public class CustomerController {
     }
 
     @PatchMapping("/{id}")
-    public void changePassword(@RequestBody PasswordChangeRequestDto passwordChangeRequestDto) {
-        oktaUserService.changePassword(passwordChangeRequestDto.getCustomerId(),
-                passwordChangeRequestDto.getOldPassword(),
-                passwordChangeRequestDto.getNewPassword());
+    public void changePassword( @PathVariable Long id,
+                                @RequestBody PasswordChangeRequestDto passwordChangeRequestDto) {
+        customerService.changePassword(id, passwordChangeRequestDto.getOldPassword(), passwordChangeRequestDto.getNewPassword());
     }
 
 
