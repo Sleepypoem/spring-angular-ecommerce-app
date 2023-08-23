@@ -6,10 +6,11 @@
 
           <app-dinamic-form [fields]="customerForm" [title]="'New Customer'" [parentForm]="formGroup" [formGroupName]="'customer'"></app-dinamic-form>
           <div class="form-area">
+            <h3>Add a profile photo</h3>
             <app-drag-n-drop (imageEventEmitter)="receiveImage($event)"></app-drag-n-drop>
           </div>
-          <div class="form-row btn btn-info">
-            <button type="submit" [disabled]="submitted">Register</button>
+          <div class="form-row">
+            <button class="btn btn-xl btn-info" type="submit" [disabled]="submitted">Register</button>
           </div>
 
         </form>
