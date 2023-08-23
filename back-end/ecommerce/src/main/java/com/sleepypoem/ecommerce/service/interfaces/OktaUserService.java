@@ -13,5 +13,7 @@ public interface OktaUserService {
 
     List<User> getAllOktaUsers();
 
+    void changePassword(String customerId, String oldPassword, String newPassword);
+
     void deleteOktaUser(String email);
 }
