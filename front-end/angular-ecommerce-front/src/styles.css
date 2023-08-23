@@ -129,9 +129,14 @@ buttons
 
 
  .btn-info{
-    color:#fff;
+    color:#fff!important;
     background-color:#0da8e4!important;
     border-color:#0da8e4!important
+}
+
+.btn-info:hover {
+  background-color: #6cc9ee!important;
+  transform: scale(1.1)!important;
 }
 
 a.primary-btn{
