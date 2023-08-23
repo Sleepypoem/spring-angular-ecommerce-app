@@ -14,6 +14,8 @@ public interface CustomerService {
 
     CustomerEntity update(Long id, CustomerEntity customerEntity);
 
+    void changePassword(Long id, String oldPassword, String newPassword);
+
     void deleteById(Long id);
 
     Page<CustomerEntity> getAll(Pageable pageable);

@@ -2,6 +2,7 @@ package com.sleepypoem.ecommerce.service.impl;
 
 import com.okta.sdk.resource.client.ApiException;
 import com.sleepypoem.ecommerce.domain.entities.CustomerEntity;
+import com.sleepypoem.ecommerce.exceptions.MyBadRequestException;
 import com.sleepypoem.ecommerce.exceptions.MyEntityNotFoundException;
 import com.sleepypoem.ecommerce.repositories.CustomerRepository;
 import com.sleepypoem.ecommerce.service.interfaces.CustomerService;
@@ -56,7 +57,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public CustomerEntity update(Long id, CustomerEntity customerEntity) {
         if(!Objects.equals(id, customerEntity.getId())){
-            throw new RuntimeException("Id: " + customerEntity.getId() + " not match with customer id: " + id);
+            throw new MyBadRequestException("Id: " + customerEntity.getId() + " not match with customer id: " + id);
         }
         CustomerEntity customerEntityFromDB = getById(id);
         if(customerEntity.getEncodedImage() != null){
@@ -66,6 +67,12 @@ public class CustomerServiceImpl implements CustomerService {
         //Email cannot be edited
         customerEntity.setEmail(customerEntityFromDB.getEmail());
         return customerRepository.save(customerEntity);
+    }
+
+    @Override
+    public void changePassword(Long id, String oldPassword, String newPassword){
+        CustomerEntity customerEntity = getById(id);
+        oktaUserService.changePassword(customerEntity.getEmail(), oldPassword, newPassword);
     }
 
     @Override
