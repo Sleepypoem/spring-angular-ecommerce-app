@@ -1,3 +1,4 @@
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Order } from 'src/app/dtos/order';
 import { OrderService } from './../../services/order.service';
 import { Component } from '@angular/core';
@@ -9,18 +10,23 @@ import { Component } from '@angular/core';
 })
 export class OrderHistoryComponent {
   orders: Order[] = [];
-  sessionStorage: Storage = sessionStorage;
 
-  constructor(private orderService: OrderService) {}
+  constructor(
+    private orderService: OrderService,
+    private authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit() {
     this.listOrders();
   }
 
   listOrders() {
-    let email = JSON.parse(this.sessionStorage.getItem('customer')!).email;
-    this.orderService.getOrdersByCustomerEmail(email).subscribe((data) => {
-      this.orders = data;
+    this.authenticationService.loggedInUser$.subscribe((user) => {
+      this.orderService
+        .getOrdersByCustomerEmail(user?.email!)
+        .subscribe((data) => {
+          this.orders = data;
+        });
     });
   }
 }

@@ -29,10 +29,19 @@ import { OktaAuth } from '@okta/okta-auth-js';
 import { MembershipsComponent } from './components/memberships/memberships.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
-import { CustomerFormComponent } from './components/customer-form/customer-form.component';
-import { AddressFormComponent } from './components/address-form/address-form.component';
-import { BillingAddressFormComponent } from './components/billing-address-form/billing-address-form.component';
 import { CreditCardFormComponent } from './components/credit-card-form/credit-card-form.component';
+import { AccountDetailsComponent } from './components/account-details/account-details.component';
+import { DragNDropDirective } from './directives/drag-n-drop.directive';
+import { DinamicFormComponent } from './components/dinamic-form/dinamic-form.component';
+import { DinamicFormFieldComponent } from './components/dinamic-form-field/dinamic-form-field.component';
+import { InvalidMessageDirective } from './directives/invalid-message.directive';
+import { DragNDropComponent } from './components/drag-n-drop/drag-n-drop.component';
+import { BillingAddressFormComponent } from './components/billing-address-form/billing-address-form.component';
+import { AddressFormComponent } from './components/address-form/address-form.component';
+import { CustomerRegisterComponent } from './components/customer-register/customer-register.component';
+import { CustomerEditComponent } from './components/customer-edit/customer-edit.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 const oktaConfigObject = oktaConfig.oidc;
 
@@ -61,6 +70,28 @@ const routes: Routes = [
     canActivate: [OktaAuthGuard],
     data: { onAuthRequired: redirectToLoginPage },
   },
+  {
+    path: 'customer/details',
+    component: AccountDetailsComponent,
+    canActivate: [OktaAuthGuard],
+    data: { onAuthRequired: redirectToLoginPage },
+  },
+  {
+    path: 'customer/signup',
+    component: CustomerRegisterComponent,
+  },
+  {
+    path: 'customer/change-password',
+    component: ChangePasswordComponent,
+    canActivate: [OktaAuthGuard],
+    data: { onAuthRequired: redirectToLoginPage },
+  },
+  {
+    path: 'customer/edit/:id',
+    component: CustomerEditComponent,
+    canActivate: [OktaAuthGuard],
+    data: { onAuthRequired: redirectToLoginPage },
+  },
   { path: 'cart', component: CartDetailsComponent },
   { path: 'checkout', component: CheckoutFormComponent },
   { path: 'category', component: ProductListComponent },
@@ -83,10 +114,19 @@ const routes: Routes = [
     LoginStatusComponent,
     MembershipsComponent,
     OrderHistoryComponent,
-    CustomerFormComponent,
-    AddressFormComponent,
     BillingAddressFormComponent,
+    AddressFormComponent,
     CreditCardFormComponent,
+    AccountDetailsComponent,
+    DragNDropDirective,
+    InvalidMessageDirective,
+    DinamicFormComponent,
+    DinamicFormFieldComponent,
+    DragNDropComponent,
+    CustomerRegisterComponent,
+    CustomerEditComponent,
+    LoadingComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

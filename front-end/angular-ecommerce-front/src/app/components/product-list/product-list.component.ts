@@ -4,6 +4,7 @@ import { CartItem } from 'src/app/dtos/cartItem';
 import { Product } from 'src/app/dtos/product';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-list',
@@ -11,7 +12,7 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent {
-  products: Product[] = [];
+  products: Product[];
 
   page: number = 1;
   pageSize: number = 5;
@@ -20,6 +21,7 @@ export class ProductListComponent {
 
   previousCategoryId: string = '';
   previousProductName: string = '';
+  imageServerUrl: string = environment.imageServerUrl;
 
   constructor(
     private productService: ProductService,

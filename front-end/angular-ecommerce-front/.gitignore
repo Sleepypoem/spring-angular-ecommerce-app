@@ -38,6 +38,7 @@ testem.log
 /typings
 /src/assets/*
 /src/config/auth-server-config.ts
+/src/app/components/test
 
 # System files
 .DS_Store

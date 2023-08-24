@@ -14,19 +14,18 @@ export class LoginComponent {
   oktaSignIn: any;
 
   constructor(@Inject(OKTA_AUTH) public oktaAuth: OktaAuth) {
-    console.log(oktaConfig.oidc.issuer.split('/oauth2')[0]);
     this.oktaSignIn = new OktaSignIn({
       baseUrl: oktaConfig.oidc.issuer.split('/oauth2')[0],
       clientId: oktaConfig.oidc.clientId,
       //VERY IMPORTANT: In Okta Sign-In Widget version 7+, Okta Identity Engine is enabled by default. If you are using version 7+ and want to use Okta Classic Engine rather than Identity Engine, you need to specify useClassicEngine: true
       useClassicEngine: true,
       redirectUri: oktaConfig.oidc.redirectUri,
+      logo: 'assets/images/logo/logo.jpg',
       authParams: {
         pkce: true,
         issuer: oktaConfig.oidc.issuer,
         scopes: oktaConfig.oidc.scopes,
       },
-      features: { registration: true },
     });
   }
 

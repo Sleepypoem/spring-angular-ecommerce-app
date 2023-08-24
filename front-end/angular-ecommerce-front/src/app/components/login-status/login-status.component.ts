@@ -2,7 +2,10 @@ import { OktaAuth } from '@okta/okta-auth-js';
 import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import { Component, Inject } from '@angular/core';
 import { Customer } from 'src/app/dtos/customer';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { CustomerService } from 'src/app/services/customer.service';
+import { environment } from 'src/environments/environment';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-login-status',
@@ -11,13 +14,16 @@ import { Router } from '@angular/router';
 })
 export class LoginStatusComponent {
   isAuthenticated: boolean = false;
-  username: string = '';
   sessionStorage: Storage = sessionStorage;
+  customer: Customer;
+  imageServerUrl = environment.imageServerUrl;
 
   constructor(
     private authService: OktaAuthStateService,
     @Inject(OKTA_AUTH) private oktaAuth: OktaAuth,
-    private router: Router
+    private customerService: CustomerService,
+    private router: Router,
+    private myAuthService: AuthenticationService
   ) {}
 
   ngOnInit() {
@@ -30,19 +36,23 @@ export class LoginStatusComponent {
   getUserDetails(): void {
     if (this.isAuthenticated) {
       this.oktaAuth.getUser().then((user) => {
-        let customer = new Customer()
-          .withFirstName(user.given_name!)
-          .withLastName(user.family_name!)
-          .withEmail(user.email!);
-        this.sessionStorage.setItem('customer', JSON.stringify(customer));
-        this.username = user.name!;
+        this.customerService
+          .getCustomerByEmail(user.email!)
+          .subscribe((data) => {
+            this.myAuthService.login(data);
+          });
       });
     }
+
+    this.myAuthService.loggedInUser$.subscribe((user) => {
+      this.customer = user!;
+    });
   }
 
   logout() {
     this.oktaAuth.signOut();
     this.sessionStorage.clear();
+    this.myAuthService.logout();
   }
 
   navigateToUrl(url: string) {
