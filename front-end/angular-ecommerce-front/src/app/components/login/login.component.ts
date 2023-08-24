@@ -26,7 +26,6 @@ export class LoginComponent {
         issuer: oktaConfig.oidc.issuer,
         scopes: oktaConfig.oidc.scopes,
       },
-      features: { registration: true },
     });
   }
 
