@@ -29,20 +29,20 @@ public class CustomerController {
     }
 
     @GetMapping
-    public PagedModel<EntityModel<CustomerEntity>> all(@PageableDefault(page = 0, size = 10)Pageable pageable) {
+    public PagedModel<EntityModel<CustomerEntity>> all(@PageableDefault Pageable pageable) {
         Page<CustomerEntity> customers = customerService.getAll(pageable);
         return pagedResourcesAssembler.toModel(customers, customerAssembler);
     }
 
     @GetMapping("/search/findAllByFirstNameContaining")
-    public PagedModel<EntityModel<CustomerEntity>> allByFirstNameContaining(@RequestParam String firstName, @PageableDefault(page = 0, size = 10)Pageable pageable) {
+    public PagedModel<EntityModel<CustomerEntity>> allByFirstNameContaining(@RequestParam String firstName, @PageableDefault Pageable pageable) {
         Page<CustomerEntity> customers = customerService.getAllByFirstNameContaining(firstName, pageable);
         return pagedResourcesAssembler.toModel(customers, customerAssembler);
     }
 
 
     @GetMapping("/search/findAllByLastNameContaining")
-    public PagedModel<EntityModel<CustomerEntity>> allByLastNameContaining(@RequestParam String lastName, @PageableDefault(page = 0, size = 10)Pageable pageable) {
+    public PagedModel<EntityModel<CustomerEntity>> allByLastNameContaining(@RequestParam String lastName, @PageableDefault Pageable pageable) {
         Page<CustomerEntity> customers = customerService.getAllByLastNameContaining(lastName, pageable);
         return pagedResourcesAssembler.toModel(customers, customerAssembler);
     }
