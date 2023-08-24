@@ -29,7 +29,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public PagedModel<EntityModel<ProductEntity>> all(@PageableDefault(page = 0, size = 10)Pageable pageable) {
+    public PagedModel<EntityModel<ProductEntity>> all(@PageableDefault Pageable pageable) {
         Page<ProductEntity> products = productService.findAll(pageable);
         return pagedResourcesAssembler.toModel(products, productAssembler);
     }
@@ -41,13 +41,13 @@ public class ProductController {
     }
 
     @GetMapping("/search/findAllByCategoryId")
-    public CollectionModel<EntityModel<ProductEntity>> allByCategoryId(@RequestParam Long id, @PageableDefault(page = 0, size = 10) Pageable pageable) {
+    public CollectionModel<EntityModel<ProductEntity>> allByCategoryId(@RequestParam Long id, @PageableDefault Pageable pageable) {
         Page<ProductEntity> products = productService.findAllByCategoryId(id, pageable);
         return pagedResourcesAssembler.toModel(products, productAssembler);
     }
 
-    @GetMapping("/search/findAllByNameContaining")
-    public CollectionModel<EntityModel<ProductEntity>> allByNameContaining(@RequestParam String name, @PageableDefault(page = 0, size = 10) Pageable pageable) {
+    @GetMapping("/search/findByNameContaining")
+    public CollectionModel<EntityModel<ProductEntity>> allByNameContaining(@RequestParam String name, @PageableDefault Pageable pageable) {
         Page<ProductEntity> products = productService.findByNameContaining(name, pageable);
         return pagedResourcesAssembler.toModel(products, productAssembler);
     }
