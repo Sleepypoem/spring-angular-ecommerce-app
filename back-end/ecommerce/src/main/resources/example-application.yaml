@@ -24,6 +24,13 @@ okta:
   oauth2:
     client-id: paste your okta client here
     issuer: paste your okta dev url here and add /oauth2/default
+  client:
+    connectionTimeout: 30 # seconds
+    orgUrl: paste your okta dev url # i.e. https://dev-123456.okta.com
+    token: paste your okta token
+    requestTimeout: 0 # seconds
+    rateLimit:
+      maxRetries: 4
 ## HTTPS CONFIGURATION ##
 server:
   port: 8081
@@ -33,3 +40,9 @@ server:
     key-store: classpath:sleepypoem-keystore.p12
     key-store-password: secret
     key-store-type: PKCS12
+## Image Server Configuration ##
+cloudinary:
+  api-key: paste your cloudinary api key
+  api:secret: paste your cloudinary api secret
+  cloud-name: paste your cloudinary cloud name
+  cloudinary-url: cloudinary://${cloudinary.api-key}:${cloudinary.api-secret}@${cloudinary.cloud-name}

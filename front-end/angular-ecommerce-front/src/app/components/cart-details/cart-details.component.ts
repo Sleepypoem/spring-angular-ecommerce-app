@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CartItem } from 'src/app/dtos/cartItem';
 import { CartService } from 'src/app/services/cart.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cart-details',
@@ -11,6 +12,7 @@ export class CartDetailsComponent {
   cartItems: CartItem[] = [];
   totalPrice: number = 0;
   totalQuantity: number = 0;
+  imageServerUrl: string = environment.imageServerUrl;
 
   constructor(private cartService: CartService) {}
 

@@ -1,6 +1,6 @@
 {
   "name": "angular-ecommerce-front",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --ssl=true --ssl-key=./ssl-localhost/localhost.key --ssl-cert=./ssl-localhost/localhost.crt --open",
@@ -23,7 +23,6 @@
     "@okta/okta-auth-js": "^7.3.0",
     "@okta/okta-signin-widget": "^7.8.1",
     "@popperjs/core": "^2.11.6",
-    "@types/node": "^20.3.3",
     "bootstrap": "^5.3.0",
     "country-state-city": "^3.1.4",
     "jquery": "^3.7.0",
@@ -38,6 +37,7 @@
     "@angular/compiler-cli": "^16.1.0",
     "@angular/localize": "^16.1.0",
     "@types/jasmine": "~4.3.0",
+    "@types/node": "^20.4.6",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -45,5 +45,10 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.1.3"
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
   }
 }

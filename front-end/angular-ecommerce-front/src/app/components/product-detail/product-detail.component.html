@@ -1,10 +1,10 @@
 <div class="main-content">
   <div class="section-content section-content-p30">
-    <div class="container-fluid ">
+    <div class="container-fluid " *ngIf="product">
       <div class="row">
 
         <div class="col-md-6 mx-auto">
-          <img src="{{product.image}}" class="img-responsive detail-img" alt="product image">
+          <img src="{{imageServerUrl + product.image}}" class="img-responsive detail-img" alt="product image">
 
           <h3>{{product.name}}</h3>
           <div class="price">${{product.price}}</div>
@@ -17,6 +17,9 @@
           <a routerLink="/products">Back to Product List</a>
         </div>
       </div>
+    </div>
+    <div *ngIf="!product">
+      <app-loading />
     </div>
   </div>
 </div>

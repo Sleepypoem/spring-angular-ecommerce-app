@@ -1,10 +1,11 @@
 package com.sleepypoem.ecommerce.domain.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sleepypoem.ecommerce.domain.entities.abstracts.EntityWithTimeStamps;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.hateoas.server.core.Relation;
 
 import java.math.BigDecimal;
 
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Table(name = "products")
+@Relation(collectionRelation = "products", itemRelation = "product")
 public class ProductEntity extends EntityWithTimeStamps {
 
     @Id
@@ -34,7 +36,9 @@ public class ProductEntity extends EntityWithTimeStamps {
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
-    @JsonIgnore
     private CategoryEntity category;
 
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String encodedImage;
 }

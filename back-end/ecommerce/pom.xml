@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.sleepypoem</groupId>
 	<artifactId>ecommerce</artifactId>
-	<version>0.0.5</version>
+	<version>0.0.6</version>
 	<name>ecommerce</name>
 	<description>The backend of an e-commerce app.</description>
 	<properties>
@@ -25,7 +25,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
@@ -36,18 +40,36 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.okta.spring</groupId>
-			<artifactId>okta-spring-boot-starter</artifactId>
-			<version>3.0.4</version>
-		</dependency>
 
-	</dependencies>
+		<!-- Image hosting server -->
+		<dependency>
+			<groupId>com.cloudinary</groupId>
+			<artifactId>cloudinary-http44</artifactId>
+			<version>1.33.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.cloudinary</groupId>
+			<artifactId>cloudinary-taglib</artifactId>
+			<version>1.32.2</version>
+		</dependency>
+		<!-- Okta Resource Server and Client-->
+		<dependency>
+			<groupId>com.okta.sdk</groupId>
+			<artifactId>okta-sdk-api</artifactId>
+			<version>13.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.okta.sdk</groupId>
+			<artifactId>okta-sdk-impl</artifactId>
+			<version>13.0.0</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+		<groupId>com.okta.spring</groupId>
+		<artifactId>okta-spring-boot-starter</artifactId>
+		<version>3.0.4</version>
+	</dependency>
+    </dependencies>
 	<build>
 		<plugins>
 			<plugin>
