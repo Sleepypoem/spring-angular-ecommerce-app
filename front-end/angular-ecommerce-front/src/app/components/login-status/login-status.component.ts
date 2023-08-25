@@ -55,7 +55,11 @@ export class LoginStatusComponent {
     this.myAuthService.logout();
   }
 
-  navigateToUrl(url: string) {
-    this.router.navigateByUrl(url);
+  navigateToUrl(url: string, reload: boolean = false) {
+    this.router.navigateByUrl(url).then(() => {
+      if (reload) {
+        window.location.reload();
+      }
+    });
   }
 }
