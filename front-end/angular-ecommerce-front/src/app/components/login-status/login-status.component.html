@@ -17,7 +17,7 @@
     </ul>
   </div>
   <div class="unauthenticated d-flex justify-content-evenly" *ngIf="!isAuthenticated">
-    <button routerLink="/login" class="btn">Login</button><button routerLink="/customer/signup" class="btn">Register</button>
+    <button (click)="navigateToUrl('/login', true)" class="btn">Login</button><button routerLink="/customer/signup" class="btn">Register</button>
   </div>
   <div>
 
