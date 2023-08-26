@@ -46,3 +46,7 @@ cloudinary:
   api:secret: paste your cloudinary api secret
   cloud-name: paste your cloudinary cloud name
   cloudinary-url: cloudinary://${cloudinary.api-key}:${cloudinary.api-secret}@${cloudinary.cloud-name}
+## Stripe config ##
+stripe:
+  public-key: paste your own stripe publishable key
+  secret-key: paste your own stripe secret key
