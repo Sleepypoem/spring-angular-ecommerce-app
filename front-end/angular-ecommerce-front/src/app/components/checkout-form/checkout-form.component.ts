@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -10,7 +11,8 @@ import { Purchase } from 'src/app/dtos/purchase';
 import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
 import { customerForm } from 'src/config/forms';
-
+import { PaymentInfo } from 'src/app/dtos/paymentInfo';
+declare var Stripe: any;
 @Component({
   selector: 'app-checkout-form',
   templateUrl: './checkout-form.component.html',
@@ -23,6 +25,10 @@ export class CheckoutFormComponent {
   sessionStorage: Storage = sessionStorage;
   totalPrice: number = 0.0;
   submitted: boolean = false;
+  stripe: any = Stripe(environment.stripePk, { locale: 'en' });
+  paymentInfo: PaymentInfo;
+  cardElement: any;
+  displayError: any = '';
 
   totalQuantity: number = 0;
 
@@ -39,6 +45,7 @@ export class CheckoutFormComponent {
 
   ngOnInit() {
     this.buildForm();
+    this.setupStripePaymentForm();
     this.updateCartReviewDetails();
   }
 
@@ -65,20 +72,78 @@ export class CheckoutFormComponent {
     }
   }
 
+  private setupStripePaymentForm() {
+    this.cardElement = this.stripe
+      .elements()
+      .create('card', { hidePostalCode: true });
+    this.cardElement.mount('#card-element');
+    this.cardElement.addEventListener('change', (event: any) => {
+      this.displayError = document.getElementById('card-errors');
+      if (event.complete) {
+        this.displayError.textContent = '';
+      } else {
+        this.displayError.textContent = event.error.message;
+      }
+    });
+  }
+
   public onSubmit() {
     if (this.loggedCustomer != null) {
-      this.formGroup.controls['customer'].disable();
+      this.formGroup.controls['customer']?.disable();
     }
     this.formGroup.updateValueAndValidity();
     if (this.formGroup.invalid) {
       this.markAllSubformsAsTouched(this.formGroup);
+      console.log(this.formGroup);
       return;
     }
     this.submitted = true;
+    this.paymentInfo = new PaymentInfo(
+      Math.round(this.totalPrice * 100),
+      'USD'
+    );
     let customer = this.customerFromForm;
     let order = this.prepareOrder();
     let purchase = new Purchase(customer, order);
+    this.checkoutService.createPaymentIntent(this.paymentInfo).subscribe({
+      next: (response) => {
+        this.stripe
+          .confirmCardPayment(
+            response.client_secret,
+            {
+              payment_method: {
+                card: this.cardElement,
+                billing_details: {
+                  email: customer.email,
+                  name: customer.firstName + ' ' + customer.lastName,
+                  address: {
+                    line1: purchase?.order?.billingAddress?.street,
+                    city: purchase?.order?.billingAddress?.city,
+                    state: purchase?.order?.billingAddress?.state,
+                    country: purchase?.order?.billingAddress?.country,
+                    postal_code: purchase?.order?.billingAddress?.zipCode,
+                  },
+                },
+              },
+            },
+            { handleActions: false }
+          )
+          .then((result: any) => {
+            if (result.error) {
+              alert('Payment failed: ' + result.error.message);
+            } else {
+              this.placeOrder(purchase);
+              console.log('Payment succeeded!');
+            }
+          });
+      },
+      error: (err) => {
+        alert('Error while placing order: ' + err.error.message);
+      },
+    });
+  }
 
+  public placeOrder(purchase: Purchase) {
     this.checkoutService.makeOrder(purchase).subscribe({
       next: (response) => {
         alert(
