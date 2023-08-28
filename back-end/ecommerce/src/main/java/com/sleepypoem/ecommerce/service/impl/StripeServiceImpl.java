@@ -6,11 +6,13 @@ import com.sleepypoem.ecommerce.service.interfaces.StripeService;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class StripeServiceImpl implements StripeService {
 
     private final StripeConfig stripeConfig;
