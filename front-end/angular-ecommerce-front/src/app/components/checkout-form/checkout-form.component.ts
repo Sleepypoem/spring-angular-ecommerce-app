@@ -122,7 +122,6 @@ export class CheckoutFormComponent {
                     state: purchase?.order?.billingAddress?.state,
                     country: purchase?.order?.billingAddress?.country,
                     postal_code: purchase?.order?.billingAddress?.zipCode,
-                    phone: customer.phone,
                   },
                 },
               },
