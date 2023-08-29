@@ -1,6 +1,6 @@
 {
   "name": "angular-ecommerce-front",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --ssl=true --ssl-key=./ssl-localhost/localhost.key --ssl-cert=./ssl-localhost/localhost.crt --open",
@@ -28,6 +28,7 @@
     "jquery": "^3.7.0",
     "popper.js": "^1.16.1",
     "rxjs": "~7.8.0",
+    "stripe": "^13.3.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },
