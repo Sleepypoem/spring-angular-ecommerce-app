@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CartItem } from 'src/app/dtos/cartItem';
 import { Product } from 'src/app/dtos/product';
 import { CartService } from 'src/app/services/cart.service';
@@ -18,6 +18,9 @@ export class ProductListComponent {
   pageSize: number = 5;
   totalRecords: number = 0;
   totalPages: number = 0;
+  public linksSize: number = 1;
+
+  public getScreenWidth: any;
 
   previousCategoryId: string = '';
   previousProductName: string = '';
@@ -30,9 +33,25 @@ export class ProductListComponent {
   ) {}
 
   ngOnInit(): void {
+    this.getScreenWidth = window.innerWidth;
+    this.changeLinksDependingOnScreenSize();
     this.route.paramMap.subscribe(() => {
       this.getProducts();
     });
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.getScreenWidth = window.innerWidth;
+    this.changeLinksDependingOnScreenSize();
+  }
+
+  public changeLinksDependingOnScreenSize() {
+    if (this.getScreenWidth < 768) {
+      this.linksSize = 1;
+    } else {
+      this.linksSize = 5;
+    }
   }
 
   setPageSize(pageSize: string): void {
