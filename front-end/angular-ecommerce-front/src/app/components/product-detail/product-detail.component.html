@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="product">
   <div class="product-details-card mx-auto">
     <div class="image">
       <a href="#"
@@ -7,12 +7,12 @@
     </div>
     <div class="product-details-content">
       <h3 class="product-name">{{ product.name }}</h3>
-      <p class="product-price">{{ product.name | currency : "USD" }}</p>
+      <p class="product-price">{{ product.price | currency : "USD" }}</p>
       <div class="product-description">
         {{ product.description }}
       </div>
       <div class="card-footer">
-        <button (click)="addToCart()" class="btn btn-primary">
+        <button (click)="addToCart(product)" class="btn btn-primary">
           Add to cart
         </button>
       </div>
@@ -50,19 +50,19 @@
       >
         <div #carouselItem class="product-mini-card" *ngFor="let item of items">
           <div class="image">
-            <a href="#"
+            <a routerLink="/products/{{ item.id }}"
               ><img
                 src="{{ imageServerUrl + item.image }}"
                 alt="Suggested product image"
             /></a>
           </div>
           <div class="mini-card-body text-truncate">
-            <a href="#"
+            <a routerLink="/products/{{ item.id }}"
               ><h3 class="product-name">{{ item.name }}</h3></a
             >
             <p class="product-price">${{ item.price }}</p>
             <button class="btn btn-success">
-              <i class="bi bi-cart4"></i> Add to cart
+              <i (click)="addToCart(item)" class="bi bi-cart4"></i> Add to cart
             </button>
           </div>
         </div>
@@ -80,3 +80,4 @@
     </div>
   </div>
 </div>
+<div *ngIf="!product"><app-loading /></div>

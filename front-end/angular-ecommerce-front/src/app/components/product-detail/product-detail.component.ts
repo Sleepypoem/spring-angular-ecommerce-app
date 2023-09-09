@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { CartItem } from 'src/app/dtos/cartItem';
 import { Product } from 'src/app/dtos/product';
 import { CartService } from 'src/app/services/cart.service';
@@ -29,8 +29,11 @@ export class ProductDetailComponent {
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
-    private cartService: CartService
-  ) {}
+    private cartService: CartService,
+    private router: Router
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
   ngOnInit() {
     this.productId = this.route.snapshot.paramMap.get('id')!;
@@ -131,14 +134,14 @@ export class ProductDetailComponent {
     this.productService.getProductById(id).subscribe((product) => {
       this.product = product;
       this.productService
-        .getProductsByCategoryPaginated(product.categoryId + '', 0, 20)
+        .getProductsByCategoryPaginated(product.categoryId + '', 0, 10)
         .subscribe((data) => {
           this.items = data._embedded.products;
         });
     });
   }
 
-  addToCart() {
-    this.cartService.addToCart(new CartItem(this.product, 1));
+  addToCart(product: Product) {
+    this.cartService.addToCart(new CartItem(product, 1));
   }
 }
