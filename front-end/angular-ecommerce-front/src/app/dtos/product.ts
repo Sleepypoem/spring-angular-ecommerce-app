@@ -5,6 +5,7 @@ export class Product {
   description?: string;
   image?: string;
   stock?: number = 0;
+  categoryId?: number;
   constructor() {}
 
   public withId(id: number): Product {
