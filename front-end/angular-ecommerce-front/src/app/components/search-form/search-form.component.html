@@ -1,7 +1,26 @@
-<form class="form-header" onsubmit="return false;" method="GET">
-  <input #searchBar class="au-input au-input-xl" type="text" name="search"
-    placeholder="Search for products..." (keyup.enter)="doSearch(searchBar.value)" />
-  <button (click)="doSearch(searchBar.value)" class="au-btn-submit" type="submit">
-    Search
-  </button>
-</form>
+<div class="search">
+  <span class="icon">
+    <i
+      (click)="toggleSearching()"
+      [ngClass]="['bi', 'bi-search', searching ? 'hide' : '']"
+    >
+    </i>
+  </span>
+  <span class="icon">
+    <i
+      (click)="toggleSearching()"
+      [ngClass]="['bi', 'bi-x-lg', searching ? '' : 'hide']"
+    >
+    </i>
+  </span>
+</div>
+<div [ngClass]="['search-box', searching ? 'active' : '']">
+  <input
+    #searchBar
+    type="text"
+    name="search"
+    class="search-input"
+    placeholder="Search here . . ."
+    (keyup.enter)="doSearch(searchBar.value)"
+  />
+</div>
