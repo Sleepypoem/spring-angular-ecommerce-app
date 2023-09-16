@@ -50,11 +50,14 @@
 }
 
 .icon .bi-search {
-    left: 15px;
+  position: relative;
+  left: 14px;
 }
 
 .icon .bi-x-lg {
     display: block;
+    position: relative;
+    left: 12px;
 }
 
 .icon .bi-search, .icon .bi-x-lg, .icon .bi-list {
@@ -66,4 +69,17 @@
     visibility: hidden;
     width: 0;
     height: 0;
+}
+
+@media (max-width: 950px) {
+  .icon .bi-search {
+      position: relative;
+      left: 23px;
+    }
+
+    .icon .bi-x-lg {
+          display: block;
+          position: relative;
+          left: 21px;
+    }
 }
