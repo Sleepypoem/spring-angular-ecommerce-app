@@ -1,4 +1,4 @@
-<div class="main-container">
+<div class="main-container" *ngIf="products">
   <div class="pagination-container">
     <div class="pagination-links-container">
       <ngb-pagination
@@ -9,7 +9,7 @@
         [collectionSize]="totalRecords"
         (pageChange)="getProducts()"
       ></ngb-pagination>
-      <pre><span class="float-md-left">Page: {{ page }} / {{ totalRecords / pageSize }}</span></pre>
+      <pre><span class="float-md-left">Page: {{ page }} / {{ roundNumber(totalRecords / pageSize) }}</span></pre>
     </div>
     <div class="page-size-selector">
       <select
@@ -49,4 +49,7 @@
       </div>
     </div>
   </div>
+</div>
+<div *ngIf="!products">
+  <app-loading />
 </div>
