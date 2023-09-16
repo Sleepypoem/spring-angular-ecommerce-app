@@ -9,7 +9,9 @@ import { Component } from '@angular/core';
 export class SearchFormComponent {
   public searching: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    router.events.subscribe((val) => (this.searching = false));
+  }
 
   ngOnInit(): void {}
 
