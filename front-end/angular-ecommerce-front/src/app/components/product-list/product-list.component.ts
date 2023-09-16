@@ -156,4 +156,8 @@ export class ProductListComponent {
     }
     return false;
   }
+
+  public roundNumber(num: number): number {
+    return Math.ceil(num);
+  }
 }
