@@ -2,7 +2,7 @@
   <div class="section-content section-content-p30">
     <h3 class="text-center mb-4">Your Orders</h3>
     <div *ngIf="orders.length > 0">
-      <div class="table-responsive-md w-50 mx-auto mt-5">
+      <div class="table-responsive-md mx-auto p-4 mt-5">
         <table class="table table-primary">
           <thead>
             <tr>
@@ -15,18 +15,21 @@
           </thead>
           <tbody>
             <tr *ngFor="let order of orders">
-              <td>{{order.status}}</td>
-              <td>{{order.orderTrackingNumber}}</td>
-              <td>{{order.totalPrice | currency: "USD"}}</td>
-              <td>{{order.totalQuantity}}</td>
-              <td>{{order.createdAt | date: 'medium'}}</td>
+              <td>{{ order.status }}</td>
+              <td>{{ order.orderTrackingNumber }}</td>
+              <td>{{ order.totalPrice | currency : "USD" }}</td>
+              <td>{{ order.totalQuantity }}</td>
+              <td>{{ order.createdAt | date : "medium" }}</td>
             </tr>
           </tbody>
         </table>
       </div>
-
     </div>
-    <div *ngIf="orders.length == 0" class="alert alert-warning text-center display-4 p-4 col-md-6 mx-auto" role="alert">
+    <div
+      *ngIf="orders.length == 0"
+      class="alert alert-warning text-center display-4 p-4 col-md-6 mx-auto"
+      role="alert"
+    >
       You don't have pending orders.
     </div>
   </div>
