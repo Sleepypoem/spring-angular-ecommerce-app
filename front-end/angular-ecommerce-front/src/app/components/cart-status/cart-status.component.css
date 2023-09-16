@@ -39,26 +39,25 @@
   width: 20px;
   height: 40px;
   transition: all .7s cubic-bezier(0.55, 0.055, 0.675, 0.19);
-  color: #ffffff00;
+  color: #ffffff;
 }
 
 .pill-container:hover i,
-.pill-container:hover p {
+.pill-container:hover p, .open > .pill-right i, .open > .pill-left p {
   display: block;
-
 }
 
-.pill-container:hover, .pill-container .open {
+.pill-container:hover, .open {
   transform: rotate(0);
   transition: all .3s ease;
 }
 
-.pill-container:hover p {
+.pill-container:hover p, .open > .pill-left p {
   color: #1d1d1d;
   transform: translateX(0);
 }
 
-.pill-container:hover i {
+.pill-container:hover i, .open > .pill-right i {
   transform: translateX(18px);
 }
 
@@ -80,8 +79,8 @@
   transition: all 1s linear;
 }
 
-.pill-container:hover .pill-left,
-.pill-container:hover .pill-right, .pill-container .open .pill-left, .pill-container .open .pill-right {
+.pill-container:hover .pill-left, .open .pill-left,
+.pill-container:hover .pill-right, .open .pill-right {
   color: #fff;
   width: 75px;
 }

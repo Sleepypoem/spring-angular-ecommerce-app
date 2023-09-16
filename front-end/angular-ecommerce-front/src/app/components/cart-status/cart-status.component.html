@@ -1,4 +1,4 @@
-<div class="pill-container">
+<div [ngClass]="['pill-container', open ? 'open' : '']">
   <div class="pill-left">
     <p>{{ totalPrice | currency : "USD" }}</p>
   </div>
