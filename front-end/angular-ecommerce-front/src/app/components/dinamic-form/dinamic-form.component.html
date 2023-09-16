@@ -1,8 +1,12 @@
 <div class="form-area" [formGroup]="parentForm != null ? parentForm : form">
-  <div *ngIf="title != null" class="text-center" formGroupName="{{formGroupName}}">
-    <h3>{{title}}</h3>
+  <div *ngIf="title != null" formGroupName="{{ formGroupName }}">
+    <h3>{{ title }}</h3>
   </div>
   <div *ngFor="let field of fields">
-    <app-field [field]="field" [form]="form!" [formName]="formGroupName"></app-field>
+    <app-field
+      [field]="field"
+      [form]="form!"
+      [formName]="formGroupName"
+    ></app-field>
   </div>
 </div>
