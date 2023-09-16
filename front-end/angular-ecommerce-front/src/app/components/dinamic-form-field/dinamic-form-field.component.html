@@ -2,57 +2,96 @@
   <div class="row">
     <div [formGroup]="form">
       <div [ngSwitch]="field.controlType">
-        <div class="d-flex mr-auto p-2" *ngSwitchCase="'text'">
-          <div class="col-md-2"><label>{{field.label}}</label></div>
-          <div class="col-md-9 input-space">
+        <div class="input-container" *ngSwitchCase="'text'">
+          <div class="input-label">
+            <label>{{ field.label }}</label>
+          </div>
+          <div class="input-space">
             <div>
-              <input [ngClass]="[
-                    'form-control',isInvalid && (isTouched && isDirty)
-                      ? 'is-invalid'
-                      : 'is-valid'
-                  ]" [formControlName]="field.key" [id]="field.key" type="text" placeholder="{{field.placeholder}}">
-              <div class="invalid-feedback position-relative" [validationMessages]="field.customVaLidationMessages" invalidmessage [fieldName]="field.key">
-
-              </div>
+              <input
+                [ngClass]="[
+                  'form-control',
+                  isInvalid && isTouched && isDirty ? 'is-invalid' : 'is-valid'
+                ]"
+                [formControlName]="field.key"
+                [id]="field.key"
+                type="text"
+                placeholder="{{ field.placeholder }}"
+              />
+              <div
+                class="invalid-feedback position-relative"
+                [validationMessages]="field.customVaLidationMessages"
+                invalidmessage
+                [fieldName]="field.key"
+              ></div>
             </div>
           </div>
         </div>
 
-        <div class="d-flex mr-auto p-2" *ngSwitchCase="'number'">
-          <div class="col-md-2"><label>{{field.label}}</label></div>
-          <div class="col-md-9 input-space">
+        <div class="input-container" *ngSwitchCase="'number'">
+          <div class="input-label">
+            <label>{{ field.label }}</label>
+          </div>
+          <div class="input-space">
             <div>
-              <input class="form-control" [formControlName]="field.key" [id]="field.key" type="number" max="{{field.maxValue}}" min="{{field.minValue}}">
-              <div class="invalid-feedback position-relative" invalidmessage [fieldName]="field.key">
-
-              </div>
+              <input
+                class="form-control"
+                [formControlName]="field.key"
+                [id]="field.key"
+                type="number"
+                max="{{ field.maxValue }}"
+                min="{{ field.minValue }}"
+              />
+              <div
+                class="invalid-feedback position-relative"
+                invalidmessage
+                [fieldName]="field.key"
+              ></div>
             </div>
           </div>
         </div>
 
-        <div class="d-flex mr-auto p-2" *ngSwitchCase="'password'">
-          <div class="col-md-2"><label>{{field.label}}</label></div>
-          <div class="col-md-9 input-space">
+        <div class="input-container" *ngSwitchCase="'password'">
+          <div class="input-label">
+            <label>{{ field.label }}</label>
+          </div>
+          <div class="input-space">
             <div>
-              <input [ngClass]="[
-                    'form-control',isInvalid && (isTouched && isDirty)
-                      ? 'is-invalid'
-                      : 'is-valid'
-                  ]" [formControlName]="field.key" [id]="field.key" type="password" placeholder="{{field.placeholder}}">
-              <div class="invalid-feedback position-relative" [validationMessages]="field.customVaLidationMessages" invalidmessage [fieldName]="field.key">
-
-              </div>
+              <input
+                [ngClass]="[
+                  'form-control',
+                  isInvalid && isTouched && isDirty ? 'is-invalid' : 'is-valid'
+                ]"
+                [formControlName]="field.key"
+                [id]="field.key"
+                type="password"
+                placeholder="{{ field.placeholder }}"
+              />
+              <div
+                class="invalid-feedback position-relative"
+                [validationMessages]="field.customVaLidationMessages"
+                invalidmessage
+                [fieldName]="field.key"
+              ></div>
             </div>
           </div>
         </div>
 
-        <div class="d-flex mr-auto p-2" *ngSwitchCase="'dropdown'">
-          <div class="col-md-2"><label>{{field.label}}</label></div>
-          <div class="col-md-9 input-space">
+        <div class="input-container" *ngSwitchCase="'dropdown'">
+          <div class="input-label">
+            <label>{{ field.label }}</label>
+          </div>
+          <div class="input-space">
             <div>
-
-              <select class="form-control" [id]="field.key" [formControlName]="field.key" title="Enter {{field.key}}">
-                <option *ngFor="let opt of field.options" [value]="opt.key">{{opt.value}}</option>
+              <select
+                class="form-control"
+                [id]="field.key"
+                [formControlName]="field.key"
+                title="Enter {{ field.key }}"
+              >
+                <option *ngFor="let opt of field.options" [value]="opt.key">
+                  {{ opt.value }}
+                </option>
               </select>
             </div>
           </div>
