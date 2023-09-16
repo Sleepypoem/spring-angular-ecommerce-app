@@ -1,3 +1,8 @@
-<div [formGroup]="formGroup">
-  <app-dinamic-form [fields]="billingAddress" [title]="'Billing Address'" [parentForm]="formGroup" [formGroupName]="'billingAddress'"></app-dinamic-form>
+<div [formGroup]="parentForm">
+  <app-dinamic-form
+    [fields]="billingAddress"
+    [title]="'Billing Address'"
+    [parentForm]="parentForm"
+    [formGroupName]="'billingAddress'"
+  ></app-dinamic-form>
 </div>

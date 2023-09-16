@@ -10,7 +10,7 @@ import { addressForm } from 'src/config/forms';
   styleUrls: ['./../forms-shared-css/forms.css'],
 })
 export class AddressFormComponent {
-  @Input() formGroup: FormGroup;
+  @Input() parentForm: FormGroup;
   address: any = addressForm;
 
   constructor(private addressService: AddressService) {}
@@ -21,7 +21,7 @@ export class AddressFormComponent {
       return { key: state.name, value: state.name };
     });
     this.address[1].options = stateList;
-    this.formGroup.get('address')?.get('state')?.setValue(states[0].name);
+    this.parentForm.get('address')?.get('state')?.setValue(states[0].name);
   }
 
   populateCountryOptions() {
@@ -37,9 +37,9 @@ export class AddressFormComponent {
   }
 
   subscribeToCountryFields() {
-    this.formGroup.valueChanges.subscribe((value) => {
+    this.parentForm.valueChanges.subscribe((value) => {
       if (value?.address != null) {
-        this.formGroup
+        this.parentForm
           .get('address')
           ?.get('country')
           ?.valueChanges.subscribe((value) => this.populateStateOptions(value));

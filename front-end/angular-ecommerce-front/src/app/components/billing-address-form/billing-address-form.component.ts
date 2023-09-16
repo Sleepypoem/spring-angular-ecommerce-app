@@ -10,7 +10,7 @@ import { addressForm, billingAddressForm } from 'src/config/forms';
   styleUrls: ['./../forms-shared-css/forms.css'],
 })
 export class BillingAddressFormComponent {
-  @Input() formGroup: FormGroup;
+  @Input() parentForm: FormGroup;
   billingAddress: any = billingAddressForm;
 
   constructor(private addressService: AddressService) {}
@@ -27,7 +27,7 @@ export class BillingAddressFormComponent {
       return { key: state.name, value: state.name };
     });
     this.billingAddress[1].options = stateList;
-    this.formGroup
+    this.parentForm
       .get('billingAddress')
       ?.get('state')
       ?.setValue(states[0].name);
@@ -46,9 +46,9 @@ export class BillingAddressFormComponent {
   }
 
   subscribeToCountryFields() {
-    this.formGroup.valueChanges.subscribe((value) => {
+    this.parentForm.valueChanges.subscribe((value) => {
       if (value?.billingAddress != null) {
-        this.formGroup
+        this.parentForm
           .get('billingAddress')
           ?.get('country')
           ?.valueChanges.subscribe((value) => this.populateStateOptions(value));

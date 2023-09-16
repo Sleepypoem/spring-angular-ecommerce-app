@@ -1,3 +1,8 @@
-<div [formGroup]="formGroup">
-  <app-dinamic-form [fields]="address" [title]="'Address'" [parentForm]="formGroup" [formGroupName]="'address'"></app-dinamic-form>
+<div [formGroup]="parentForm">
+  <app-dinamic-form
+    [fields]="address"
+    [title]="'Address'"
+    [parentForm]="parentForm"
+    [formGroupName]="'address'"
+  ></app-dinamic-form>
 </div>
