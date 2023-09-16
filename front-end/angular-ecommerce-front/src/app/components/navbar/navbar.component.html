@@ -11,15 +11,16 @@
     <ul [ngClass]="['navigation', showMenu ? 'open' : '']">
       <li><a routerLink="/">Home</a></li>
       <li><a routerLink="/products">Products</a></li>
-      <li><a href="">Cart</a></li>
-      <li><a href="">About</a></li>
+      <li><a routerLink="/cart">Cart</a></li>
     </ul>
   </div>
   <app-cart-status />
   <div class="search">
-    <span class="menu-toggle"
-      ><i (click)="toggleMenu()" class="bi bi-list"></i
+    <span (click)="toggleMenu()" class="menu-toggle"
+      ><i class="bi bi-list"></i
     ></span>
     <app-search-form />
   </div>
+
+  <app-login-status />
 </header>

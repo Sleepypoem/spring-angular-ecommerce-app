@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -12,5 +13,9 @@ export class NavbarComponent {
 
   public toggleMenu(): void {
     this.showMenu = !this.showMenu;
+  }
+
+  constructor(private router: Router) {
+    router.events.subscribe((val) => (this.showMenu = false));
   }
 }
