@@ -1,117 +1,153 @@
-.container-fluid {
-  padding-right: 0!important;
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*{
+  --main-bg: #687478;
 }
 
-.header-desktop{
-    background:#ff571e;
-    -webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
-    -moz-box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
-    box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
-    position:fixed;
-    top:0;
-    right:0;
-    left:200px;
-    height:75px;
-    z-index:999
+header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 120px;
+    background-color: var(--main-bg);
+    padding: 20px 40px;
+    overflow-x: clip;
+    z-index: 10;
 }
 
-.header-desktop .section-content{
-    overflow:visible;
-    position:absolute;
-    top:50%;
-    left:0;
-    right:0;
-    -webkit-transform:translateY(-50%);
-    -moz-transform:translateY(-50%);
-    -ms-transform:translateY(-50%);
-    -o-transform:translateY(-50%);
-    transform:translateY(-50%)
+.logo {
+  display: block;
+  margin-left: -20px;
+  width: 300px;
 }
 
-.header-wrap{
-    display:-webkit-box;
-    display:-webkit-flex;
-    display:-moz-box;
-    display:-ms-flexbox;
-    display:flex;
-    -webkit-box-align:center;
-    -webkit-align-items:center;
-    -moz-box-align:center;
-    -ms-flex-align:center;
-    align-items:center;
-    -webkit-box-pack:justify;
-    -webkit-justify-content:space-between;
-    -moz-box-pack:justify;
-    -ms-flex-pack:justify;
-    justify-content:space-between
+.logo img {
+  width: 100%;
 }
 
-.header-button{
-    display:-webkit-box;
-    display:-webkit-flex;
-    display:-moz-box;
-    display:-ms-flexbox;
-    display:flex;
-    -webkit-box-align:center;
-    -webkit-align-items:center;
-    -moz-box-align:center;
-    -ms-flex-align:center;
-    align-items:center
+.group {
+    display: flex;
+    align-items: center;
 }
 
-.number{
-    padding:6px 0
+.navigation {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 80px;
 }
 
-.arrows i{
-    font-size:30px;
-    padding:4px 4px
+.navigation li {
+    list-style: none;
+    margin-top: 20px;
 }
 
-section{
-    position:relative
+.navigation li a {
+  font-family: 'Poppins', 'sans-serif';
+    text-decoration: none;
+    position: relative;
+    font-size: 1em;
+    font-weight: 800;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
 }
 
-.section-content{
-    position:relative;
-    margin:0 auto;
-    z-index:1
+.navigation li a::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    transform: scale(0);
+    transition: transform .5s ease-in-out;
+    transform-origin: right;
 }
 
-.section-content-p30{
-    padding:0 30px
+.navigation li a:hover::before {
+    transform: scale(1);
+    transform-origin: left;
 }
 
-.cart-area.d-n{
-    display:block
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.5em;
 }
 
-.cart-area i{
-    font-size:22px;
-    float:left;
-    margin-top:16px;
-    color:#fff;
-    margin-left:15px
+.hide {
+    transform: scale(0);
+    opacity: 0;
+    visibility: hidden;
 }
 
-.total{
-    background:#000;
-    line-height:43px;
-    color:#fff;
-    border-radius:30px;
-    border:1px solid #0da8e4;
-    float:left;
-    margin-top:7px;
-    padding-left:17px
+.menu-toggle {
+    display: none;
 }
 
-.total span{
-    display:inline-block;
-    background:#fff;
-    padding:0 13px;
-    color:#000;
-    border-top-right-radius:20px;
-    border-bottom-right-radius:20px;
-    margin-left:11px
-}
+@media (max-width: 950px) {
 
+    .icon .bi-search {
+        left: -10;
+    }
+
+    .logo {
+      margin-left: -50px;
+      padding: 20px;
+      width: 250px;
+    }
+
+    .logo img{
+
+      width: 100%;
+    }
+
+    .menu-toggle {
+        transform: translateX(-30px);
+        position: absolute;
+        display: block;
+        font-size: 1.5em;
+        cursor: pointer;
+        color: #fff;
+    }
+
+    .menu-toggle .bi-list {
+        transition: all 0.5s .3s ease-in-out;
+    }
+
+    .navigation {
+        position: absolute;
+        transform: translateX(-200%);
+        display: flex;
+        left: 0;
+        flex-direction: column;
+        transition: all 1s;
+        margin-top: 20px;
+        width: 100%;
+        height: 80vh;
+        top: 100px;
+        padding: 40px;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        z-index: 1;
+        background: #fff;
+    }
+
+    .navigation.open {
+        visibility: visible;
+        transform: translate(0);
+        transition: all 0.5s;
+    }
+
+    .navigation.open li a {
+        font-size: 1.25rem;
+        color: black;
+    }
+
+}

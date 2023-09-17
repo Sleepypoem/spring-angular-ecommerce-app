@@ -6,43 +6,12 @@
     padding:50px 20px;
     border:3px solid #ccc
 }
-.form-area h3{
-    position:absolute;
-    top:-26px;
-    /* left:auto; */
-    background:#e5e5e5;
-    padding: 10px 15px;
-    font-weight:500;
-    z-index:23;
-    display:inline-block
-}
-.input-space{
-    margin-bottom:20px
-}
-.input-space label{
-    padding-left:31px;
-    font-size:14px;
-    margin-bottom:50px
-}
-.input-space input[type=text]{
-    width:100%;
-    height:40px;
-    border-radius:30px;
-    outline:0;
-    padding:10px;
-    border:1px solid #ccc
-}
-
-.input-space input[type=number]{
-    width:100%;
-    height:40px;
-    border-radius:30px;
-    outline:0;
-    padding:10px;
-    border:1px solid #ccc
-}
 
 /* CheckBox https://codepen.io/alvarotrigo */
+
+.item {
+  margin-bottom: 25px;
+}
 
 .checkbox-rect input[type="checkbox"] {
   display: none;
@@ -92,20 +61,3 @@
   background: #0071bd;
   box-shadow: 0 0 0 1px #000;
 }
-
-/* Checkbox */
-
-label.date{
-    padding-top:8px
-}
-option:first{
-    color:#ccc
-}
-select{
-    color:#828482
-}
-
-.hidden {
-  display: none;
-}
-

@@ -89,3 +89,7 @@ table.table.table-bordered th{
   -webkit-text-stroke: .3px;
   font-size: 22px;
 }
+
+.table-container {
+  overflow-x: auto;
+}

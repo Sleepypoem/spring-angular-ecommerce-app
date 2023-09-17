@@ -2,33 +2,53 @@
   <div class="section-content section-content-p30 e-spc">
     <div class="container-fluid">
       <div>
-        <form class="col-md-9 mx-auto mt-4" (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+        <form
+          class="col-md-9 mx-auto mt-4"
+          (ngSubmit)="onSubmit()"
+          [formGroup]="formGroup"
+        >
           <div *ngIf="loggedCustomer == null">
-            <app-dinamic-form [fields]="customer" [title]="'Customer'" [parentForm]="formGroup" [formGroupName]="'customer'"></app-dinamic-form>
+            <app-dinamic-form
+              [fields]="customerForm"
+              [title]="'Customer'"
+              [parentForm]="formGroup"
+              [formGroupName]="'customer'"
+            ></app-dinamic-form>
           </div>
-          <app-address-form [formGroup]="formGroup"></app-address-form>
+          <app-address-form [parentForm]="formGroup"></app-address-form>
+
           <!-- is billing address same as address? -->
           <div class="item input-space">
             <div class="checkbox-rect">
-              <input (change)="copyAddressToBillingAddress($event)" type="checkbox" id="checkbox-rect1" name="check" />
-              <label for="checkbox-rect1">Is billing address same as address?</label>
+              <input
+                (change)="copyAddressToBillingAddress($event)"
+                type="checkbox"
+                id="checkbox-rect1"
+                name="check"
+              />
+              <label for="checkbox-rect1"
+                >Is billing address same as address?</label
+              >
             </div>
           </div>
-          <app-billing-address-form [formGroup]="formGroup"></app-billing-address-form>
+          <app-billing-address-form
+            [parentForm]="formGroup"
+          ></app-billing-address-form>
           <app-credit-card-form></app-credit-card-form>
           <!-- Order review area -->
           <div class="form-area">
             <div class="text-center">
               <h3>Review your order</h3>
             </div>
-            <b>Total Quantity: {{totalQuantity}}</b>
+            <b>Total Quantity: {{ totalQuantity }}</b>
             <h4>Shipping: FREE</h4>
-            <B>Total Price: {{totalPrice | currency: 'USD'}}</B>
+            <B>Total Price: {{ totalPrice | currency : "USD" }}</B>
           </div>
-          <div class="form-row btn btn-info">
-            <button type="submit" [disabled]="submitted">Place order</button>
+          <div class="form-row">
+            <button class="btn btn-info" type="submit" [disabled]="submitted">
+              Place order
+            </button>
           </div>
-
         </form>
       </div>
     </div>
