@@ -65,10 +65,49 @@ CREATE TABLE IF NOT EXISTS
         `last_name` varchar(255) DEFAULT NULL,
         `email` varchar(255) DEFAULT NULL,
         `phone` varchar(255) DEFAULT NULL,
+        `active` bit DEFAULT 1,
+        `role_id` bigint DEFAULT NULL,
         `image` varchar(255) DEFAULT NULL,
         `created_at` datetime(6) DEFAULT NULL,
         `updated_at` datetime(6) DEFAULT NULL,
         PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+
+-- -----------------------------------------------------
+-- Table `ecommerce`.`roles`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS
+    `ecommerce`.`roles` (
+        `id` bigint NOT NULL AUTO_INCREMENT,
+        `name` varchar(255) DEFAULT NULL,
+        `description` varchar(500) DEFAULT NULL,
+        `created_at` datetime(6) DEFAULT NULL,
+        `updated_at` datetime(6) DEFAULT NULL,
+        PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+
+-- -----------------------------------------------------
+-- Table `ecommerce`.`permissions`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS
+    `ecommerce`.`permissions` (
+        `id` bigint NOT NULL AUTO_INCREMENT,
+        `name` varchar(255) DEFAULT NULL,
+        `description` varchar(500) DEFAULT NULL,
+        `created_at` datetime(6) DEFAULT NULL,
+        `updated_at` datetime(6) DEFAULT NULL,
+        PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+
+-- -----------------------------------------------------
+-- Table `ecommerce`.`permissions_roles`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS
+    `ecommerce`.`permissions_roles` (
+        `role_id` bigint NOT NULL,
+        `permission_id` bigint NOT NULL,
+        CONSTRAINT `FK_role_id` FOREIGN KEY (`role_id`) REFERENCES `roles`(`id`),
+        CONSTRAINT `FK_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `permissions`(`id`)
     ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 -- -----------------------------------------------------
