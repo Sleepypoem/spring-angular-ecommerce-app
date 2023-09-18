@@ -36,6 +36,10 @@ public class CustomerEntity extends EntityWithTimeStamps {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<OrderEntity> orders = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
+    private RoleEntity role;
+
     @Transient
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String encodedImage;
