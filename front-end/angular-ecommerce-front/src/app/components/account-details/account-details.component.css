@@ -52,3 +52,16 @@ img {
   width: 150px;
   height: 150px;
 }
+
+.button-container {
+  display: flex;
+  padding: 10px;
+  gap: 3px;
+}
+
+@media (max-width: 458px) {
+  .button-container button {
+    padding: 0!important;
+    font-size: .9rem;
+  }
+}

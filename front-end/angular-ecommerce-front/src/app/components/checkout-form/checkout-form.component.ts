@@ -1,6 +1,6 @@
 import { environment } from 'src/environments/environment';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Address } from 'src/app/dtos/address';
@@ -19,9 +19,11 @@ declare var Stripe: any;
   styleUrls: ['./checkout-form.component.css'],
 })
 export class CheckoutFormComponent {
+  @ViewChild('progressBarFill') progressBar: ElementRef;
+
   formGroup: FormGroup;
   loggedCustomer: Customer;
-  customer: any = customerForm;
+  customerForm = customerForm;
   sessionStorage: Storage = sessionStorage;
   totalPrice: number = 0.0;
   submitted: boolean = false;
@@ -92,11 +94,13 @@ export class CheckoutFormComponent {
       this.formGroup.controls['customer']?.disable();
     }
     this.formGroup.updateValueAndValidity();
+
     if (this.formGroup.invalid) {
       this.markAllSubformsAsTouched(this.formGroup);
       console.log(this.formGroup);
       return;
     }
+
     this.submitted = true;
     this.paymentInfo = new PaymentInfo(
       Math.round(this.totalPrice * 100),
@@ -105,6 +109,10 @@ export class CheckoutFormComponent {
     let customer = this.customerFromForm;
     let order = this.prepareOrder();
     let purchase = new Purchase(customer, order);
+    this.createAndProccessPaymentIntent(purchase);
+  }
+
+  private createAndProccessPaymentIntent(purchase: Purchase) {
     this.checkoutService.createPaymentIntent(this.paymentInfo).subscribe({
       next: (response) => {
         this.stripe
@@ -113,23 +121,14 @@ export class CheckoutFormComponent {
             {
               payment_method: {
                 card: this.cardElement,
-                billing_details: {
-                  email: customer.email,
-                  name: customer.firstName + ' ' + customer.lastName,
-                  address: {
-                    line1: purchase?.order?.billingAddress?.street,
-                    city: purchase?.order?.billingAddress?.city,
-                    state: purchase?.order?.billingAddress?.state,
-                    country: purchase?.order?.billingAddress?.country,
-                    postal_code: purchase?.order?.billingAddress?.zipCode,
-                  },
-                },
+                billing_details: this.getStripeCustomerDetails(purchase),
               },
             },
             { handleActions: false }
           )
           .then((result: any) => {
             if (result.error) {
+              this.submitted = false;
               alert('Payment failed: ' + result.error.message);
             } else {
               this.placeOrder(purchase);
@@ -156,6 +155,20 @@ export class CheckoutFormComponent {
         alert('Error while placing order: ' + err.error.message);
       },
     });
+  }
+
+  private getStripeCustomerDetails(purchase: Purchase): any {
+    return {
+      email: purchase.customer.email,
+      name: purchase.customer.firstName + ' ' + purchase.customer.lastName,
+      address: {
+        line1: purchase?.order?.billingAddress?.street,
+        city: purchase?.order?.billingAddress?.city,
+        state: purchase?.order?.billingAddress?.state,
+        country: purchase?.order?.billingAddress?.country,
+        postal_code: purchase?.order?.billingAddress?.zipCode,
+      },
+    };
   }
 
   public cleanCart() {

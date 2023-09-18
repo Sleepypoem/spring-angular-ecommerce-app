@@ -1,12 +1,26 @@
-<header class="header-desktop">
-  <div class="section-content">
-    <div class="container-fluid">
-      <div class="header-wrap">
-        <app-search-form></app-search-form>
-        <app-cart-status></app-cart-status>
-        <app-login-status></app-login-status>
-      </div>
-      <div class="account-wrap"></div>
-    </div>
+<header>
+  <a routerLink="/" class="logo">
+    <img
+      src="{{
+        imageServerUrl
+      }}spring-angular-ecommerce/assets/images/uhddetqjlv134ggotyhl"
+      alt="ecommerce-logo"
+    />
+  </a>
+  <div class="group">
+    <ul [ngClass]="['navigation', showMenu ? 'open' : '']">
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/products">Products</a></li>
+      <li><a routerLink="/cart">Cart</a></li>
+    </ul>
   </div>
+  <app-cart-status />
+  <div class="search">
+    <span (click)="toggleMenu()" class="menu-toggle"
+      ><i class="bi bi-list"></i
+    ></span>
+    <app-search-form />
+  </div>
+
+  <app-login-status />
 </header>

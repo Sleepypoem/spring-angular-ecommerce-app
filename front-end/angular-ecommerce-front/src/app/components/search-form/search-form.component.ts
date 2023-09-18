@@ -7,11 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./search-form.component.css'],
 })
 export class SearchFormComponent {
-  constructor(private router: Router) {}
+  public searching: boolean = false;
+
+  constructor(private router: Router) {
+    router.events.subscribe((val) => (this.searching = false));
+  }
 
   ngOnInit(): void {}
 
   doSearch(name: string) {
     this.router.navigate(['/search', name]);
+  }
+
+  public toggleSearching(): void {
+    this.searching = !this.searching;
   }
 }

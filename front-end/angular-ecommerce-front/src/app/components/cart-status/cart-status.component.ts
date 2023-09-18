@@ -11,6 +11,8 @@ export class CartStatusComponent {
 
   totalQuantity: number = 0;
 
+  public open: boolean = false;
+
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
@@ -22,5 +24,17 @@ export class CartStatusComponent {
     this.cartService.totalQuantity.subscribe(
       (value) => (this.totalQuantity = value)
     );
+    this.cartService.totalPrice.subscribe({
+      next: (data) => {
+        this.showCart();
+      },
+    });
+  }
+
+  public showCart() {
+    this.open = true;
+    setTimeout(() => {
+      this.open = false;
+    }, 1500);
   }
 }

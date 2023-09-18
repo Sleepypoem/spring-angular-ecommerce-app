@@ -1,6 +1,6 @@
 import { OktaAuth } from '@okta/okta-auth-js';
 import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
-import { Component, Inject } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { Customer } from 'src/app/dtos/customer';
 import { NavigationEnd, Router } from '@angular/router';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -17,6 +17,7 @@ export class LoginStatusComponent {
   sessionStorage: Storage = sessionStorage;
   customer: Customer;
   imageServerUrl = environment.imageServerUrl;
+  userMenuOpen: boolean = false;
 
   constructor(
     private authService: OktaAuthStateService,
@@ -24,7 +25,9 @@ export class LoginStatusComponent {
     private customerService: CustomerService,
     private router: Router,
     private myAuthService: AuthenticationService
-  ) {}
+  ) {
+    router.events.subscribe((event) => (this.userMenuOpen = false));
+  }
 
   ngOnInit() {
     this.authService.authState$.subscribe((result) => {
@@ -61,5 +64,13 @@ export class LoginStatusComponent {
         window.location.reload();
       }
     });
+  }
+
+  public blur() {
+    this.userMenuOpen = false;
+  }
+
+  public toggleOpen() {
+    this.userMenuOpen = !this.userMenuOpen;
   }
 }

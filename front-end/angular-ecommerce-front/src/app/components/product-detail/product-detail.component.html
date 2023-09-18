@@ -1,25 +1,83 @@
-<div class="main-content">
-  <div class="section-content section-content-p30">
-    <div class="container-fluid " *ngIf="product">
-      <div class="row">
+<div *ngIf="product">
+  <div class="product-details-card mx-auto">
+    <div class="image">
+      <a href="#"
+        ><img src="{{ imageServerUrl + product.image }}" alt="Product image"
+      /></a>
+    </div>
+    <div class="product-details-content">
+      <h3 class="product-name">{{ product.name }}</h3>
+      <p class="product-price">{{ product.price | currency : "USD" }}</p>
+      <div class="product-description">
+        {{ product.description }}
+      </div>
+      <div class="card-footer">
+        <button (click)="addToCart(product)" class="btn btn-primary">
+          Add to cart
+        </button>
+      </div>
+    </div>
+  </div>
 
-        <div class="col-md-6 mx-auto">
-          <img src="{{imageServerUrl + product.image}}" class="img-responsive detail-img" alt="product image">
-
-          <h3>{{product.name}}</h3>
-          <div class="price">${{product.price}}</div>
-          <a (click)="addToCart()" class="primary-btn">Add to cart</a>
-
-          <h4>Product Description</h4>
-          <p>{{product.description}}
-          </p>
-
-          <a routerLink="/products">Back to Product List</a>
+  <!-- Carousel -->
+  <div class="carousel mx-auto">
+    <div class="carousel-top text-truncate">
+      <h2>More like this</h2>
+      <div class="carousel-controls">
+        <button
+          class="btn btn-warning"
+          [disabled]="disabledButtons"
+          (click)="scrollPrev()"
+          [style.display]="buttonsHidden ? 'none' : 'block'"
+        >
+          <i class="bi bi-caret-left-fill"></i>
+        </button>
+        <button
+          class="btn btn-warning"
+          [disabled]="disabledButtons"
+          (click)="scrollNext()"
+          [style.display]="buttonsHidden ? 'none' : 'block'"
+        >
+          <i class="bi bi-caret-right-fill"></i>
+        </button>
+      </div>
+    </div>
+    <div class="carousel-content">
+      <div
+        #carouselContainer
+        class="carousel-container"
+        [style.transform]="'translateX(' + containerPosition + 'px)'"
+      >
+        <div #carouselItem class="product-mini-card" *ngFor="let item of items">
+          <div class="image">
+            <a routerLink="/products/{{ item.id }}"
+              ><img
+                src="{{ imageServerUrl + item.image }}"
+                alt="Suggested product image"
+            /></a>
+          </div>
+          <div class="mini-card-body text-truncate">
+            <a routerLink="/products/{{ item.id }}"
+              ><h3 class="product-name">{{ item.name }}</h3></a
+            >
+            <p class="product-price">${{ item.price }}</p>
+            <button class="btn btn-success">
+              <i (click)="addToCart(item)" class="bi bi-cart4"></i> Add to cart
+            </button>
+          </div>
         </div>
       </div>
     </div>
-    <div *ngIf="!product">
-      <app-loading />
+    <div
+      class="carousel-bottom mx-auto"
+      [style.display]="buttonsHidden ? 'none' : 'flex'"
+    >
+      <div
+        *ngFor="let item of items; let i = index"
+        [attr.data-index]="i"
+        [ngClass]="['step', currentPos === i ? 'current' : '']"
+      ></div>
     </div>
   </div>
 </div>
+<div *ngIf="!product"><app-loading /></div>

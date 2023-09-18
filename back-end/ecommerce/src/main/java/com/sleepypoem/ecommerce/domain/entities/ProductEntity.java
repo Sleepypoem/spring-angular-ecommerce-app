@@ -38,6 +38,14 @@ public class ProductEntity extends EntityWithTimeStamps {
     @JoinColumn(name = "category_id", nullable = false)
     private CategoryEntity category;
 
+    @JsonProperty("categoryId")
+    public Long getCategoryIdentifier() {
+        if (category != null) {
+            return category.getId();
+        }
+        return null;
+    }
+
     @Transient
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String encodedImage;

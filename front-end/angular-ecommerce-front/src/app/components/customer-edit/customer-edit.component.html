@@ -2,17 +2,29 @@
   <div class="section-content section-content-p30 e-spc">
     <div class="container-fluid">
       <div>
-        <form class="col-md-9 mx-auto mt-4" (ngSubmit)="onSubmit()" [formGroup]="formGroup">
-
-          <app-dinamic-form [fields]="customerForm" [title]="'Edit Customer Information'" [parentForm]="formGroup" [formGroupName]="'customer'"></app-dinamic-form>
+        <form
+          class="col-md-9 mx-auto mt-4"
+          (ngSubmit)="onSubmit()"
+          [formGroup]="formGroup"
+        >
+          <app-dinamic-form
+            [fields]="customerForm"
+            [title]="'Edit Customer Information'"
+            [parentForm]="formGroup"
+            [formGroupName]="'customer'"
+          ></app-dinamic-form>
           <div class="form-area" *ngIf="customer">
-            <h3 class="text-center">Edit Profile Photo</h3>
-            <app-drag-n-drop [defaultImage]="customer.image!" (imageEventEmitter)="receiveImage($event)"></app-drag-n-drop>
+            <h3>Edit Profile Photo</h3>
+            <app-drag-n-drop
+              [defaultImage]="customer.image!"
+              (imageEventEmitter)="receiveImage($event)"
+            ></app-drag-n-drop>
           </div>
-          <div class="form-row btn btn-info">
-            <button type="submit" [disabled]="submitted">Save</button>
+          <div class="form-row">
+            <button class="btn btn-info" type="submit" [disabled]="submitted">
+              Save
+            </button>
           </div>
-
         </form>
       </div>
     </div>

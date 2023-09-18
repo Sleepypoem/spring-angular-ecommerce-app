@@ -1,33 +1,92 @@
-
-.cart-area.d-n{
-    display:block
+.pill-container {
+  margin-top: 20px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  width: 150px;
+  justify-content: center;
+  transform: rotate(90deg);
+  transition-delay: 1s;
+  transition-duration: .4s;
+  transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
 }
 
-.cart-area i{
-    font-size:22px;
-    float:left;
-    margin-top:16px;
-    color:#fff;
-    margin-left:15px
+.pill-left {
+  background-color: #ffffff;
+  border-top-left-radius: 999rem;
+  border-bottom-left-radius: 999rem;
+  border-right: 2px solid #1d1d1d;
+  border-top: 1px solid #1d1d1d;
+  border-bottom: 1px solid #1d1d1d;
+  border-left: 1px solid #1d1d1d;
 }
 
-.total{
-    background:#000;
-    line-height:43px;
-    color:#fff;
-    border-radius:30px;
-    border:1px solid #0da8e4;
-    float:left;
-    margin-top:7px;
-    padding-left:17px
+.pill-right {
+  background: #3b4245;
+  border-top-right-radius: 999rem;
+  border-bottom-right-radius: 999rem;
+  border-left: 2px solid #1d1d1d;
+  border-top: 1px solid #1d1d1d;
+  border-bottom: 1px solid #1d1d1d;
+  border-right: 1px solid #1d1d1d;
 }
 
-.total span{
-    display:inline-block;
-    background:#fff;
-    padding:0 13px;
-    color:#000;
-    border-top-right-radius:20px;
-    border-bottom-right-radius:20px;
-    margin-left:11px
+.pill-left,
+.pill-right {
+
+  overflow: hidden;
+  text-align: center;
+  width: 20px;
+  height: 40px;
+  transition: all .7s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  color: #ffffff;
+}
+
+.pill-container:hover i,
+.pill-container:hover p, .open > .pill-right i, .open > .pill-left p {
+  display: block;
+}
+
+.pill-container:hover, .open {
+  transform: rotate(0);
+  transition: all .3s ease;
+}
+
+.pill-container:hover p, .open > .pill-left p {
+  color: #1d1d1d;
+  transform: translateX(0);
+}
+
+.pill-container:hover i, .open > .pill-right i {
+  transform: translateX(18px);
+}
+
+.pill-left p,
+.pill-right i {
+  margin-top: 6px;
+}
+
+.pill-left p {
+  position: absolute;
+  padding: 0 15px;
+  transform: translateX(-200px);
+  transition: all 1s ease-in-out;
+}
+
+.pill-right i {
+  position: absolute;
+  transform: translateX(200px);
+  transition: all 1s linear;
+}
+
+.pill-container:hover .pill-left, .open .pill-left,
+.pill-container:hover .pill-right, .open .pill-right {
+  color: #fff;
+  width: 75px;
+}
+
+@media (max-width: 1300px) {
+  .pill-container {
+    display: none;
+  }
 }
