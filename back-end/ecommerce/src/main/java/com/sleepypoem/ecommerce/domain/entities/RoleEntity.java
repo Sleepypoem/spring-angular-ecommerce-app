@@ -25,7 +25,11 @@ public class RoleEntity extends EntityWithTimeStamps {
 
     private String description;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany
+    @JoinTable(
+            name = "permissions_roles",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id"))
     private Set<PermissionEntity> permissions = new HashSet<>();
 
     @OneToMany(mappedBy = "role")

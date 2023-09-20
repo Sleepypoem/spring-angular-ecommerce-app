@@ -24,11 +24,7 @@ public class PermissionEntity extends EntityWithTimeStamps {
 
     private String description;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "permissions")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @JoinTable(
-            name = "permissions_roles",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "permission_id"))
     private Set<RoleEntity> roles = new java.util.HashSet<>();
 }
