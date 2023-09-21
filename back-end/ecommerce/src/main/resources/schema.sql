@@ -13,6 +13,8 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`categories` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NULL DEFAULT NULL,
   `description` varchar(255),
+  `created_at` DATETIME(6) DEFAULT NULL,
+  `updated_at` DATETIME(6) DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE=InnoDB
 AUTO_INCREMENT = 1;

@@ -5,31 +5,39 @@ USE `ecommerce` ;
 -- -----------------------------------------------------
 
 INSERT INTO
-    categories(name, description)
+    categories(name, description, created_at, updated_at)
 VALUES (
         'Books',
-        'A category for books and literature.'
+        'A category for books and literature.',
+        NOW(),
+        NOW()
     );
 
 INSERT INTO
-    categories(name, description)
+    categories(name, description, created_at, updated_at)
 VALUES (
         'Coffee Mugs',
-        'A category for coffee mugs'
+        'A category for coffee mugs',
+        NOW(),
+        NOW()
     );
 
 INSERT INTO
-    categories(name, description)
+    categories(name, description, created_at, updated_at)
 VALUES (
         'Mouse Pads',
-        'A category for mouse pads'
+        'A category for mouse pads',
+        NOW(),
+        NOW()
     );
 
 INSERT INTO
-    categories(name, description)
+    categories(name, description, created_at, updated_at)
 VALUES (
         'Luggage Tags',
-        'A category for luggage tags'
+        'A category for luggage tags',
+        NOW(),
+        NOW()
     );
 
 -- -----------------------------------------------------
