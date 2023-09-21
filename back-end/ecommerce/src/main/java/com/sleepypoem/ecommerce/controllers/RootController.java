@@ -17,7 +17,11 @@ public class RootController implements
                 linkTo(ProductController.class)
                         .withRel("products")).add(
                 linkTo(CustomerController.class)
-                        .withRel("customers"));
+                        .withRel("customers")).add(
+                linkTo(RoleController.class)
+                        .withRel("roles")).add(
+                linkTo(PermissionController.class)
+                        .withRel("permissions"));
         return model;
     }
 }
