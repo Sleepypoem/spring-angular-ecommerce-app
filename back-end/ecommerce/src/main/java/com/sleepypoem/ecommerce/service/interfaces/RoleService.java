@@ -23,7 +23,7 @@ public interface RoleService {
 
     RoleEntity findByName(String name);
 
-    RoleEntity addPermission(Long roleId, PermissionEntity permission);
+    RoleEntity assignPermission(Long roleId, PermissionEntity permission);
 
     RoleEntity removePermission(Long roleId, Long permissionId);
 }
