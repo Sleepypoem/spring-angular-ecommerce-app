@@ -49,15 +49,20 @@ public class CustomerEntity extends EntityWithTimeStamps {
     private String password;
 
     public void addOrder(OrderEntity order) {
-        if(order == null) {
+        if (order == null) {
             return;
-        }
-
-        if(this.orders == null) {
-            this.orders = new HashSet<>();
         }
 
         order.setCustomer(this);
         this.orders.add(order);
     }
+
+    public void addRole(RoleEntity role) {
+        if (role == null) {
+            return;
+        }
+
+        this.role = role;
+    }
+
 }
