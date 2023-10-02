@@ -2,12 +2,16 @@ package com.sleepypoem.ecommerce.service.impl;
 
 import com.okta.sdk.resource.client.ApiException;
 import com.sleepypoem.ecommerce.domain.entities.CustomerEntity;
+import com.sleepypoem.ecommerce.domain.entities.RoleEntity;
 import com.sleepypoem.ecommerce.exceptions.MyBadRequestException;
 import com.sleepypoem.ecommerce.exceptions.MyEntityNotFoundException;
 import com.sleepypoem.ecommerce.repositories.CustomerRepository;
 import com.sleepypoem.ecommerce.service.interfaces.CustomerService;
 import com.sleepypoem.ecommerce.service.interfaces.ImageService;
 import com.sleepypoem.ecommerce.service.interfaces.OktaUserService;
+import com.sleepypoem.ecommerce.service.interfaces.RoleService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Objects;
 
 @Service
+@Slf4j
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
@@ -24,13 +29,21 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final OktaUserService oktaUserService;
 
+    private final RoleService roleService;
+
     private static final String IMAGE_FOLDER = "spring-angular-ecommerce/assets/images/customers/";
 
-    public CustomerServiceImpl(CustomerRepository customerRepository, ImageService imageService, OktaUserService oktaUserService) {
+    @Value("${security.super-user}")
+    private String superUserName;
+
+    public CustomerServiceImpl( CustomerRepository customerRepository, ImageService imageService, OktaUserService oktaUserService, RoleService roleService) {
         this.customerRepository = customerRepository;
         this.imageService = imageService;
         this.oktaUserService = oktaUserService;
+        this.roleService = roleService;
+
     }
+
     @Override
     @Transactional(rollbackFor = ApiException.class)
     public CustomerEntity create(CustomerEntity customerEntity) {
@@ -64,7 +77,8 @@ public class CustomerServiceImpl implements CustomerService {
             imageService.deleteImage(customerEntity.getImage());
             customerEntity.setImage(imageService.addImageToFolder(customerEntity.getEncodedImage(), IMAGE_FOLDER));
         }
-        //Email cannot be edited
+        //Email and role cannot be edited from update method
+        customerEntity.setRole(customerEntityFromDB.getRole());
         customerEntity.setEmail(customerEntityFromDB.getEmail());
         return customerRepository.save(customerEntity);
     }
@@ -106,5 +120,31 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public boolean existsById(Long id) {
         return customerRepository.existsById(id);
+    }
+
+    @Override
+    public CustomerEntity assignRole(Long id, RoleEntity role){
+        CustomerEntity customerEntity = getById(id);
+        checkSuperUser(customerEntity);
+        oktaUserService.setUserRole(customerEntity.getEmail(), role.getName());
+        customerEntity.addRole(role);
+        return customerRepository.save(customerEntity);
+    }
+
+    @Override
+    public CustomerEntity setRoleToDefault(Long id){
+        CustomerEntity customerEntity = getById(id);
+        checkSuperUser(customerEntity);
+        RoleEntity defaultRole = roleService.findByName("USER");
+        oktaUserService.setUserRole(customerEntity.getEmail(), defaultRole.getName());
+        customerEntity.addRole(defaultRole);
+        return customerRepository.save(customerEntity);
+    }
+
+    private void checkSuperUser(CustomerEntity customerEntity) throws ApiException
+    {
+        if(customerEntity.getEmail().equals(superUserName)){
+            throw new MyBadRequestException("Cannot update super user's role.");
+        }
     }
 }

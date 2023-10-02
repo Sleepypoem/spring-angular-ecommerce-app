@@ -1,6 +1,7 @@
 package com.sleepypoem.ecommerce.service.interfaces;
 
 import com.sleepypoem.ecommerce.domain.entities.CustomerEntity;
+import com.sleepypoem.ecommerce.domain.entities.RoleEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -29,4 +30,8 @@ public interface CustomerService {
     boolean existsByEmail(String email);
 
     boolean existsById(Long id);
+
+    CustomerEntity assignRole(Long id, RoleEntity role);
+
+    CustomerEntity setRoleToDefault(Long id);
 }
