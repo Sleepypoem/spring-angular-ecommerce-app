@@ -2,15 +2,14 @@ package com.sleepypoem.ecommerce.service.impl;
 
 import com.okta.sdk.resource.api.UserApi;
 import com.okta.sdk.resource.client.ApiClient;
-import com.okta.sdk.resource.model.ChangePasswordRequest;
-import com.okta.sdk.resource.model.PasswordCredential;
-import com.okta.sdk.resource.model.User;
+import com.okta.sdk.resource.model.*;
 import com.okta.sdk.resource.user.UserBuilder;
 import com.sleepypoem.ecommerce.domain.entities.CustomerEntity;
 import com.sleepypoem.ecommerce.service.interfaces.OktaUserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class OktaUserServiceImpl implements OktaUserService {
@@ -19,6 +18,8 @@ public class OktaUserServiceImpl implements OktaUserService {
     public OktaUserServiceImpl(ApiClient client) {
         userApi = new UserApi(client);
     }
+
+    public static final String ROLE_KEY = "assigned_role";
 
     @Override
     public CustomerEntity createOktaUser(CustomerEntity customerEntity) {
@@ -34,7 +35,7 @@ public class OktaUserServiceImpl implements OktaUserService {
         UserBuilder.instance()
                 .setEmail(email)
                 .setPassword(password.toCharArray())
-                .setCustomProfileProperty("assigned_role", "user")
+                .setCustomProfileProperty(ROLE_KEY, "user")
                 .setActive(true)
                 .buildAndCreate(userApi);
     }
@@ -43,7 +44,7 @@ public class OktaUserServiceImpl implements OktaUserService {
         UserBuilder.instance()
                 .setEmail(email)
                 .setActive(true)
-                .setCustomProfileProperty("assigned_role", "user")
+                .setCustomProfileProperty(ROLE_KEY, "user")
                 .buildAndCreate(userApi);
     }
 
@@ -68,6 +69,16 @@ public class OktaUserServiceImpl implements OktaUserService {
         passwordCredentialNew.setValue(newPassword);
         changePasswordRequest.setNewPassword(passwordCredentialNew);
         userApi.changePassword(user.getId(), changePasswordRequest, true);
+    }
+
+    @Override
+    public void setUserRole(String id, String roleName) {
+        User user = userApi.getUser(id);
+        UpdateUserRequest updateUserRequest = new UpdateUserRequest();
+        UserProfile userProfile = new UserProfile();
+        userProfile.setAdditionalProperties(Map.of(ROLE_KEY, roleName));
+        updateUserRequest.setProfile(userProfile);
+        userApi.updateUser(user.getId(), updateUserRequest, true);
     }
 
     @Override
