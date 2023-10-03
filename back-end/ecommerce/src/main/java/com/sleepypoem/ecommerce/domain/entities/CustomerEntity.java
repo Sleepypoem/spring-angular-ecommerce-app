@@ -31,6 +31,8 @@ public class CustomerEntity extends EntityWithTimeStamps {
 
     private String phone;
 
+    private int active;
+
     private String image;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
