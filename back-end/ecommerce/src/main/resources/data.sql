@@ -1,47 +1,87 @@
 USE `ecommerce` ;
 
 -- -----------------------------------------------------
+
 -- Categories
+
 -- -----------------------------------------------------
 
 INSERT INTO
-    categories(name, description, created_at, updated_at)
+    categories(
+        name,
+        description,
+        created_at,
+        updated_at
+    )
 VALUES (
         'Books',
         'A category for books and literature.',
-        NOW(),
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
-    categories(name, description, created_at, updated_at)
+    categories(
+        name,
+        description,
+        created_at,
+        updated_at
+    )
 VALUES (
         'Coffee Mugs',
         'A category for coffee mugs',
-        NOW(),
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
-    categories(name, description, created_at, updated_at)
+    categories(
+        name,
+        description,
+        created_at,
+        updated_at
+    )
 VALUES (
         'Mouse Pads',
         'A category for mouse pads',
-        NOW(),
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
-    categories(name, description, created_at, updated_at)
+    categories(
+        name,
+        description,
+        created_at,
+        updated_at
+    )
 VALUES (
         'Luggage Tags',
         'A category for luggage tags',
-        NOW(),
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 -- -----------------------------------------------------
+
 -- Books
+
 -- -----------------------------------------------------
 
 INSERT INTO
@@ -54,7 +94,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1000',
@@ -65,7 +106,12 @@ VALUES (
         100,
         14.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -78,7 +124,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1001',
@@ -89,7 +136,12 @@ VALUES (
         100,
         20.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -102,7 +154,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1002',
@@ -113,7 +166,12 @@ VALUES (
         100,
         14.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -126,7 +184,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1003',
@@ -137,7 +196,12 @@ VALUES (
         100,
         13.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -150,7 +214,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1004',
@@ -161,7 +226,12 @@ VALUES (
         100,
         18.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -174,7 +244,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1005',
@@ -185,7 +256,12 @@ VALUES (
         100,
         23.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -198,7 +274,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1006',
@@ -209,7 +286,12 @@ VALUES (
         100,
         14.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -222,7 +304,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1007',
@@ -233,7 +316,12 @@ VALUES (
         100,
         16.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -246,7 +334,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1008',
@@ -257,7 +346,12 @@ VALUES (
         100,
         25.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -270,7 +364,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1009',
@@ -281,7 +376,12 @@ VALUES (
         100,
         23.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -294,7 +394,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1010',
@@ -305,7 +406,12 @@ VALUES (
         100,
         24.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -318,7 +424,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1011',
@@ -329,7 +436,12 @@ VALUES (
         100,
         19.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -342,7 +454,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1012',
@@ -353,7 +466,12 @@ VALUES (
         100,
         24.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -366,7 +484,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1013',
@@ -377,7 +496,12 @@ VALUES (
         100,
         19.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -390,7 +514,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1014',
@@ -401,7 +526,12 @@ VALUES (
         100,
         22.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -414,7 +544,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1015',
@@ -425,7 +556,12 @@ VALUES (
         100,
         22.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -438,7 +574,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1016',
@@ -449,7 +586,12 @@ VALUES (
         100,
         27.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -462,7 +604,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1017',
@@ -473,7 +616,12 @@ VALUES (
         100,
         13.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -486,7 +634,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1018',
@@ -497,7 +646,12 @@ VALUES (
         100,
         26.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -510,7 +664,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1019',
@@ -521,7 +676,12 @@ VALUES (
         100,
         13.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -534,7 +694,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1020',
@@ -545,7 +706,12 @@ VALUES (
         100,
         19.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -558,7 +724,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1021',
@@ -569,7 +736,12 @@ VALUES (
         100,
         18.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -582,7 +754,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1022',
@@ -593,7 +766,12 @@ VALUES (
         100,
         26.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -606,7 +784,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1023',
@@ -617,7 +796,12 @@ VALUES (
         100,
         22.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -630,7 +814,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'BOOK-TECH-1024',
@@ -641,7 +826,12 @@ VALUES (
         100,
         16.99,
         1,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 -- -----------------------------------------------------
@@ -660,7 +850,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1000',
@@ -671,7 +862,12 @@ VALUES (
         100,
         23.02,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -684,7 +880,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1001',
@@ -695,7 +892,12 @@ VALUES (
         100,
         10.08,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -708,7 +910,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1002',
@@ -719,7 +922,12 @@ VALUES (
         100,
         47.60,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -732,7 +940,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1003',
@@ -743,7 +952,12 @@ VALUES (
         100,
         0.66,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -756,7 +970,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1004',
@@ -767,7 +982,12 @@ VALUES (
         100,
         79.81,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -780,7 +1000,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1005',
@@ -791,7 +1012,12 @@ VALUES (
         100,
         78.29,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -804,7 +1030,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1006',
@@ -815,7 +1042,12 @@ VALUES (
         100,
         4.97,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -828,7 +1060,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1007',
@@ -839,7 +1072,12 @@ VALUES (
         100,
         47.56,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -852,7 +1090,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1008',
@@ -863,7 +1102,12 @@ VALUES (
         100,
         25.97,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -876,7 +1120,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1009',
@@ -887,7 +1132,12 @@ VALUES (
         100,
         83.57,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -900,7 +1150,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1010',
@@ -911,7 +1162,12 @@ VALUES (
         100,
         54.92,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -924,7 +1180,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1011',
@@ -935,7 +1192,12 @@ VALUES (
         100,
         20.23,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -948,7 +1210,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1012',
@@ -959,7 +1222,12 @@ VALUES (
         100,
         62.64,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -972,7 +1240,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1013',
@@ -983,7 +1252,12 @@ VALUES (
         100,
         92.72,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -996,7 +1270,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1014',
@@ -1007,7 +1282,12 @@ VALUES (
         100,
         23.06,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1020,7 +1300,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1015',
@@ -1031,7 +1312,12 @@ VALUES (
         100,
         73.00,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1044,7 +1330,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1016',
@@ -1055,7 +1342,12 @@ VALUES (
         100,
         77.48,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1068,7 +1360,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1017',
@@ -1079,7 +1372,12 @@ VALUES (
         100,
         71.55,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1092,7 +1390,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1018',
@@ -1103,7 +1402,12 @@ VALUES (
         100,
         56.35,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1116,7 +1420,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1019',
@@ -1127,7 +1432,12 @@ VALUES (
         100,
         95.12,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1140,7 +1450,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1020',
@@ -1151,7 +1462,12 @@ VALUES (
         100,
         88.10,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1164,7 +1480,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1021',
@@ -1175,7 +1492,12 @@ VALUES (
         100,
         74.89,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1188,7 +1510,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1022',
@@ -1199,7 +1522,12 @@ VALUES (
         100,
         18.13,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1212,7 +1540,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1023',
@@ -1223,7 +1552,12 @@ VALUES (
         100,
         64.09,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1236,7 +1570,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'COOFEE-MUG-1024',
@@ -1247,7 +1582,12 @@ VALUES (
         100,
         22.52,
         2,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 -- -----------------------------------------------------
@@ -1266,7 +1606,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1000',
@@ -1277,7 +1618,12 @@ VALUES (
         100,
         51.46,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1290,7 +1636,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1001',
@@ -1301,7 +1648,12 @@ VALUES (
         100,
         24.96,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1314,7 +1666,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1002',
@@ -1325,7 +1678,12 @@ VALUES (
         100,
         89.48,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1338,7 +1696,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1003',
@@ -1349,7 +1708,12 @@ VALUES (
         100,
         7.19,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1362,7 +1726,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1004',
@@ -1373,7 +1738,12 @@ VALUES (
         100,
         42.77,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1386,7 +1756,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1005',
@@ -1397,7 +1768,12 @@ VALUES (
         100,
         21.19,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1410,7 +1786,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1006',
@@ -1421,7 +1798,12 @@ VALUES (
         100,
         97.15,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1434,7 +1816,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1007',
@@ -1445,7 +1828,12 @@ VALUES (
         100,
         42.12,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1458,7 +1846,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1008',
@@ -1469,7 +1858,12 @@ VALUES (
         100,
         32.39,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1482,7 +1876,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1009',
@@ -1493,7 +1888,12 @@ VALUES (
         100,
         10.72,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1506,7 +1906,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1010',
@@ -1517,7 +1918,12 @@ VALUES (
         100,
         32.03,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1530,7 +1936,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1011',
@@ -1541,7 +1948,12 @@ VALUES (
         100,
         80.37,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1554,7 +1966,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1012',
@@ -1565,7 +1978,12 @@ VALUES (
         100,
         16.08,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1578,7 +1996,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1013',
@@ -1589,7 +2008,12 @@ VALUES (
         100,
         53.83,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1602,7 +2026,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1014',
@@ -1613,7 +2038,12 @@ VALUES (
         100,
         92.93,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1626,7 +2056,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1015',
@@ -1637,7 +2068,12 @@ VALUES (
         100,
         32.57,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1650,7 +2086,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1016',
@@ -1661,7 +2098,12 @@ VALUES (
         100,
         62.52,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1674,7 +2116,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1017',
@@ -1685,7 +2128,12 @@ VALUES (
         100,
         33.30,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1698,7 +2146,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1018',
@@ -1709,7 +2158,12 @@ VALUES (
         100,
         9.30,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1722,7 +2176,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1019',
@@ -1733,7 +2188,12 @@ VALUES (
         100,
         24.68,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1746,7 +2206,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1020',
@@ -1757,7 +2218,12 @@ VALUES (
         100,
         20.20,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1770,7 +2236,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1021',
@@ -1781,7 +2248,12 @@ VALUES (
         100,
         26.24,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1794,7 +2266,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1022',
@@ -1805,7 +2278,12 @@ VALUES (
         100,
         62.54,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1818,7 +2296,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1023',
@@ -1829,7 +2308,12 @@ VALUES (
         100,
         31.41,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1842,7 +2326,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'MOUSEPAD-1024',
@@ -1853,7 +2338,12 @@ VALUES (
         100,
         24.05,
         3,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 -- -----------------------------------------------------
@@ -1872,7 +2362,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1000',
@@ -1883,7 +2374,12 @@ VALUES (
         100,
         97.67,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1896,7 +2392,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1001',
@@ -1907,7 +2404,12 @@ VALUES (
         100,
         88.30,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1920,7 +2422,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1002',
@@ -1931,7 +2434,12 @@ VALUES (
         100,
         82.96,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1944,7 +2452,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1003',
@@ -1955,7 +2464,12 @@ VALUES (
         100,
         10.81,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1968,7 +2482,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1004',
@@ -1979,7 +2494,12 @@ VALUES (
         100,
         27.10,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -1992,7 +2512,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1005',
@@ -2003,7 +2524,12 @@ VALUES (
         100,
         7.46,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2016,7 +2542,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1006',
@@ -2027,7 +2554,12 @@ VALUES (
         100,
         11.18,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2040,7 +2572,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1007',
@@ -2051,7 +2584,12 @@ VALUES (
         100,
         52.26,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2064,7 +2602,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1008',
@@ -2075,7 +2614,12 @@ VALUES (
         100,
         15.78,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2088,7 +2632,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1009',
@@ -2099,7 +2644,12 @@ VALUES (
         100,
         63.34,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2112,7 +2662,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1010',
@@ -2123,7 +2674,12 @@ VALUES (
         100,
         83.91,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2136,7 +2692,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1011',
@@ -2147,7 +2704,12 @@ VALUES (
         100,
         13.82,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2160,7 +2722,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1012',
@@ -2171,7 +2734,12 @@ VALUES (
         100,
         14.96,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2184,7 +2752,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1013',
@@ -2195,7 +2764,12 @@ VALUES (
         100,
         87.43,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2208,7 +2782,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1014',
@@ -2219,7 +2794,12 @@ VALUES (
         100,
         13.58,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2232,7 +2812,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1015',
@@ -2243,7 +2824,12 @@ VALUES (
         100,
         38.69,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2256,7 +2842,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1016',
@@ -2267,7 +2854,12 @@ VALUES (
         100,
         40.68,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2280,7 +2872,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1017',
@@ -2291,7 +2884,12 @@ VALUES (
         100,
         3.80,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2304,7 +2902,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1018',
@@ -2315,7 +2914,12 @@ VALUES (
         100,
         96.25,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2328,7 +2932,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1019',
@@ -2339,7 +2944,12 @@ VALUES (
         100,
         70.46,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2352,7 +2962,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1020',
@@ -2363,7 +2974,12 @@ VALUES (
         100,
         79.43,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2376,7 +2992,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1021',
@@ -2387,7 +3004,12 @@ VALUES (
         100,
         85.40,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2400,7 +3022,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1022',
@@ -2411,7 +3034,12 @@ VALUES (
         100,
         94.21,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2424,7 +3052,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1023',
@@ -2435,7 +3064,12 @@ VALUES (
         100,
         8.17,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 INSERT INTO
@@ -2448,7 +3082,8 @@ INSERT INTO
         stock,
         price,
         category_id,
-        created_at
+        created_at,
+        updated_at
     )
 VALUES (
         'LUGGAGETAG-1024',
@@ -2459,33 +3094,122 @@ VALUES (
         100,
         32.44,
         4,
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
 -- -----------------------------------------------------
+
 -- Roles
--- -----------------------------------------------------
-
-insert into roles (id, name, description, created_at, updated_at) values (1, 'ADMIN', 'A Role for admins.',NOW(), NOW());
-insert into roles(id, name, description, created_at, updated_at) values (2, 'USER', 'A Role for users.', NOW(), NOW());
 
 -- -----------------------------------------------------
+
+insert into
+    roles (
+        id,
+        name,
+        description,
+        created_at,
+        updated_at
+    )
+values (
+        1,
+        'ADMIN',
+        'A Role for admins.',
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
+    );
+
+insert into
+    roles(
+        id,
+        name,
+        description,
+        created_at,
+        updated_at
+    )
+values (
+        2,
+        'USER',
+        'A Role for users.',
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
+    );
+
+-- -----------------------------------------------------
+
 -- Permissions
--- -----------------------------------------------------
-
-insert into permissions (id, name, description, created_at, updated_at) values (1, 'WRITE', 'It allows to edit data.', NOW(), NOW());
-insert into permissions (id, name, description, created_at, updated_at) values (2, 'READ', 'It allows to read data.', NOW(), NOW());
 
 -- -----------------------------------------------------
+
+insert into
+    permissions (
+        id,
+        name,
+        description,
+        created_at,
+        updated_at
+    )
+values (
+        1,
+        'WRITE',
+        'It allows to edit data.',
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
+    );
+
+insert into
+    permissions (
+        id,
+        name,
+        description,
+        created_at,
+        updated_at
+    )
+values (
+        2,
+        'READ',
+        'It allows to read data.',
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
+    );
+
+-- -----------------------------------------------------
+
 -- Assign permissions to roles
+
 -- -----------------------------------------------------
 
 insert into permissions_roles (role_id, permission_id) values (1, 1);
+
 insert into permissions_roles (role_id, permission_id) values (1, 2);
+
 insert into permissions_roles (role_id, permission_id) values (2, 2);
 
 -- -----------------------------------------------------
+
 -- Customers
+
 -- -----------------------------------------------------
 
 INSERT INTO
@@ -2508,11 +3232,15 @@ VALUES (
         1,
         1,
         'spring-angular-ecommerce/assets/images/customers/usbu1hfswc3jvyesyzwu',
-        NOW(),
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
 
-    INSERT INTO
+INSERT INTO
     customers (
         first_name,
         last_name,
@@ -2532,6 +3260,10 @@ VALUES (
         1,
         2,
         'spring-angular-ecommerce/assets/images/customers/agae0s1qavzz5oxqa4ks',
-        NOW(),
-        NOW()
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        ),
+        FROM_UNIXTIME(
+            UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
+        )
     );
